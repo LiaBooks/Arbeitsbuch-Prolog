@@ -103,7 +103,7 @@ mermaid.render('id@0',graphDefinition,cb)
 
 Template for integrating the Tau-Prolog interpreter into LiaScript
 
-## Vorwort zur ersten und zweiten Auflage
+## Originales Vorwort
 
 Dieses Buch soll in die Programmiersprache PROLOG und in die mit ihr verbundene
 'Logik-programmierung' einführen. Die Idee, 'Logik als eine Programmiersprache'
@@ -196,13 +196,12 @@ beschreiben:
 * Das Vergißmeinnicht ist blau.
 * Das Veilchen ist blau.
 
-#### Fakten & Prädikate
+#### PROLOG-Notation
 
                             --{{0}}--
-Solche Fakten **Fakten** (Tatsachen) wie die Zusammensetzung eines Straußes
-können in PROLOG wie folgt abgebildet werden:
+Solche **Fakten** (Tatsachen) wie die Zusammensetzung eines Straußes können in
+PROLOG wie folgt abgebildet werden:
 
-PROLOG-Darstellung:
 
 ```prolog
 rot(rose).
@@ -219,7 +218,7 @@ Form. Sowohl Prädikate als auch Konstanten werden mit kleinem Anfangsbuchstaben
 geschrieben, deutsche Sonderzeichen vermeiden wir. Jedes Faktum wird mit einem
 Punkt und dem Drücken der RETURN-Taste abgeschlossen.
 
-#### PROLOG - IDE
+#### PROLOG-Programme
 
                                  --{{0}}--
 Die hier genuzte PROLOG-IDE besteht immer aus zwei Teilen, einer Eingabe für das
@@ -294,7 +293,7 @@ blau(Blume).
 @tau_prolog_query(blumenstrauss.pl)
 
 
-#### Urlaubsplanung
+#### Zweistellige Prädikate
 
                            --{{0}}--
 Dies ist die Urlaubsplanung für die nächsten Ferien, die umgangssprachliche
@@ -339,12 +338,12 @@ deine Anfragen mit den Auflösungen:
        [( )] Ja
        [(X)] Nein
    ================================
-   ---
+
    ```prolog
    faehrt_nach(axel, griechenland).
    ```
    @tau_prolog_query(urlaubsplanung.pl)
-   ---
+
    ================================
 
 2. Wohin fährt Beate?
@@ -399,7 +398,7 @@ deine Anfragen mit den Auflösungen:
    @tau_prolog_query(urlaubsplanung.pl)
    ================================
 
-#### Komplexere Anfragen
+#### _und_ & _oder_ Operatoren
 
 Die Vorlieben und Abneigungen am Frühstückstisch seien in der folgenden
 PROLOG-Datenbasis mit dem Namen 'fruehstueck.pl' festgehalten:
