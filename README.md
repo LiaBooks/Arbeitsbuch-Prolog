@@ -177,24 +177,32 @@ Gabriele Lehmann
 
 ## Grundlagen
 
-### Willkommen in PROLOG
+### Willkommen
 
-Da das Buch nicht im Vierfarbendruck erscheinen konnte, wollen wir den
-Willkommensstrauß kurz beschreiben (vielleicht koloriert ihr noch selbst):
+                            --{{0}}--
+Einen kleinen Blumenstrauß zu beginn.
 
-![flowers](img/flowers.png)
+![flowers](img/flowers.png)<!-- style="max-width: 100%;" -->
 
-> Die Rose ist rot.
->
-> Die Tulpe ist gelb.
->
-> Die Nelke ist weiß.
->
-> Das Vergißmeinnicht ist blau.
->
-> Das Veilchen ist blau.
+                            --{{1}}--
+Dieses Buch ist leider im original nicht im Vierfarbendruck erscheinen aber wir
+können den Willkommensstrauß auch kurz mit einfachen Worten wie folgt
+beschreiben:
 
-Diese **Fakten** (Tatsachen) werden in PROLOG so festgehalten:
+                              {{1}}
+* Die Rose ist rot.
+* Die Tulpe ist gelb.
+* Die Nelke ist weiß.
+* Das Vergißmeinnicht ist blau.
+* Das Veilchen ist blau.
+
+#### Fakten & Prädikate
+
+                            --{{0}}--
+Solche Fakten **Fakten** (Tatsachen) wie die Zusammensetzung eines Straußes
+können in PROLOG wie folgt abgebildet werden:
+
+PROLOG-Darstellung:
 
 ```prolog
 rot(rose).
@@ -204,104 +212,99 @@ blau(vergissmeinnicht).
 blau(veilchen).
 ```
 
+                            --{{1}}--
 Die **Prädikate** (Eigenschaften) *rot*, *gelb*, *weiss* und *blau* treffen auf
-gewisse Konstanten wie z.B. *rose* zu, dies schreiben wir in der obigen Form.
-Sowohl Prädikate als auch Konstanten werden mit kleinem Anfangsbuchstaben
+gewisse Konstanten wie zum Beispiel *rose* zu, dies schreiben wir in der obigen
+Form. Sowohl Prädikate als auch Konstanten werden mit kleinem Anfangsbuchstaben
 geschrieben, deutsche Sonderzeichen vermeiden wir. Jedes Faktum wird mit einem
 Punkt und dem Drücken der RETURN-Taste abgeschlossen.
 
+#### PROLOG - IDE
 
-1) Geben Sie die obigen Fakten in das untere Code-Element ein. Mit einem Doppel-Klick
-gelangen sie in den Editiermodus (siehe Anhang S. 111). Laden Sie das Program indem sie
-auf den Play-Button klicken. Gelingt es ihnen die Datenbasis korrekt zu laden, also in den Arbeitsspeicher zu übernehmen, so antwortet PROLOG mit
+                                 --{{0}}--
+Die hier genuzte PROLOG-IDE besteht immer aus zwei Teilen, einer Eingabe für das
+Programm. Wenn du hier auf Ausführen klickst, so wird dieses Programm geladen.
+Da dieses Programm jedoch einen syntaktischen Fehler hat, erhältst du zunächst
+eine Fehlermeldung, die auf ein Syntax-Problem hinweist.
 
-`database 'blumenstrauss.pl' loaded`
-
-Andernfalls Antwortet das System mit einer Fehlermeldung
-
-`Error: parsing program => error(syntax_error(line(2), column(1), ...`<!-- style="color: red" -->
-
-Das Programm konnte nicht geladen werden, sei es, weil in der
-Datei noch ein Fehler ist, sei es, weil die Datei im falschen Verzeichnis gesucht wurde. Überzeugen Sie sich zunächst, dass Ihre Datei mit der obigen übereinstimmt und lesen Sie im Anhang oder in Ihrem PROLOG-Handbuch nach, wie eine Datei zu laden ist, die in einem anderen Verzeichnis liegt.
-
-Auf jeden Fall sollten Sie sich im Anhang dieses Buches und in Ihrem Handbuch über den
-Umgang mit Ihrer PROLOG-Version kundig machen.
-
-Fakten:
+                                 --{{1}}--
+Mit einem Doppel-Klick auf den Code gelangst du in den Editiermodus und kannst
+den fehlenden Punkt am Ende der letzten Zeile einfügen. Wenn du dann wieder auf
+Ausführen klickst, so wird dir angezeigt, dass deine Datenbasis erfolgreich
+geladen werden konnte.
 
 ```prolog
-% Klicken Sie doppelt auf dieses Feld,
-% um in den Editiermodus zu gelangen
-% und übernehmen sie obige Faktenbasis.
+rot(rose).
+gelb(tulpe).
+weiss(nelke).
+blau(vergissmeinnicht).
+blau(veilchen)
 ```
 @tau_prolog_program(blumenstrauss.pl)
 
-Ist die Datenbasis geladen, so kann man Anfragen stellen. Geben Sie ein:
+                             --{{2}}--
+Um anfragen an deine Datenbasis zu stellen, benötigst du noch eine zweite
+Eingabemöglichkeit:
 
+    {{2-4}}
 ```prolog
 rot(rose).
 ```
 @tau_prolog_query(blumenstrauss.pl)
 
-Dies wird als Frage aufgefasst. Umgangsprachlich formuliert heißt das: "Ist die
-Rose rot?". Als Antwort erscheint `true`.
+                          --{{3}}--
+Solche Eingaben werden als Fragen aufgefasst. Umgangsprachlich formuliert heißt
+das: "Ist die Rose rot?". Als Antwort erscheint `true`.
 
-Auf die Frage `gelb(veilchen).` erhalten wir `false`.
+                     --{{4}}--
+Und auf die Frage `gelb(veilchen).` erhalten wir `false`. Versuch weitere
+solcher Fragen einzugeben. Du wirst sehen: Kommt die Frage buchstabengetreu als
+Faktum in der Datenbasis vor, so antwortet PROLOG mit `true`, andernfalls mit
+`false`.
 
-Geben Sie einige derartige Fragen ein. Versuchen Sie es auch mal mit "sinnlosen"
-Fragen wie:
+{{4}}
+```prolog
+gelb(veilchen).
+```
+@tau_prolog_query(blumenstrauss.pl)
+
+
+#### Variablen
+
+                                 --{{0}}--
+Wir können mit Hilfe von Variablen auch etwas anspruchsvoller fragen: "Was ist
+blau?". Gibt es mehrere Lösungen, so wird zunächst immer nur eine angeboten. Du
+kannst  weitere Lösungen anfordern, indem du wiederholt auf Ausführen klickst.
+Gibt es schließlich keine weitere Lösung mehr, so erscheint `false.`.
 
 ```prolog
-gelb(primel).
+blau(X).
 ```
+@tau_prolog_query(blumenstrauss.pl)
 
+                              --{{1}}--
+Variablen werden mit einem großen Anfangsbuchstaben geschrieben. Dieselbe Frage
+können wir auch mit einer anderen (mehr aussagekräftigeren) Variablen stellen.
+Beachte wie sich die Ausgabe verändert.
+
+    {{1}}
 ```prolog
-lila(veilchen).
+blau(Blume).
 ```
-
-Sie sehen: Kommt die Frage buchstabengetreu als Faktum in der Datenbasis vor, so
-antwortet PROLOG mit `true`, andernfalls mit `false`.
-
-Wir können mit Hilfe von Variablen auch etwas anspruchsvoller fragen
-
-```prolog
-rot(X).
-```
-
-heißt übersetzt: Was ist rot?
-
-Wir erhalten die Antwort
-
-`X = rose ;`
-
-Variablen werden mit einem großen Anfangsbuchstaben geschrieben. Dieselbe
-Frage können wir auch mit einer anderen Variablen stellen, etwa:
-
-```prolog
-rot(Blume).
-```
-
-Jetzt lautet die Antwort
-
-`Blume = rose ;`
-
-Bei manchen PROLOG-Versionen müssen Sie die Antwort mit einem Punkt bestätigen
-oder mit einem Strichpunkt weitere Antworten anfordern.
+@tau_prolog_query(blumenstrauss.pl)
 
 
-2) Sie wollen wissen, welche Blume unseres Straußes gelb ist. Stellen Sie die
-entsprechende Anfrage.
+#### Urlaubsplanung
 
-Fragen Sie nach violetten Blumen.
-Fragen Sie nach blauen Blumen.
+                           --{{0}}--
+Dies ist die Urlaubsplanung für die nächsten Ferien, die umgangssprachliche
+Formulierung kann ganz einfach in eine PROLOG-Programm übersetzt werden.
 
+**Umgangsprachlich:** Axel fährt nach England, Beate fährt nach Griechenland und
+**in die Türkei, Clemens, Elmar und Frederike fahren nach Frankreich, Dagmar
+**fährt nach Italien.
 
-Wie Sie sehen, wird mit `false.` geantwortet, wenn keine Lösung der Anfrage
-möglich ist. Gibt es mehrere Lösungen, so wird Ihnen zunächst eine angeboten und
-Sie können weitere anfordern. Gibt es schließlich keine weitere Lösung mehr, so
-erscheint `false.`.
-
-Dies ist die Urlaubsplanung für die nächsten Ferien:
+----
 
 ```prolog
 faehrt_nach(axel,england).
@@ -314,34 +317,34 @@ faehrt_nach(frederike,frankreich).
 ```
 @tau_prolog_program(urlaubsplanung.pl)
 
-Umgangssprachlich heißt das
-
-Axel fährt nach England,
-Beate fährt nach Griechenland und in die Türkei,
-Clemens, Elmar und Frederike fahren nach Frankreich,
-Dagmar fährt nach Italien.
-
+                               --{{1}}--
 In dieser **Datenbasis** gibt es nur ein Prädikat, das zweistellige Prädikat
 `faehrt_nach`. Laden die obige Datenbasis in PROLOG. Die Frage "Wer fährt nach
 England?" heißt in PROLOG:
 
+{{1}}
 ```prolog
 faehrt_nach(X,england).
 ```
 @tau_prolog_query(urlaubsplanung.pl)
 
+              --{{2}}--
+Beantworte die folgenden Fragen, indem du sie in PROLOG übersetzt und vergleiche
+deine Anfragen mit den Auflösungen:
 
-3) Übersetzen Sie die folgenden Fragen und überprüfen Sie die Antworten:
 
+{{2}}
 1. Fährt Axel nach Griechenland?
 
-       [(X)] Ja
-       [( )] Nein
+       [( )] Ja
+       [(X)] Nein
    ================================
+   ---
    ```prolog
    faehrt_nach(axel, griechenland).
    ```
    @tau_prolog_query(urlaubsplanung.pl)
+   ---
    ================================
 
 2. Wohin fährt Beate?
@@ -395,6 +398,8 @@ faehrt_nach(X,england).
    ```
    @tau_prolog_query(urlaubsplanung.pl)
    ================================
+
+#### Komplexere Anfragen
 
 Die Vorlieben und Abneigungen am Frühstückstisch seien in der folgenden
 PROLOG-Datenbasis mit dem Namen 'fruehstueck.pl' festgehalten:
@@ -452,6 +457,8 @@ Strichpunkt. Die obigen Anfragen lauten also:
 * Wer mag Kuchen und Müsli?
 * Was mögen sowohl Papa als auch Mami?
 * Wer mag Kuchen und haßt Müsli?
+
+#### sss
 
 5) Stellen Sie die Gegebenheiten des Willkommensstraußes von Aufgabe 1 mit Hilfe
 eines zweistelligen Prädikates farbe dar. Welchen Vorteil hat diese Darstellung?
@@ -584,6 +591,7 @@ und stellen Sie Fragen:
   elter(daisy, Y).
   ```
   @tau_prolog_query(stammbaum.pl)
+
   =====================================
 
 * [[!]] Mit wem ist Baldur verheiratet?
@@ -592,6 +600,7 @@ und stellen Sie Fragen:
   verheiratet(baldur, X).
   ```
   @tau_prolog_query(stammbaum.pl)
+
   =====================================
 
 * [[!]] Wie heißen die Kinder von Adam?
@@ -600,6 +609,7 @@ und stellen Sie Fragen:
   elter(X, adam).
   ```
   @tau_prolog_query(stammbaum.pl)
+
   =====================================
 
 Wenn wir die Mutter von Cosima suchen, müssen wir eine zusammengesetzte Frage stellen:
@@ -621,4 +631,104 @@ Beide Fragen sind logisch gleichwertig und erzielen dieselbe Antwort. Auf
 Unterschiede bei der Abarbeitung der beiden Anfragen wollen wir erst in Kapitel
 3 eingehen.
 
+8) Fragen Sie auf jeweils zwei verschiedene Arten nach dem Vater von Daisy, nach den Söh-
+nen von Barbara und nach den Töchtern von Anton.
 
+Wir suchen die Großeltern von Donald. Dies erreichen wir durch die Anfrage:
+
+
+?- elter(donald,E), elter(E,G).
+
+In Worten: Gesucht sind E und G, so dass E Elternteil von Donald und G Elternteil von E ist.
+
+9) Suchen Sie die Großmütter von Clemens, die Urgroßeltern von Daisy, die Schwiegermutter von Bernd.
+
+Eine besondere Schwierigkeit tritt auf, wenn wir den Bruder von Clemens suchen. Der Bruder
+ist das Kind der beiden Eltern von Clemens, das ergibt die Anfrage
+
+?- elter(clemens,V),maennl(V),elter(clemens,M),weibl(M),
+elter(X,V), elter(X,M), maennl(X).
+
+(Die Frage läßt sich nicht mehr in einer Zeile unterbringen. Sie gelangen mit
+der RETURN- Taste in die nächste Zeile. Erst durch Punkt und RETURN wird die
+Anfrage abgeschlossen.) Diese Anfrage ist noch fehlerhaft. Außer der richtigen
+Lösung Casanova erscheint auch Clemens selbst als Antwort. Wir benötigen hier
+ein Prädikat für die Ungleichheit, dies wird in PROLOG geschrieben als `\=`.
+Unsere Frage nach dem Bruder von Clemens lautet damit
+
+?- elter(clemens,V),maennl(V),elter(clemens,M),weibl(M),
+elter(X,V), elter(X,M), maennl(X), X \= clemens.
+
+10) Lassen Sie nach den Schwestern von Cosima suchen.
+
+### Regeln
+
+Im vorigen Beispiel waren einige Grundbegriffe wie Elternteil, männlich,
+weiblich durch die Datenbasis erklärt, andere Begriffe wie Vater,
+Schwiegermutter oder Bruder mussten wir bei Anfragen in diese Grundbegriffe
+übersetzen. Dieses umständliche Verfahren können wir vereinfachen, indem wir zu
+den Fakten unserer Datenbasis noch **Regeln** hinzufügen. Im Beispiel wären das
+die Regeln
+
+```prolog
+mutter(X,Y) :- elter(X,Y), weibl(Y).
+vater(X,Y) :-  elter(X,Y), maennl(Y).
+kind(X,Y) :-   elter(Y,X).
+
+schwiegermutter(X,Y) :- verheiratet(X,Z), mutter(Z,Y).
+
+bruder(X,Y) :- vater(X,V), mutter(X,M),
+               vater(Y,V), mutter(Y,M), maennl(Y), Y\=X.
+```
+
+Dabei wird das Zeichen `:-` gelesen als 'falls' oder 'wenn'. Umgangssprachlich
+lesen wir die Regel für mutter als:
+
+Y ist Mutter von X, wenn Y Elternteil von X ist und Y weiblich ist.
+
+Die Regel für schwiegermutter heißt:
+
+Y ist Schwiegermutter von X, falls eine Person Z mit X verheiratet ist und Y
+Mutter von Z ist.
+
+Manche Prädikate werden durch mehrere Regeln beschrieben:
+
+```prolog
+schwager(X,Y) :- verheiratet(X,Z), bruder(Z,Y).
+schwager(X,Y) :- schwester(X,Z),   verheiratet(Z,Y).
+```
+
+**In Worten:** Y ist Schwager von X, falls X mit einer Person Z verheiratet ist
+und Y Bruder von Z ist oder falls X eine Schwester Z hat, die mit Y
+verheiratet ist.
+
+Der Regelteil vor dem Zeichen `:-` heißt **Kopf der Regel**, der Rest heißt
+**Rumpf der Regel**.
+
+Sowohl Fakten als auch Regeln bezeichnen wir als **Klauseln**. Die Gesamtheit
+aller Klauseln bildet ein PROLOG-**Programm**. Dieses wird mit Hilfe des Editors
+als Datei angelegt. Mit _consult_ wird das Programm geladen.
+
+Lesen Sie die Regel für das Prädikat bruder umgangssprachlich. Ergänzen Sie (mit
+Hilfe des Editors) die Datei stammb.pro um Regeln für die
+Verwandtschaftsbeziehungen Vater, Mutter, Kind, Sohn, Tochter, Bruder,
+Schwester, Großeltern. Schreiben Sie vor jedes Prädikat einen Kommentar zur
+Erläuterung, z. B.
+
+/* vater(X,Y) heißt: Y ist Vater von X */
+
+Laden Sie dann das Programm und fragen Sie mit Hilfe der neuen Prädikate nach
+den Großeltern von Donald, dem Bruder von Clemens usw. Überprüfen Sie, ob PROLOG
+die Antworten gibt, die Sie aufgrund des Stammbaums erwarten.
+
+Bis jetzt haben wir Regeln verwendet, um neue Prädikate mit Hilfe der schon
+bekannten zu definieren. Man kann Regeln auch dazu benutzen, den Geltungsbereich
+von schon bekannten Prädikaten zu erweitern; z. B. haben wir in der Datei
+fruehst.pro die Prädikate mag und hasst vorliegen, die Vorlieben und Abneigungen
+beim Frühstück beschreiben. Nun sei bekannt, dass der Opa dieser Familie alles
+mag, was Oma haßt. Diese Regel lautet dann in PROLOG:
+
+mag(opa,X):- hasst(oma,X).
+
+2) Nehmen Sie diese Regel in das PROLOG-Programm auf. Welche Antworten erwarten Sie
+bei den Fragen
