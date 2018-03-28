@@ -103,6 +103,7 @@ mermaid.render('id@0',graphDefinition,cb)
 
 Template for integrating the Tau-Prolog interpreter into LiaScript
 
+
 ## Originales Vorwort
 
 Dieses Buch soll in die Programmiersprache PROLOG und in die mit ihr verbundene
@@ -337,14 +338,14 @@ deine Anfragen mit den Auflösungen:
 
        [( )] Ja
        [(X)] Nein
-   ================================
+   ********************************
 
    ```prolog
    faehrt_nach(axel, griechenland).
    ```
    @tau_prolog_query(urlaubsplanung.pl)
 
-   ================================
+   ********************************
 
 2. Wohin fährt Beate?
 
@@ -353,12 +354,12 @@ deine Anfragen mit den Auflösungen:
        [[X]] griechenland
        [[ ]] italien
        [[X]] tuerkei
-   ================================
+   ********************************
    ```prolog
    faehrt_nach(beate, Urlaubsziel).
    ```
    @tau_prolog_query(urlaubsplanung.pl)
-   ================================
+   ********************************
 
 3. Wohin fährt Xaver?
 
@@ -367,14 +368,14 @@ deine Anfragen mit den Auflösungen:
        [[ ]] griechenland
        [[ ]] italien
        [[ ]] tuerkei
-   ================================
+   ********************************
    Xaver fährt nirgends hin, er ist nicht in der Datenbasis enthalten.
 
    ```prolog
    faehrt_nach(xaver, Urlaubsziel).
    ```
    @tau_prolog_query(urlaubsplanung.pl)
-   ================================
+   ********************************
 
 4. Wer fährt nach Frankreich?
 
@@ -382,24 +383,31 @@ deine Anfragen mit den Auflösungen:
        [[ ]] Beate
        [[X]] Clemens
        [[ ]] Dagmar
-       [[ ]] Elmar
-   ================================
+       [[X]] Elmar
+       [[X]] Frederike
+   ********************************
    ```prolog
    faehrt_nach(Wer, frankreich).
    ```
    @tau_prolog_query(urlaubsplanung.pl)
-   ================================
+   ********************************
 
-5. [[!]] Wer fährt wohin?
-   ================================
+5. Wer fährt wohin?
+
+       [[!]]
+   ********************************
    ```prolog
    faehrt_nach(Person, Ziel).
    ```
    @tau_prolog_query(urlaubsplanung.pl)
-   ================================
+   ********************************
 
 #### _und_ & _oder_ Operatoren
 
+{{0-1}}
+![breakfast](img/breakfast.png)<!-- style="max-width: 100%" -->
+
+                              --{{0}}--
 Die Vorlieben und Abneigungen am Frühstückstisch seien in der folgenden
 PROLOG-Datenbasis mit dem Namen 'fruehstueck.pl' festgehalten:
 
@@ -420,50 +428,137 @@ hasst(baby,brot).
 @tau_prolog_program(fruehstueck.pl)
 
 ```prolog
-% Fragen hier eingeben!
-mag(papa, kucken).
+mag(papa, brot).
 ```
 @tau_prolog_query(fruehstueck.pl)
 
-Bis jetzt können wir vier Arten von Fragen stellen. **Beispiele:**
+                  --{{1}}--
+Bis jetzt jetzt soltest du in der Lage sein, vier Arten von Fragen stellen. Du
+kannst dich selber testen und PROLOG dazu bringen, diese Fragen zu beantworten.
 
-* Mag Papa Kuchen?
-* Wer haßt Müsli?
-* Was mag Oma?
-* Wer mag was?
+                   {{1-2}}
+1. Mag Papa Kuchen?
+2. Wer haßt Müsli?
+3. Was mag Oma?
+4. Wer mag was?
 
-Für die Frühstücksplanung sind aber auch zusammengesetzte Fragen wichtig, wie:
 
-* Wer haßt Kuchen und mag Müsli?
-* Wer mag Kuchen und Brot?
-* Wer mag Brot oder Kuchen?
 
-Das Zeichen in PROLOG für _und_ ist ein Komma, für _oder_ schreibt man einen
-Strichpunkt. Die obigen Anfragen lauten also:
+                               --{{2}}--
+Für die Frühstücksplanung sind aber auch zusammengesetzte Fragen wichtig die
+Prädikate mit _und_ oder _oder_ verknüpft. Das Zeichen in PROLOG für _und_ ist
+ein Komma, für _oder_ schreibt man Semikolon.
 
-* ```prolog
+                               --{{3}}--
+Damit ergeben sich folgende PROLOG-Fragen:
+
+               {{2-4}}
+* Wer haßt Kuchen _und_ mag Müsli?
+
+  {{3}}
+  ```prolog
   hasst(X,kuchen), mag(X,muesli).
   ```
-* ```prolog
+  @tau_prolog_query(fruehstueck.pl)
+
+* Wer mag Kuchen _und_ Brot?
+
+  {{3}}
+  ```prolog
   mag(X,brot), mag(X,kuchen).
   ```
-* ```prolog
+  @tau_prolog_query(fruehstueck.pl)
+
+* Wer mag Brot _oder_ Kuchen?
+
+  {{3}}
+  ```prolog
   mag(X,brot); mag(X,kuchen).
   ```
+  @tau_prolog_query(fruehstueck.pl)
 
-4) Testen Sie diese Anfragen. Übersetzen Sie die folgenden Fragen nach PROLOG:
+--{{4}}-- Teste jetzt dein Wissen und versuch die folgenden Fragen mit PROLOG zu
+beantworten und  vergleiche deine Lösungen mit den Auflösungen.
 
-* Wer mag Kuchen und Müsli?
-* Was mögen sowohl Papa als auch Mami?
-* Wer mag Kuchen und haßt Müsli?
+       {{4}}
+1. Wer mag Kuchen und Müsli?
 
-#### sss
+       [[X]] Baby
+       [[ ]] Mami
+       [[ ]] Papa
+       [[ ]] Omi
+   **************************
+   ```prolog
+   mag(X, kuchen), mag(X, muesli).
+   ```
+   @tau_prolog_query(fruehstueck.pl)
+   **************************
 
-5) Stellen Sie die Gegebenheiten des Willkommensstraußes von Aufgabe 1 mit Hilfe
-eines zweistelligen Prädikates farbe dar. Welchen Vorteil hat diese Darstellung?
+2. Was mögen sowohl Papa als auch Mami?
 
+       [[X]] Brot
+       [[ ]] Kuchen
+       [[ ]] Müsli
+   *********************************
+   ```prolog
+   mag(papa, X), mag(mami, X).
+   ```
+   @tau_prolog_query(fruehstueck.pl)
+   *********************************
 
-6) Übersetzen Sie die folgenden Sätze in eine PROLOG-Datenbasis.
+3. Wer mag Kuchen und haßt Müsli?
+
+       [[ ]] Baby
+       [[X]] Mami
+       [[ ]] Papa
+       [[ ]] Omi
+   **************************
+   ```prolog
+   mag(X, kuchen), hasst(X, muesli).
+   ```
+   @tau_prolog_query(fruehstueck.pl)
+   **************************
+
+#### Aufgabe 1
+
+Stellen Sie die Gegebenheiten des Willkommensstraußes von Aufgabe 1 mit Hilfe
+eines zweistelligen Prädikates farbe dar.
+
+```prolog
+rot(rose).
+gelb(tulpe).
+weiss(nelke).
+blau(vergissmeinnicht).
+blau(veilchen).
+```
+@tau_prolog_program(blumenstrauss2.pl)
+
+```prolog
+
+```
+@tau_prolog_query(blumenstrauss2.pl)
+
+Welchen Vorteil hat diese zweistellige Darstellung?
+
+    [[!]]
+**************************************
+
+**Vorteil:** Man kann auch Fragen stellen wie: "_Welche Farbe hat die Rose?_"
+
+```prolog
+blume(rot, rose).
+blume(gelb, tulpe).
+blume(weiss, nelke).
+...
+
+?- blume(rot, X).
+```
+
+**************************************
+
+#### Aufgabe 2
+
+Übersetzen Sie die folgenden Sätze in eine PROLOG-Datenbasis.
 
 * Peter liebt Susi.
 * Hans liebt Susi und Sabine.
@@ -487,10 +582,138 @@ Stellen Sie die Anfragen:
 * der ihn auch liebt?
 * Wessen Liebe wird mit Haß vergolten?
 
+
+#### Stammbaum
+<!--
+script: https://d3js.org/d3.v5.min.js
+-->
+
+<style>
+
+ .node circle {
+   fill: #fff;
+   stroke: steelblue;
+   stroke-width: 3px;
+ }
+
+ .node text { font: 12px sans-serif; }
+
+ .link {
+   fill: none;
+   stroke: #ccc;
+   stroke-width: 2px;
+ }
+
+    </style>
+
+<div id="familytree"></div>
+
+<script>
+
+
+var treeData = [
+  {
+    "name": "Top Level",
+    "parent": "null",
+    "children": [
+      {
+        "name": "Level 2: A",
+        "parent": "Top Level",
+        "children": [
+          {
+            "name": "Son of A",
+            "parent": "Level 2: A"
+          },
+          {
+            "name": "Daughter of A",
+            "parent": "Level 2: A"
+          }
+        ]
+      },
+      {
+        "name": "Level 2: B",
+        "parent": "Top Level"
+      }
+    ]
+  }
+];
+
+// ************** Generate the tree diagram  *****************
+var margin = {top: 20, right: 120, bottom: 20, left: 120},
+ width = 960 - margin.right - margin.left,
+ height = 500 - margin.top - margin.bottom;
+
+var i = 0;
+
+
+
+var tree = d3.layout.tree()
+ .size([height, width]);
+
+var diagonal = d3.svg.diagonal()
+ .projection(function(d) { return [d.y, d.x]; });
+
+alert("FFFF");
+
+var svg = d3.select("#familytree").append("svg")
+ .attr("width", width + margin.right + margin.left)
+ .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+ .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+root = treeData[0];
+
+update(root);
+
+
+
+function update(source) {
+
+  // Compute the new tree layout.
+  var nodes = tree.nodes(root).reverse(),
+   links = tree.links(nodes);
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 180; });
+
+  // Declare the nodesâ€¦
+  var node = svg.selectAll("g.node")
+   .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+  // Enter the nodes.
+  var nodeEnter = node.enter().append("g")
+   .attr("class", "node")
+   .attr("transform", function(d) {
+    return "translate(" + d.y + "," + d.x + ")"; });
+
+  nodeEnter.append("circle")
+   .attr("r", 10)
+   .style("fill", "#fff");
+
+  nodeEnter.append("text")
+   .attr("x", function(d) {
+    return d.children || d._children ? -13 : 13; })
+   .attr("dy", ".35em")
+   .attr("text-anchor", function(d) {
+    return d.children || d._children ? "end" : "start"; })
+   .text(function(d) { return d.name; })
+   .style("fill-opacity", 1);
+
+  // Declare the linksâ€¦
+  var link = svg.selectAll("path.link")
+   .data(links, function(d) { return d.target.id; });
+
+  // Enter the links.
+  link.enter().insert("path", "g")
+   .attr("class", "link")
+   .attr("d", diagonal);
+
+}
+
+</script>
+
 Der folgende Stammbaum von Donald und Daisy läßt eine gewisse Systematik bei der
 Namensgebung erkennen, die den Überblick erleichtert:
-
-... todo ...
 
 Es gibt verschiedene Möglichkeiten, die Informationen dieses Stammbaumes in
 einer Datenbasis festzuhalten. Wir wählen dazu die Prädikate _maennl_, _weibl_,
@@ -569,7 +792,7 @@ elter(daisy,cleopatra).
 @tau_prolog_query(stammbaum.pl)
 
 Beachten Sie, wie sich die Symmetrie des Prädikats _verheiratet_ in der
-Datenbasis ausdrückt. Das Prädikat elter bedarf einer Erläuterung. Wir fügen in
+Datenbasis ausdrückt. Das Prädikat _elter_ bedarf einer Erläuterung. Wir fügen in
 die Datei noch einen Kommentar ein:
 
 /* elter(X,Y) heißt: Y ist Elternteil von X */
@@ -584,32 +807,37 @@ Gepflogenheiten der Mathematiker) festgelegt wurde.
 sich nicht schon auf Ihrer Diskette befindet. Laden Sie diese Datei nach PROLOG
 und stellen Sie Fragen:
 
-* [[!]] Wer sind die Eltern von Daisy?
-  =====================================
+#### sss
+
+* Wer sind die Eltern von Daisy?
+
+  [[!]]
+  *************************************
   ```prolog
   elter(daisy, Y).
   ```
   @tau_prolog_query(stammbaum.pl)
+  *************************************
 
-  =====================================
+* Mit wem ist Baldur verheiratet?
 
-* [[!]] Mit wem ist Baldur verheiratet?
-  =====================================
+  [[!]]
+  *************************************
   ```prolog
   verheiratet(baldur, X).
   ```
   @tau_prolog_query(stammbaum.pl)
+  *************************************
 
-  =====================================
+* Wie heißen die Kinder von Adam?
 
-* [[!]] Wie heißen die Kinder von Adam?
-  =====================================
+  [[!]]
+  *************************************
   ```prolog
   elter(X, adam).
   ```
   @tau_prolog_query(stammbaum.pl)
-
-  =====================================
+  *************************************
 
 Wenn wir die Mutter von Cosima suchen, müssen wir eine zusammengesetzte Frage stellen:
 "Welchen weiblichen Elternteil hat Cosima?". In PROLOG lautet das:
