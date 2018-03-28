@@ -346,7 +346,6 @@ deine Anfragen mit den Auflösungen:
    @tau_prolog_query(urlaubsplanung.pl)
 
    ********************************
-
 2. Wohin fährt Beate?
 
        [[ ]] england
@@ -360,7 +359,6 @@ deine Anfragen mit den Auflösungen:
    ```
    @tau_prolog_query(urlaubsplanung.pl)
    ********************************
-
 3. Wohin fährt Xaver?
 
        [[ ]] england
@@ -376,7 +374,6 @@ deine Anfragen mit den Auflösungen:
    ```
    @tau_prolog_query(urlaubsplanung.pl)
    ********************************
-
 4. Wer fährt nach Frankreich?
 
        [[ ]] Axel
@@ -391,7 +388,6 @@ deine Anfragen mit den Auflösungen:
    ```
    @tau_prolog_query(urlaubsplanung.pl)
    ********************************
-
 5. Wer fährt wohin?
 
        [[!]]
@@ -460,7 +456,6 @@ Damit ergeben sich folgende PROLOG-Fragen:
   hasst(X,kuchen), mag(X,muesli).
   ```
   @tau_prolog_query(fruehstueck.pl)
-
 * Wer mag Kuchen _und_ Brot?
 
   {{3}}
@@ -468,7 +463,6 @@ Damit ergeben sich folgende PROLOG-Fragen:
   mag(X,brot), mag(X,kuchen).
   ```
   @tau_prolog_query(fruehstueck.pl)
-
 * Wer mag Brot _oder_ Kuchen?
 
   {{3}}
@@ -493,7 +487,6 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    ```
    @tau_prolog_query(fruehstueck.pl)
    **************************
-
 2. Was mögen sowohl Papa als auch Mami?
 
        [[X]] Brot
@@ -505,7 +498,6 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    ```
    @tau_prolog_query(fruehstueck.pl)
    *********************************
-
 3. Wer mag Kuchen und haßt Müsli?
 
        [[ ]] Baby
@@ -584,378 +576,5 @@ Stellen Sie die Anfragen:
 
 
 #### Stammbaum
-<!--
-script: https://d3js.org/d3.v5.min.js
--->
 
-<style>
-
- .node circle {
-   fill: #fff;
-   stroke: steelblue;
-   stroke-width: 3px;
- }
-
- .node text { font: 12px sans-serif; }
-
- .link {
-   fill: none;
-   stroke: #ccc;
-   stroke-width: 2px;
- }
-
-    </style>
-
-<div id="familytree"></div>
-
-<script>
-
-
-var treeData = [
-  {
-    "name": "Top Level",
-    "parent": "null",
-    "children": [
-      {
-        "name": "Level 2: A",
-        "parent": "Top Level",
-        "children": [
-          {
-            "name": "Son of A",
-            "parent": "Level 2: A"
-          },
-          {
-            "name": "Daughter of A",
-            "parent": "Level 2: A"
-          }
-        ]
-      },
-      {
-        "name": "Level 2: B",
-        "parent": "Top Level"
-      }
-    ]
-  }
-];
-
-// ************** Generate the tree diagram  *****************
-var margin = {top: 20, right: 120, bottom: 20, left: 120},
- width = 960 - margin.right - margin.left,
- height = 500 - margin.top - margin.bottom;
-
-var i = 0;
-
-
-
-var tree = d3.layout.tree()
- .size([height, width]);
-
-var diagonal = d3.svg.diagonal()
- .projection(function(d) { return [d.y, d.x]; });
-
-alert("FFFF");
-
-var svg = d3.select("#familytree").append("svg")
- .attr("width", width + margin.right + margin.left)
- .attr("height", height + margin.top + margin.bottom)
-  .append("g")
- .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-root = treeData[0];
-
-update(root);
-
-
-
-function update(source) {
-
-  // Compute the new tree layout.
-  var nodes = tree.nodes(root).reverse(),
-   links = tree.links(nodes);
-
-  // Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 180; });
-
-  // Declare the nodesâ€¦
-  var node = svg.selectAll("g.node")
-   .data(nodes, function(d) { return d.id || (d.id = ++i); });
-
-  // Enter the nodes.
-  var nodeEnter = node.enter().append("g")
-   .attr("class", "node")
-   .attr("transform", function(d) {
-    return "translate(" + d.y + "," + d.x + ")"; });
-
-  nodeEnter.append("circle")
-   .attr("r", 10)
-   .style("fill", "#fff");
-
-  nodeEnter.append("text")
-   .attr("x", function(d) {
-    return d.children || d._children ? -13 : 13; })
-   .attr("dy", ".35em")
-   .attr("text-anchor", function(d) {
-    return d.children || d._children ? "end" : "start"; })
-   .text(function(d) { return d.name; })
-   .style("fill-opacity", 1);
-
-  // Declare the linksâ€¦
-  var link = svg.selectAll("path.link")
-   .data(links, function(d) { return d.target.id; });
-
-  // Enter the links.
-  link.enter().insert("path", "g")
-   .attr("class", "link")
-   .attr("d", diagonal);
-
-}
-
-</script>
-
-Der folgende Stammbaum von Donald und Daisy läßt eine gewisse Systematik bei der
-Namensgebung erkennen, die den Überblick erleichtert:
-
-Es gibt verschiedene Möglichkeiten, die Informationen dieses Stammbaumes in
-einer Datenbasis festzuhalten. Wir wählen dazu die Prädikate _maennl_, _weibl_,
-_verheiratet_ und _elter_. Die Datenbasis wird schon recht groß und ist deshalb
-hier im Buch zweispaltig gedruckt. In Ihrer Datei erscheint sie einspaltig, da
-jedes Faktum mit Punkt und RETURN abgeschlossen wird.
-
-<!-- style="max-height: 300px; overflow: auto;" -->
-```prolog
-maennl(adam).
-maennl(alfred).
-maennl(anton).
-maennl(arthur).
-maennl(baldur).
-maennl(bernd).
-maennl(boris).
-maennl(casanova).
-maennl(clemens).
-maennl(donald).
-
-weibl(adele).
-weibl(alwine).
-weibl(anna).
-weibl(ariadne).
-weibl(barbara).
-weibl(berta).
-weibl(cleopatra).
-weibl(cosima).
-weibl(daisy).
-
-verheiratet(adam,adele).
-verheiratet(adele,adam).
-verheiratet(alfred,alwine).
-verheiratet(alwine,alfred).
-verheiratet(anton,anna).
-verheiratet(anna,anton).
-verheiratet(arthur,ariadne).
-verheiratet(ariadne,arthur).
-verheiratet(baldur,barbara).
-verheiratet(barbara,baldur).
-verheiratet(bernd,berta).
-verheiratet(berta,bernd).
-verheiratet(clemens,cleopatra).
-verheiratet(cleopatra,clemens).
-
-/* elter(X,Y) heißt: Y ist Elternteil von X */
-
-elter(baldur,adam).
-elter(baldur,adele).
-elter(barbara,alfred).
-elter(barbara,alwine).
-elter(bernd,anton).
-elter(bernd,anna).
-elter(berta,arthur).
-elter(berta,ariadne).
-elter(boris,arthur).
-elter(boris,ariadne).
-elter(casanova,baldur).
-elter(casanova,barbara).
-elter(clemens,baldur).
-elter(clemens,barbara).
-elter(cleopatra,bernd).
-elter(cleopatra,berta).
-elter(cosima,bernd).
-elter(cosima,berta).
-elter(donald,clemens).
-elter(donald,cleopatra).
-elter(daisy,clemens).
-elter(daisy,cleopatra).
-```
-@tau_prolog_program(stammbaum.pl)
-
-```prolog
-% Anfragen hier eingeben.
-```
-@tau_prolog_query(stammbaum.pl)
-
-Beachten Sie, wie sich die Symmetrie des Prädikats _verheiratet_ in der
-Datenbasis ausdrückt. Das Prädikat _elter_ bedarf einer Erläuterung. Wir fügen in
-die Datei noch einen Kommentar ein:
-
-/* elter(X,Y) heißt: Y ist Elternteil von X */
-
-Alles was zwischen den Kommentarzeichen `/*` und `*/` steht, wird von PROLOG
-ignoriert (es kann sein, dass Ihre PROLOG-Version andere Kommentarzeichen
-verwendet). Für den Benutzer ist im obigen Fall ein solcher Kommentar notwendig,
-da die Reihenfolge von X und Y von uns willkürlich (in Anlehnung an
-Gepflogenheiten der Mathematiker) festgelegt wurde.
-
-7) Geben Sie die obige Datenbasis unter dem Namen "stammbaum.pl" ein, falls sie
-sich nicht schon auf Ihrer Diskette befindet. Laden Sie diese Datei nach PROLOG
-und stellen Sie Fragen:
-
-#### sss
-
-* Wer sind die Eltern von Daisy?
-
-  [[!]]
-  *************************************
-  ```prolog
-  elter(daisy, Y).
-  ```
-  @tau_prolog_query(stammbaum.pl)
-  *************************************
-
-* Mit wem ist Baldur verheiratet?
-
-  [[!]]
-  *************************************
-  ```prolog
-  verheiratet(baldur, X).
-  ```
-  @tau_prolog_query(stammbaum.pl)
-  *************************************
-
-* Wie heißen die Kinder von Adam?
-
-  [[!]]
-  *************************************
-  ```prolog
-  elter(X, adam).
-  ```
-  @tau_prolog_query(stammbaum.pl)
-  *************************************
-
-Wenn wir die Mutter von Cosima suchen, müssen wir eine zusammengesetzte Frage stellen:
-"Welchen weiblichen Elternteil hat Cosima?". In PROLOG lautet das:
-
-```prolog
-elter(cosima,X), weibl(X).
-```
-@tau_prolog_query(stammbaum.pl)
-
-oder ...
-
-```prolog
-weibl(X), elter(cosima,X).
-```
-@tau_prolog_query(stammbaum.pl)
-
-Beide Fragen sind logisch gleichwertig und erzielen dieselbe Antwort. Auf
-Unterschiede bei der Abarbeitung der beiden Anfragen wollen wir erst in Kapitel
-3 eingehen.
-
-8) Fragen Sie auf jeweils zwei verschiedene Arten nach dem Vater von Daisy, nach den Söh-
-nen von Barbara und nach den Töchtern von Anton.
-
-Wir suchen die Großeltern von Donald. Dies erreichen wir durch die Anfrage:
-
-
-?- elter(donald,E), elter(E,G).
-
-In Worten: Gesucht sind E und G, so dass E Elternteil von Donald und G Elternteil von E ist.
-
-9) Suchen Sie die Großmütter von Clemens, die Urgroßeltern von Daisy, die Schwiegermutter von Bernd.
-
-Eine besondere Schwierigkeit tritt auf, wenn wir den Bruder von Clemens suchen. Der Bruder
-ist das Kind der beiden Eltern von Clemens, das ergibt die Anfrage
-
-?- elter(clemens,V),maennl(V),elter(clemens,M),weibl(M),
-elter(X,V), elter(X,M), maennl(X).
-
-(Die Frage läßt sich nicht mehr in einer Zeile unterbringen. Sie gelangen mit
-der RETURN- Taste in die nächste Zeile. Erst durch Punkt und RETURN wird die
-Anfrage abgeschlossen.) Diese Anfrage ist noch fehlerhaft. Außer der richtigen
-Lösung Casanova erscheint auch Clemens selbst als Antwort. Wir benötigen hier
-ein Prädikat für die Ungleichheit, dies wird in PROLOG geschrieben als `\=`.
-Unsere Frage nach dem Bruder von Clemens lautet damit
-
-?- elter(clemens,V),maennl(V),elter(clemens,M),weibl(M),
-elter(X,V), elter(X,M), maennl(X), X \= clemens.
-
-10) Lassen Sie nach den Schwestern von Cosima suchen.
-
-### Regeln
-
-Im vorigen Beispiel waren einige Grundbegriffe wie Elternteil, männlich,
-weiblich durch die Datenbasis erklärt, andere Begriffe wie Vater,
-Schwiegermutter oder Bruder mussten wir bei Anfragen in diese Grundbegriffe
-übersetzen. Dieses umständliche Verfahren können wir vereinfachen, indem wir zu
-den Fakten unserer Datenbasis noch **Regeln** hinzufügen. Im Beispiel wären das
-die Regeln
-
-```prolog
-mutter(X,Y) :- elter(X,Y), weibl(Y).
-vater(X,Y) :-  elter(X,Y), maennl(Y).
-kind(X,Y) :-   elter(Y,X).
-
-schwiegermutter(X,Y) :- verheiratet(X,Z), mutter(Z,Y).
-
-bruder(X,Y) :- vater(X,V), mutter(X,M),
-               vater(Y,V), mutter(Y,M), maennl(Y), Y\=X.
-```
-
-Dabei wird das Zeichen `:-` gelesen als 'falls' oder 'wenn'. Umgangssprachlich
-lesen wir die Regel für mutter als:
-
-Y ist Mutter von X, wenn Y Elternteil von X ist und Y weiblich ist.
-
-Die Regel für schwiegermutter heißt:
-
-Y ist Schwiegermutter von X, falls eine Person Z mit X verheiratet ist und Y
-Mutter von Z ist.
-
-Manche Prädikate werden durch mehrere Regeln beschrieben:
-
-```prolog
-schwager(X,Y) :- verheiratet(X,Z), bruder(Z,Y).
-schwager(X,Y) :- schwester(X,Z),   verheiratet(Z,Y).
-```
-
-**In Worten:** Y ist Schwager von X, falls X mit einer Person Z verheiratet ist
-und Y Bruder von Z ist oder falls X eine Schwester Z hat, die mit Y
-verheiratet ist.
-
-Der Regelteil vor dem Zeichen `:-` heißt **Kopf der Regel**, der Rest heißt
-**Rumpf der Regel**.
-
-Sowohl Fakten als auch Regeln bezeichnen wir als **Klauseln**. Die Gesamtheit
-aller Klauseln bildet ein PROLOG-**Programm**. Dieses wird mit Hilfe des Editors
-als Datei angelegt. Mit _consult_ wird das Programm geladen.
-
-Lesen Sie die Regel für das Prädikat bruder umgangssprachlich. Ergänzen Sie (mit
-Hilfe des Editors) die Datei stammb.pro um Regeln für die
-Verwandtschaftsbeziehungen Vater, Mutter, Kind, Sohn, Tochter, Bruder,
-Schwester, Großeltern. Schreiben Sie vor jedes Prädikat einen Kommentar zur
-Erläuterung, z. B.
-
-/* vater(X,Y) heißt: Y ist Vater von X */
-
-Laden Sie dann das Programm und fragen Sie mit Hilfe der neuen Prädikate nach
-den Großeltern von Donald, dem Bruder von Clemens usw. Überprüfen Sie, ob PROLOG
-die Antworten gibt, die Sie aufgrund des Stammbaums erwarten.
-
-Bis jetzt haben wir Regeln verwendet, um neue Prädikate mit Hilfe der schon
-bekannten zu definieren. Man kann Regeln auch dazu benutzen, den Geltungsbereich
-von schon bekannten Prädikaten zu erweitern; z. B. haben wir in der Datei
-fruehst.pro die Prädikate mag und hasst vorliegen, die Vorlieben und Abneigungen
-beim Frühstück beschreiben. Nun sei bekannt, dass der Opa dieser Familie alles
-mag, was Oma haßt. Diese Regel lautet dann in PROLOG:
-
-mag(opa,X):- hasst(oma,X).
-
-2) Nehmen Sie diese Regel in das PROLOG-Programm auf. Welche Antworten erwarten Sie
-bei den Fragen
+todo
