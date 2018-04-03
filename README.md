@@ -63,7 +63,6 @@ script:   https://cdn.rawgit.com/liaScript/tau-prolog_template/master/js/tau-pro
 @end
 
 
-
 script:   https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js
 
 @mermaid
@@ -96,6 +95,7 @@ var cb = function(svgGraph) {
 mermaid.render('id@0',graphDefinition,cb)
 </script>
 @end
+
 
 -->
 
@@ -187,8 +187,7 @@ Einen kleinen Blumenstrauß zu beginn.
 
                             --{{1}}--
 Dieses Buch ist leider im original nicht im Vierfarbendruck erscheinen aber wir
-können den Willkommensstrauß auch kurz mit einfachen Worten wie folgt
-beschreiben:
+können den Willkommensstrauß auch kurz mit einfachen Worten wie:
 
                               {{1}}
 * Die Rose ist rot.
@@ -196,6 +195,7 @@ beschreiben:
 * Die Nelke ist weiß.
 * Das Vergißmeinnicht ist blau.
 * Das Veilchen ist blau.
+<!-- --{{1}}-- Die Rose ist rot, die Tulpe ist gelb oder das Veilchen ist blau. -->
 
 #### PROLOG-Notation
 
@@ -550,7 +550,11 @@ blume(weiss, nelke).
 
 #### Aufgabe 2
 
-Übersetzen Sie die folgenden Sätze in eine PROLOG-Datenbasis.
+                    --{{0}}--
+Übersetz die folgenden Sätze in eine PROLOG-Datenbasis.
+
+
+{{0-1}} ![cats](img/cats.png)
 
 * Peter liebt Susi.
 * Hans liebt Susi und Sabine.
@@ -562,19 +566,339 @@ blume(weiss, nelke).
 
 ```prolog
 @tau_prolog(beziehungen.pl, `% und hier deine fragen`)
-% gib deine beziehungen hier ein
+% gib hier die Beziehungen ein
 ```
 
-Stellen Sie die Anfragen:
 
+                           --{{1}}--
+Versuch die folgenden Anfragen selbst zu lösen, bevor du sie mit den Auflösungen
+vergleichst:
+
+
+
+    {{1}}
 * Wen liebt Sabine?
+
+  [[!]]
+  *************************
+  ```prolog
+  liebt(sabine, X).
+  ```
+  *************************
 * Wer liebt Sabine?
+
+  [[!]]
+  *************************
+  ```prolog
+  liebt(X, sabine).
+  ```
+  *************************
 * Wer liebt wen?
-* Wer liebt jemanden,
-* der ihn auch liebt?
+
+  [[!]]
+  *************************
+  ```prolog
+  liebt(Wer, Wen).
+  ```
+  *************************
+* Wer liebt jemanden, der ihn auch liebt?
+
+  [[!]]
+  *************************
+  ```prolog
+  liebt(X, Y), liebt(Y, X).
+  ```
+  *************************
 * Wessen Liebe wird mit Haß vergolten?
+
+  [[!]]
+  *************************
+  ```prolog
+  liebt(X, Y), hasst(Y, X).
+  ```
+  *************************
 
 
 #### Stammbaum
 
-todo
+                 --{{0}}--
+Der folgende Stammbaum von Donald und Daisy läßt eine gewisse Systematik bei der
+Namensgebung erkennen, die den Überblick erleichtert:
+
+```yml
+ Adam ♂ ═════╗
+             ╠════ Baldur ♂ ═════╗
+ Adele ♀ ════╝                   ╠════ Casanova ♂
+ Alfred ♂ ═══╗                   ╠════ Clemens ♂ ════╗
+             ╠════ Barbara ♀ ════╝                   ║
+ Alwine ♀ ═══╝                                       ╠═══ Donald ♂
+ Anton ♂ ════╗                                       ╠═══ Daisy ♀
+             ╠════ Berta ♀ ══════╗                   ║
+ Anna ♀ ═════╝                   ╠════ Cleopatra ♀ ══╝
+ Arthur ♂ ═══╗                   ╠════ Cosima ♀
+             ╠════ Bernd ♂ ══════╝
+             ╠════ Boris ♂
+ Adriane ♀ ══╝
+```
+
+       --{{1}}--
+Es gibt verschiedene Möglichkeiten, die Informationen dieses Stammbaumes in
+einer Datenbasis festzuhalten. Wir wählen dazu die Prädikate _maennl_, _weibl_,
+_verheiratet_ und _elter_. Die Datenbasis wird schon recht groß. In Ihrer Datei
+erscheint sie einspaltig, da jedes Faktum mit Punkt und RETURN abgeschlossen
+wird.
+
+                                   {{1}}
+*******************************************************************************
+<!-- style="max-height: 300px; overflow: auto;" -->
+```prolog
+maennl(adam).
+maennl(alfred).
+maennl(anton).
+maennl(arthur).
+maennl(baldur).
+maennl(bernd).
+maennl(boris).
+maennl(casanova).
+maennl(clemens).
+maennl(donald).
+
+weibl(adele).
+weibl(alwine).
+weibl(anna).
+weibl(ariadne).
+weibl(barbara).
+weibl(berta).
+weibl(cleopatra).
+weibl(cosima).
+weibl(daisy).
+
+verheiratet(adam,adele).
+verheiratet(adele,adam).
+verheiratet(alfred,alwine).
+verheiratet(alwine,alfred).
+verheiratet(anton,anna).
+verheiratet(anna,anton).
+verheiratet(arthur,ariadne).
+verheiratet(ariadne,arthur).
+verheiratet(baldur,barbara).
+verheiratet(barbara,baldur).
+verheiratet(bernd,berta).
+verheiratet(berta,bernd).
+verheiratet(clemens,cleopatra).
+verheiratet(cleopatra,clemens).
+
+/* elter(X,Y) heißt: Y ist Elternteil von X */
+
+elter(baldur,adam).
+elter(baldur,adele).
+elter(barbara,alfred).
+elter(barbara,alwine).
+elter(bernd,anton).
+elter(bernd,anna).
+elter(berta,arthur).
+elter(berta,ariadne).
+elter(boris,arthur).
+elter(boris,ariadne).
+elter(casanova,baldur).
+elter(casanova,barbara).
+elter(clemens,baldur).
+elter(clemens,barbara).
+elter(cleopatra,bernd).
+elter(cleopatra,berta).
+elter(cosima,bernd).
+elter(cosima,berta).
+elter(donald,clemens).
+elter(donald,cleopatra).
+elter(daisy,clemens).
+elter(daisy,cleopatra).
+```
+@tau_prolog_program(stammbaum.pl)
+
+```prolog
+% Anfragen hier eingeben.
+```
+@tau_prolog_query(stammbaum.pl)
+*******************************************************************************
+
+                          --{{2}}--
+Beachte, wie sich die Symmetrie des Prädikats _verheiratet_ in der Datenbasis
+ausdrückt. Das Prädikat _elter_ bedarf einer Erläuterung. Hierzu wurde ein
+noch einen Kommentar eingefügt:
+
+                           {{2-3}}
+/* elter(X,Y) heißt: Y ist Elternteil von X */
+
+                           --{{2}}--
+Alles was zwischen den Kommentarzeichen `/*` und `*/` steht, wird von PROLOG
+ignoriert. Für den Benutzer ist im obigen Fall ein solcher Kommentar notwendig,
+da die Reihenfolge von X und Y von uns willkürlich (in Anlehnung an
+Gepflogenheiten der Mathematiker) festgelegt wurde.
+
+                          --{{3}}--
+Lade das Programm und versuche die folgenden Fragen zu stellen und zu
+beantworten:
+
+                                   {{3-4}}
+*******************************************************************************
+
+**Fragen:**
+
+* Wer sind die Eltern von Daisy?
+
+  [[!]]
+  *************************************
+  ```prolog
+  elter(daisy, Y).
+  ```
+  @tau_prolog_query(stammbaum.pl)
+  *************************************
+
+* Mit wem ist Baldur verheiratet?
+
+  [[!]]
+  *************************************
+  ```prolog
+  verheiratet(baldur, X).
+  ```
+  @tau_prolog_query(stammbaum.pl)
+  *************************************
+
+* Wie heißen die Kinder von Adam?
+
+  [[!]]
+  *************************************
+  ```prolog
+  elter(X, adam).
+  ```
+  @tau_prolog_query(stammbaum.pl)
+  *************************************
+
+*******************************************************************************
+
+               --{{4}}--
+Wenn wir die Mutter von Cosima suchen, müssen wir eine zusammengesetzte Frage
+stellen: "Welchen weiblichen Elternteil hat Cosima?". In PROLOG lautet das:
+
+                             {{4}}
+********************************************************************************
+```prolog
+elter(cosima,X), weibl(X).
+```
+@tau_prolog_query(stammbaum.pl)
+
+oder ...
+
+```prolog
+weibl(X), elter(cosima,X).
+```
+@tau_prolog_query(stammbaum.pl)
+****************************************************************************
+
+                          --{{4}}--
+Beide Fragen sind logisch gleichwertig und erzielen dieselbe Antwort. Auf
+Unterschiede bei der Abarbeitung der beiden Anfragen wollen wir erst in Kapitel
+3 eingehen.
+
+#### ccc
+
+8) Fragen Sie auf jeweils zwei verschiedene Arten nach dem Vater von Daisy, nach den Söhnen von Barbara und nach den Töchtern von Anton.
+
+Wir suchen die Großeltern von Donald. Dies erreichen wir durch die Anfrage:
+
+
+?- elter(donald,E), elter(E,G).
+
+In Worten: Gesucht sind E und G, so dass E Elternteil von Donald und G Elternteil von E ist.
+
+9) Suchen Sie die Großmütter von Clemens, die Urgroßeltern von Daisy, die Schwiegermutter von Bernd.
+
+Eine besondere Schwierigkeit tritt auf, wenn wir den Bruder von Clemens suchen. Der Bruder
+ist das Kind der beiden Eltern von Clemens, das ergibt die Anfrage
+
+?- elter(clemens,V),maennl(V),elter(clemens,M),weibl(M),
+elter(X,V), elter(X,M), maennl(X).
+
+(Die Frage läßt sich nicht mehr in einer Zeile unterbringen. Sie gelangen mit
+der RETURN- Taste in die nächste Zeile. Erst durch Punkt und RETURN wird die
+Anfrage abgeschlossen.) Diese Anfrage ist noch fehlerhaft. Außer der richtigen
+Lösung Casanova erscheint auch Clemens selbst als Antwort. Wir benötigen hier
+ein Prädikat für die Ungleichheit, dies wird in PROLOG geschrieben als `\=`.
+Unsere Frage nach dem Bruder von Clemens lautet damit
+
+?- elter(clemens,V),maennl(V),elter(clemens,M),weibl(M),
+elter(X,V), elter(X,M), maennl(X), X \= clemens.
+
+10) Lassen Sie nach den Schwestern von Cosima suchen.
+
+### Regeln
+
+Im vorigen Beispiel waren einige Grundbegriffe wie Elternteil, männlich,
+weiblich durch die Datenbasis erklärt, andere Begriffe wie Vater,
+Schwiegermutter oder Bruder mussten wir bei Anfragen in diese Grundbegriffe
+übersetzen. Dieses umständliche Verfahren können wir vereinfachen, indem wir zu
+den Fakten unserer Datenbasis noch **Regeln** hinzufügen. Im Beispiel wären das
+die Regeln
+
+```prolog
+mutter(X,Y) :- elter(X,Y), weibl(Y).
+vater(X,Y) :-  elter(X,Y), maennl(Y).
+kind(X,Y) :-   elter(Y,X).
+
+schwiegermutter(X,Y) :- verheiratet(X,Z), mutter(Z,Y).
+
+bruder(X,Y) :- vater(X,V), mutter(X,M),
+               vater(Y,V), mutter(Y,M), maennl(Y), Y\=X.
+```
+
+Dabei wird das Zeichen `:-` gelesen als 'falls' oder 'wenn'. Umgangssprachlich
+lesen wir die Regel für mutter als:
+
+Y ist Mutter von X, wenn Y Elternteil von X ist und Y weiblich ist.
+
+Die Regel für schwiegermutter heißt:
+
+Y ist Schwiegermutter von X, falls eine Person Z mit X verheiratet ist und Y
+Mutter von Z ist.
+
+Manche Prädikate werden durch mehrere Regeln beschrieben:
+
+```prolog
+schwager(X,Y) :- verheiratet(X,Z), bruder(Z,Y).
+schwager(X,Y) :- schwester(X,Z),   verheiratet(Z,Y).
+```
+
+**In Worten:** Y ist Schwager von X, falls X mit einer Person Z verheiratet ist
+und Y Bruder von Z ist oder falls X eine Schwester Z hat, die mit Y
+verheiratet ist.
+
+Der Regelteil vor dem Zeichen `:-` heißt **Kopf der Regel**, der Rest heißt
+**Rumpf der Regel**.
+
+Sowohl Fakten als auch Regeln bezeichnen wir als **Klauseln**. Die Gesamtheit
+aller Klauseln bildet ein PROLOG-**Programm**. Dieses wird mit Hilfe des Editors
+als Datei angelegt. Mit _consult_ wird das Programm geladen.
+
+Lesen Sie die Regel für das Prädikat bruder umgangssprachlich. Ergänzen Sie (mit
+Hilfe des Editors) die Datei stammb.pro um Regeln für die
+Verwandtschaftsbeziehungen Vater, Mutter, Kind, Sohn, Tochter, Bruder,
+Schwester, Großeltern. Schreiben Sie vor jedes Prädikat einen Kommentar zur
+Erläuterung, z. B.
+
+/* vater(X,Y) heißt: Y ist Vater von X */
+
+Laden Sie dann das Programm und fragen Sie mit Hilfe der neuen Prädikate nach
+den Großeltern von Donald, dem Bruder von Clemens usw. Überprüfen Sie, ob PROLOG
+die Antworten gibt, die Sie aufgrund des Stammbaums erwarten.
+
+Bis jetzt haben wir Regeln verwendet, um neue Prädikate mit Hilfe der schon
+bekannten zu definieren. Man kann Regeln auch dazu benutzen, den Geltungsbereich
+von schon bekannten Prädikaten zu erweitern; z. B. haben wir in der Datei
+fruehst.pro die Prädikate mag und hasst vorliegen, die Vorlieben und Abneigungen
+beim Frühstück beschreiben. Nun sei bekannt, dass der Opa dieser Familie alles
+mag, was Oma haßt. Diese Regel lautet dann in PROLOG:
+
+mag(opa,X):- hasst(oma,X).
+
+2) Nehmen Sie diese Regel in das PROLOG-Programm auf. Welche Antworten erwarten Sie
+bei den Fragen
