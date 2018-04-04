@@ -452,26 +452,34 @@ Damit ergeben sich folgende PROLOG-Fragen:
 * Wer haßt Kuchen _und_ mag Müsli?
 
   {{3}}
+  ***********************************
   ```prolog
   hasst(X,kuchen), mag(X,muesli).
   ```
   @tau_prolog_query(fruehstueck.pl)
+  ***********************************
 * Wer mag Kuchen _und_ Brot?
 
   {{3}}
+  ***********************************
   ```prolog
   mag(X,brot), mag(X,kuchen).
   ```
   @tau_prolog_query(fruehstueck.pl)
+  ***********************************
 * Wer mag Brot _oder_ Kuchen?
 
   {{3}}
+  ***********************************
   ```prolog
   mag(X,brot); mag(X,kuchen).
   ```
   @tau_prolog_query(fruehstueck.pl)
+  ***********************************
 
---{{4}}-- Teste jetzt dein Wissen und versuch die folgenden Fragen mit PROLOG zu
+
+      --{{4}}--
+Teste jetzt dein Wissen und versuch die folgenden Fragen mit PROLOG zu
 beantworten und  vergleiche deine Lösungen mit den Auflösungen.
 
        {{4}}
