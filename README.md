@@ -451,7 +451,7 @@ Damit ergeben sich folgende PROLOG-Fragen:
                {{2-4}}
 * Wer haßt Kuchen _und_ mag Müsli?
 
-  {{3}}
+      {{3}}
   ***********************************
   ```prolog
   hasst(X,kuchen), mag(X,muesli).
@@ -460,7 +460,7 @@ Damit ergeben sich folgende PROLOG-Fragen:
   ***********************************
 * Wer mag Kuchen _und_ Brot?
 
-  {{3}}
+      {{3}}
   ***********************************
   ```prolog
   mag(X,brot), mag(X,kuchen).
@@ -469,7 +469,7 @@ Damit ergeben sich folgende PROLOG-Fragen:
   ***********************************
 * Wer mag Brot _oder_ Kuchen?
 
-  {{3}}
+      {{3}}
   ***********************************
   ```prolog
   mag(X,brot); mag(X,kuchen).
@@ -735,7 +735,7 @@ ausdrückt. Das Prädikat _elter_ bedarf einer Erläuterung. Hierzu wurde ein
 noch einen Kommentar eingefügt:
 
                            {{2-3}}
-/* elter(X,Y) heißt: Y ist Elternteil von X */
+**Kommentar:** `/* elter(X,Y) heißt: Y ist Elternteil von X */ `
 
                            --{{2}}--
 Alles was zwischen den Kommentarzeichen `/*` und `*/` steht, wird von PROLOG
@@ -749,9 +749,6 @@ beantworten:
 
                                    {{3-4}}
 *******************************************************************************
-
-**Fragen:**
-
 * Wer sind die Eltern von Daisy?
 
   [[!]]
@@ -784,12 +781,17 @@ beantworten:
 
 *******************************************************************************
 
-               --{{4}}--
-Wenn wir die Mutter von Cosima suchen, müssen wir eine zusammengesetzte Frage
-stellen: "Welchen weiblichen Elternteil hat Cosima?". In PROLOG lautet das:
+                           --{{4}}--
+Wenn wir nun die Mutter von Cosima suchen, müssen wir eine zusammengesetzte
+Frage stellen: _Welchen weiblichen Elternteil hat Cosima?_. In PROLOG lautet das
+wie folgt. Beide Fragen sind logisch gleichwertig und erzielen dieselbe Antwort.
+Auf Unterschiede bei der Abarbeitung der beiden Anfragen wollen wir erst in
+Kapitel 3 eingehen.
 
-                             {{4}}
+                             {{4-5}}
 ********************************************************************************
+Wer ist die Mutter von Cosima?
+
 ```prolog
 elter(cosima,X), weibl(X).
 ```
@@ -803,44 +805,95 @@ weibl(X), elter(cosima,X).
 @tau_prolog_query(stammbaum.pl)
 ****************************************************************************
 
-                          --{{4}}--
-Beide Fragen sind logisch gleichwertig und erzielen dieselbe Antwort. Auf
-Unterschiede bei der Abarbeitung der beiden Anfragen wollen wir erst in Kapitel
-3 eingehen.
 
-#### ccc
+                         {{5}}
+Versuche selbst als kleine Fingerübung auf jeweils zwei verschiedene Arten nach
+dem Vater von Daisy, nach den Söhnen von Barbara und nach den Töchtern von
+Anton!
 
-8) Fragen Sie auf jeweils zwei verschiedene Arten nach dem Vater von Daisy, nach den Söhnen von Barbara und nach den Töchtern von Anton.
+                       --{{6}}--
+Suchen wir die Großeltern von Donald, dann erreichen wir dies durch die folgende
+Anfrage. In Worten: "Gesucht sind _E_ und _G_, so dass _E_ Elternteil von Donald
+und _G_ Elternteil von _E_ ist.
 
-Wir suchen die Großeltern von Donald. Dies erreichen wir durch die Anfrage:
+{{6-7}}
+```prolog
+elter(donald,E), elter(E,G).
+```
+@tau_prolog_query(stammbaum.pl)
+
+    --{{7}}--
+Versuche selbst die folgenden Fragen zu lösen!
+
+<!-- --{{7}}-- Und suche die Großmütter von Clemens, die Urgroßeltern von Daisy,
+die Schwiegermutter von Bernd! -->
+
+{{7-8}}
+* Wer ist die Großmütter von Clemens?
+
+      [[!]]
+  *******************************
+  ```prolog
+  weibl(Oma), elter(E, Oma), elter(clemens, E).
+  ```
+  @tau_prolog_query(stammbaum.pl)
+  *******************************
+* Wer sind die Urgroßeltern von Daisy?
+
+      [[!]]
+  *******************************
+  ```prolog
+  elter(G, E), elter(E, G), elter(daisy, E).
+  ```
+  @tau_prolog_query(stammbaum.pl)
+  *******************************
+* Wie heißt die Schwiegermutter von Bernd?
+
+      [[!]]
+  *******************************
+  ```prolog
+  verheiratet(bernd, F), elter(F, S), weibl(S).
+  ```
+  @tau_prolog_query(stammbaum.pl)
+  *******************************
+
+                  --{{8}}--
+Eine besondere Schwierigkeit tritt auf, wenn wir den Bruder von Clemens suchen.
+Der Bruder ist das Kind der beiden Eltern von Clemens, das ergibt die folgende
+Anfrage. Da sich diese Frage sich nicht mehr in einer Zeile unterbringen läßt,
+können wir auch mehrere Zeilen für eine Anfrage nutzen. Erst durch den Punkt
+wird die Anfrage abgeschlossen.
 
 
-?- elter(donald,E), elter(E,G).
+    {{8-9}}
+```prolog
+elter(clemens, V), maennl(V), elter(clemens, M), weibl(M),
+elter(X, V), elter(X, M), maennl(X).
+```
+@tau_prolog_query(stammbaum.pl)
 
-In Worten: Gesucht sind E und G, so dass E Elternteil von Donald und G Elternteil von E ist.
+                 --{{9}}--
+Diese Anfrage nach den Brüdern von Clemens ist jedoch noch fehlerhaft. Außer der
+richtigen Lösung Casanova erscheint auch Clemens selbst als Antwort. Wir
+benötigen hier ein Prädikat für die Ungleichheit, dies wird in PROLOG
+geschrieben als `\=`. Unsere Frage nach dem Bruder von Clemens lautet damit wie
+folgt:
 
-9) Suchen Sie die Großmütter von Clemens, die Urgroßeltern von Daisy, die Schwiegermutter von Bernd.
+{{9}}
+```prolog
+elter(clemens, V), maennl(V), elter(clemens, M), weibl(M),
+elter(X, V), elter(X, M), maennl(X), X \= clemens.
+```
+@tau_prolog_query(stammbaum.pl)
 
-Eine besondere Schwierigkeit tritt auf, wenn wir den Bruder von Clemens suchen. Der Bruder
-ist das Kind der beiden Eltern von Clemens, das ergibt die Anfrage
+--{{10}}-- Versuch diese Anfrage selbst verändern um auch nach den Schwestern
+--von Cosima zu suchen.
 
-?- elter(clemens,V),maennl(V),elter(clemens,M),weibl(M),
-elter(X,V), elter(X,M), maennl(X).
 
-(Die Frage läßt sich nicht mehr in einer Zeile unterbringen. Sie gelangen mit
-der RETURN- Taste in die nächste Zeile. Erst durch Punkt und RETURN wird die
-Anfrage abgeschlossen.) Diese Anfrage ist noch fehlerhaft. Außer der richtigen
-Lösung Casanova erscheint auch Clemens selbst als Antwort. Wir benötigen hier
-ein Prädikat für die Ungleichheit, dies wird in PROLOG geschrieben als `\=`.
-Unsere Frage nach dem Bruder von Clemens lautet damit
 
-?- elter(clemens,V),maennl(V),elter(clemens,M),weibl(M),
-elter(X,V), elter(X,M), maennl(X), X \= clemens.
+#### Regeln 1.
 
-10) Lassen Sie nach den Schwestern von Cosima suchen.
-
-### Regeln
-
+                      --{{0}}--
 Im vorigen Beispiel waren einige Grundbegriffe wie Elternteil, männlich,
 weiblich durch die Datenbasis erklärt, andere Begriffe wie Vater,
 Schwiegermutter oder Bruder mussten wir bei Anfragen in diese Grundbegriffe
@@ -848,29 +901,109 @@ Schwiegermutter oder Bruder mussten wir bei Anfragen in diese Grundbegriffe
 den Fakten unserer Datenbasis noch **Regeln** hinzufügen. Im Beispiel wären das
 die Regeln
 
+<!-- style="max-height: 300px; overflow: auto;" -->
 ```prolog
 mutter(X,Y) :- elter(X,Y), weibl(Y).
+
 vater(X,Y) :-  elter(X,Y), maennl(Y).
+
 kind(X,Y) :-   elter(Y,X).
 
 schwiegermutter(X,Y) :- verheiratet(X,Z), mutter(Z,Y).
 
 bruder(X,Y) :- vater(X,V), mutter(X,M),
                vater(Y,V), mutter(Y,M), maennl(Y), Y\=X.
+
+/* ursprüngliche Fakten aus stammbaum.pl */
+maennl(adam).
+maennl(alfred).
+maennl(anton).
+maennl(arthur).
+maennl(baldur).
+maennl(bernd).
+maennl(boris).
+maennl(casanova).
+maennl(clemens).
+maennl(donald).
+
+weibl(adele).
+weibl(alwine).
+weibl(anna).
+weibl(ariadne).
+weibl(barbara).
+weibl(berta).
+weibl(cleopatra).
+weibl(cosima).
+weibl(daisy).
+
+verheiratet(adam,adele).
+verheiratet(adele,adam).
+verheiratet(alfred,alwine).
+verheiratet(alwine,alfred).
+verheiratet(anton,anna).
+verheiratet(anna,anton).
+verheiratet(arthur,ariadne).
+verheiratet(ariadne,arthur).
+verheiratet(baldur,barbara).
+verheiratet(barbara,baldur).
+verheiratet(bernd,berta).
+verheiratet(berta,bernd).
+verheiratet(clemens,cleopatra).
+verheiratet(cleopatra,clemens).
+
+/* elter(X,Y) heißt: Y ist Elternteil von X */
+
+elter(baldur,adam).
+elter(baldur,adele).
+elter(barbara,alfred).
+elter(barbara,alwine).
+elter(bernd,anton).
+elter(bernd,anna).
+elter(berta,arthur).
+elter(berta,ariadne).
+elter(boris,arthur).
+elter(boris,ariadne).
+elter(casanova,baldur).
+elter(casanova,barbara).
+elter(clemens,baldur).
+elter(clemens,barbara).
+elter(cleopatra,bernd).
+elter(cleopatra,berta).
+elter(cosima,bernd).
+elter(cosima,berta).
+elter(donald,clemens).
+elter(donald,cleopatra).
+elter(daisy,clemens).
+elter(daisy,cleopatra).
 ```
+@tau_prolog_program(stammbaum2.pl)
 
-Dabei wird das Zeichen `:-` gelesen als 'falls' oder 'wenn'. Umgangssprachlich
-lesen wir die Regel für mutter als:
+```prolog
 
-Y ist Mutter von X, wenn Y Elternteil von X ist und Y weiblich ist.
+```
+@tau_prolog_query(stammbaum2.pl)
 
+
+{{1-5}} **Neues Zeichen:** `:-` ==> falls
+
+             --{{1}}--
+Dabei wird das Zeichen `:-` gelesen als 'falls' oder 'wenn'.  Der Regelteil vor
+dem Zeichen `:-` heißt **Kopf der Regel**, der Rest heißt **Rumpf der Regel**.
+
+             --{{1}}--
+Umgangssprachlich lesen wir die Regel für mutter als:
+__Y ist Mutter von X, wenn Y Elternteil von X ist und Y weiblich ist.__
+
+
+             --{{1}}--
 Die Regel für schwiegermutter heißt:
+__Y ist Schwiegermutter von X, falls eine Person Z mit X verheiratet ist und Y Mutter von Z ist.__
 
-Y ist Schwiegermutter von X, falls eine Person Z mit X verheiratet ist und Y
-Mutter von Z ist.
-
+             --{{2}}--
 Manche Prädikate werden durch mehrere Regeln beschrieben:
 
+               {{2-3}}
+*******************************************************************************
 ```prolog
 schwager(X,Y) :- verheiratet(X,Z), bruder(Z,Y).
 schwager(X,Y) :- schwester(X,Z),   verheiratet(Z,Y).
@@ -880,24 +1013,51 @@ schwager(X,Y) :- schwester(X,Z),   verheiratet(Z,Y).
 und Y Bruder von Z ist oder falls X eine Schwester Z hat, die mit Y
 verheiratet ist.
 
-Der Regelteil vor dem Zeichen `:-` heißt **Kopf der Regel**, der Rest heißt
-**Rumpf der Regel**.
+*******************************************************************************
 
+                 --{{3}}--
 Sowohl Fakten als auch Regeln bezeichnen wir als **Klauseln**. Die Gesamtheit
 aller Klauseln bildet ein PROLOG-**Programm**. Dieses wird mit Hilfe des Editors
 als Datei angelegt. Mit _consult_ wird das Programm geladen.
 
-Lesen Sie die Regel für das Prädikat bruder umgangssprachlich. Ergänzen Sie (mit
-Hilfe des Editors) die Datei stammb.pro um Regeln für die
-Verwandtschaftsbeziehungen Vater, Mutter, Kind, Sohn, Tochter, Bruder,
-Schwester, Großeltern. Schreiben Sie vor jedes Prädikat einen Kommentar zur
-Erläuterung, z. B.
+                 --{{4}}--
+Lies die Regel für das Prädikat _bruder_ umgangssprachlich. Ergänze die das
+Programm `stammbaum2.pro` um Regeln für die folgenden Verwandtschaftsbeziehungen
+und schreibe vor jedes Prädikat einen Kommentar zur Erläuterung:
 
-/* vater(X,Y) heißt: Y ist Vater von X */
+{{4-5}}
+1. Vater:
 
-Laden Sie dann das Programm und fragen Sie mit Hilfe der neuen Prädikate nach
-den Großeltern von Donald, dem Bruder von Clemens usw. Überprüfen Sie, ob PROLOG
-die Antworten gibt, die Sie aufgrund des Stammbaums erwarten.
+        [[!]]
+   ************************
+
+   `todo`
+
+   ************************
+2. Mutter
+
+   [[!]]
+   ************************
+
+   `todo`
+
+   ************************
+3. Kind
+4. Sohn
+5. Tochter
+6. Bruder
+7. Schwester
+8. Großeltern
+9. Füge Kommentare ein, w. z. B. `/* vater(X,Y) heißt: Y ist Vater von X */`
+
+
+          --{{5}}--
+Lade dein Programm und frage mit Hilfe der neuen Prädikate nach den Großeltern
+von Donald, dem Bruder von Clemens usw. Überprüfen Sie, ob PROLOG die Antworten
+gibt, die du aufgrund des Stammbaums erwartest.
+
+
+#### Regeln 2.
 
 Bis jetzt haben wir Regeln verwendet, um neue Prädikate mit Hilfe der schon
 bekannten zu definieren. Man kann Regeln auch dazu benutzen, den Geltungsbereich
