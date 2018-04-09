@@ -144,8 +144,6 @@ Gabriele Lehmann
 
 ## Grundlagen
 
-### Willkommen
-
                             --{{0}}--
 Einen kleinen Blumenstrauß zu beginn.
 
@@ -184,7 +182,7 @@ Form. Sowohl Prädikate als auch Konstanten werden mit kleinem Anfangsbuchstaben
 geschrieben, deutsche Sonderzeichen vermeiden wir. Jedes Faktum wird mit einem
 Punkt und dem Drücken der RETURN-Taste abgeschlossen.
 
-#### PROLOG-Programme
+### PROLOG-Programme
 
                                  --{{0}}--
 Die hier genuzte PROLOG-IDE besteht immer aus zwei Teilen, einer Eingabe für das
@@ -234,7 +232,7 @@ gelb(veilchen).
 @tau_prolog_query(blumenstrauss.pro)
 
 
-#### Variablen
+### Variablen
 
                                  --{{0}}--
 Wir können mit Hilfe von Variablen auch etwas anspruchsvoller fragen: "Was ist
@@ -259,7 +257,7 @@ blau(Blume).
 @tau_prolog_query(blumenstrauss.pro)
 
 
-#### Zweistellige Prädikate
+### Zweistellige Prädikate
 
                            --{{0}}--
 Dies ist die Urlaubsplanung für die nächsten Ferien, die umgangssprachliche
@@ -363,7 +361,7 @@ deine Anfragen mit den Auflösungen:
    @tau_prolog_query(urlaubsplanung.pro)
    ********************************
 
-#### _und_ & _oder_ Operatoren
+### _und_ & _oder_ Operatoren
 
 {{0-1}}
 ![breakfast](img/breakfast.png)<!-- style="max-width: 100%" -->
@@ -484,7 +482,14 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    @tau_prolog_query(fruehstueck.pro)
    **************************
 
-#### Aufgabe 1
+### Aufgaben
+
+                             --{{0}}--
+Die folgenden beiden Abschnitte sollen dazu dienen, das bereits gelernte zu
+wiederholen und zu festigen, bevor wir lernen wie man komplexere Sachverhalte
+durch die Nutzung von Regeln abbildet.
+
+#### Blumenstrauß #2
 
 Stellen Sie die Gegebenheiten des Willkommensstraußes von Aufgabe 1 mit Hilfe
 eines zweistelligen Prädikates farbe dar.
@@ -521,7 +526,7 @@ blume(weiss, nelke).
 
 **************************************
 
-#### Aufgabe 2
+#### Beziehungen
 
                     --{{0}}--
 Übersetz die folgenden Sätze in eine PROLOG-Datenbasis.
@@ -877,11 +882,11 @@ elter(X, V), elter(X, M), maennl(X), X \= clemens.
 @tau_prolog_query(stammbaum.pro)
 
 --{{10}}-- Versuch diese Anfrage selbst verändern um auch nach den Schwestern
---von Cosima zu suchen.
+von Cosima zu suchen.
 
 
 
-#### Regeln 1.
+## Regeln
 
                       --{{0}}--
 Im vorigen Beispiel waren einige Grundbegriffe wie Elternteil, männlich,
@@ -1047,8 +1052,6 @@ und schreibe vor jedes Prädikat einen Kommentar zur Erläuterung:
    ```
    ************************
 4. Großeltern
-
-
 5. Füge Kommentare ein, w. z. B. `/* vater(X,Y) heißt: Y ist Vater von X */`
 
 
@@ -1057,16 +1060,24 @@ Lade dein Programm und frage mit Hilfe der neuen Prädikate nach den Großeltern
 von Donald, dem Bruder von Clemens usw. Überprüfen Sie, ob PROLOG die Antworten
 gibt, die du aufgrund des Stammbaums erwartest.
 
+             {{5}}
+******************************************************
+**Frage nach:**
 
-#### Regeln 2.
+* Großeltern von Donald,
+* dem Bruder von Clemens
+* usw.
+******************************************************
+
+### Geltungsbereiche
 
                       --{{0}}--
 Bis jetzt haben wir Regeln verwendet, um neue Prädikate mit Hilfe der schon
 bekannten zu definieren. Man kann Regeln auch dazu benutzen, den Geltungsbereich
-von schon bekannten Prädikaten zu erweitern; z. B. haben wir in der Datei
-fruehst.pro die Prädikate mag und hasst vorliegen, die Vorlieben und Abneigungen
-beim Frühstück beschreiben. Nun sei bekannt, dass der Opa dieser Familie alles
-mag, was Oma haßt. Diese Regel lautet dann in PROLOG:
+von schon bekannten Prädikaten zu erweitern; zum Beispiel haben wir in der Datei
+`fruehstueck.pro` die Prädikate mag und hasst vorliegen, die Vorlieben und
+Abneigungen beim Frühstück beschreiben. Nun sei bekannt, dass der Opa dieser
+Familie alles mag, was Oma haßt. Diese Regel lautet dann in PROLOG:
 
 ```prolog
 mag(opa,X):- hasst(oma,X).
@@ -1080,11 +1091,16 @@ bei den Fragen
 ?- mag(opa,muesli).
 ?- hasst(opa,X).
 
+### Aufgaben
+
+#### Urlaub #2
+
 3) Zur Gruppe aus der Datei urlaub.pro stößt Romeo. Er fährt überall hin, wo Beate hinfährt.
 Wie lautet diese Regel in PROLOG? Ergänzen Sie die Datei urlaub.pro.
 
-Der Nibelungen Not:
+#### Nibelungen
 
+Der Nibelungen Not:
 
 1. Siegfried liebt Krimhild und mag Gunther.
 2. Krimhild liebt Siegfried und haßt Brunhild.
@@ -1094,18 +1110,43 @@ Der Nibelungen Not:
 6. Brunhild mag alle, die Siegfried hassen.
 7. Alberich haßt alle, mit Ausnahme von sich selbst.
 
-Schreiben Sie die obigen Aussagen als PROLOG-Programm in eine Datei `nibelungen.pro`. Stellen Sie Fragen:
+             --{{0}}--
+Schreibe die obigen Aussagen als PROLOG-Programm in eine Datei `nibelungen.pro`.
 
+@tau_prolog(nibelungen.pro,%program,%fragen)
+
+             --{{1}}--
+Stelle die folgenden Fragen:
+
+    {{1-2}}
 1. Wer haßt Siegfried?
 2. Wen mag Brunhild?
 3. Wer haßt wen?
 4. Wer liebt wen?
 
-Definieren Sie ein Prädikat _ideales\_paar_, das auf _(X,Y)_ zutrifft, falls _X_
+
+   {{2}}
+*******************************************************************************
+Definieren ein Prädikat _ideales\_paar_, das auf _(X,Y)_ zutrifft, falls _X_
 von _Y_ und _Y_ von _X_ geliebt wird.
 
-#### Regeln 3.
+   [[!]]
+************************
+```prolog
+/* schwester(X,Y) heißt: Y ist die Schwester von X, wenn beide den gleichen
+Vater und die gleiche Mutter haben und Y ist weiblich und X und Y nicht die
+gleiche Person sind. */
+schwester(X,Y) :- vater(X,V), mutter(X,M),
+                  vater(Y,V), mutter(Y,M), weibl(Y), Y\=X.
+```
+@tau_prolog_query(nibelungen.pro)
+************************
 
+*******************************************************************************
+
+#### Grammtiken
+
+               --{{0}}--
 Regeln kennen wir auch aus der Grammatik. An einem sehr einfachen Beispiel
 wollen wir einen Zusammenhang mit PROLOG aufzeigen.
 
@@ -1114,9 +1155,12 @@ wollen wir einen Zusammenhang mit PROLOG aufzeigen.
 * Der Fuchs flieht.
 * Der Jäger schießt.
 
+
+              --{{1}}--
 Diese Sätze sind alle nach demselben Schema gebildet, das wir als PROLOG-Regel
 schreiben können:
 
+{{1}}
 ```prolog
 artikel(der).
 
@@ -1133,38 +1177,37 @@ satz(X,Y,Z):- artikel(X), nomen(Y), verb(Z).
 ```
 @tau_prolog_program(grammatik.pro)
 
-```prolog
-
-```
-@tau_prolog_query(grammatik.pro)
-
-
+          --{{1}}--
 Damit haben wir eine kleine Sprache definiert, die über einen sehr begrenzten
 Wortschatz und über eine einzige grammatikalische Regel verfügt und natürlich
 nur einen ganz engen Bereich unserer Umgangssprache abdeckt.
 
+                 --{{2}}--
 Verwenden Sie das Prädikat satz, um zu überprüfen, ob drei Worte einen Satz
 unserer Sprache bilden. Beispiele:
 
+{{2-3}}
 ```prolog
 satz(der,jaeger,bellt).
 ```
 @tau_prolog_query(grammatik.pro)
 
+{{2-3}}
 ```prolog
 satz(flieht,der,hund).
 ```
 @tau_prolog_query(grammatik.pro)
 
-Verwenden Sie das Prädikat satz auch, um alle möglichen Sätze dieser Sprache zu
-erzeugen:
+              --{{3}}--
+Verwende das Prädikat _satz_ auch, um alle möglichen Sätze dieser Sprache zu
+erzeugen (Wieviele verschiedene Sätze erwartest du):
 
+{{3}}
 ```prolog
 satz(A,B,C).
 ```
 @tau_prolog_query(grammatik.pro)
 
-Wieviele verschiedene Sätze erwarten Sie?
 
 
 #### Aufgabe
@@ -1182,8 +1225,12 @@ Ein Menü besteht aus Vorspeise, Hauptgericht und Nachspeise.
 Schreiben Sie ein Programm, das ein dreistelliges Prädikat menue enthält. Dieses
 Prädikat soll Menüvorschläge überprüfen und erzeugen können.
 
-#### Aufgaben
+#### 4-Farbenproblem
 
+                    --{{0}}--
+Das dargestellte Rechteck besteht aus 4 Gebieten, die mit den drei Farben _rot_,
+_gelb_ und _blau_ so eingefärbt werden sollen, dass keine gleichfarbigen Gebiete
+längs einer Linie aneinandergrenzen.
 
 <!-- style="max-width: 315px;" -->
 ```yml
@@ -1200,6 +1247,41 @@ Prädikat soll Menüvorschläge überprüfen und erzeugen können.
 
 ```
 
+                        --{{1}}--
+Wir lassen ein Programm nach den Lösungen suchen. Die Farbe des Gebietes 1
+bezeichnen wir mit der Variablen `F1`, und so weiter. Dabei bedeutet
+`einfaerbung(F1, F2, F3, F4)`, dass die Farben `F1`, `F2`, `F3`, `F4` eine
+erlaubte Einfärbung des Rechtecks liefern.
+
+{{1}}
+```prolog
+farbe(rot).
+farbe(gelb).
+farbe(blau).
+
+einfaerbung(F1, F2, F3, F4):-
+  farbe(F1), farbe(F2), farbe(F3), farbe(F4),
+  F1\=F2,  F1\=F4,  F2\=F3,  F2\=F4,  F3\=F4.
+```
+@tau_prolog_program(vier_farben.pro)
+
+      --{{2}}--
+Wir bekommen also die Lösungen durch die folgende Anfrage:
+
+{{2}}
+```prolog
+einfaerbung(F1, F2, F3, F4).
+```
+@tau_prolog_query(vier_farben.pro)
+
+
+                     {{3}}
+***********************************************************************
+
+Versuche nun selbst eine Regel `einfaerbung2(F1, F2, F3, F4, F5)` für das das
+folgende Rechteck, bestehend aus 5 Gebieten, zu definieren. Nutze wieder nur
+drei Farben und achte darauf, dass keine gleichfarbigen Gebiete
+aneinandergrenzen?
 
 <!-- style="max-width: 315px;" -->
 ```
@@ -1215,6 +1297,25 @@ Prädikat soll Menüvorschläge überprüfen und erzeugen können.
  ┗━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┛
 
 ```
+
+Wieviel Lösungen existieren?
+
+   [[X]] 12
+****************************************
+
+```prolog
+% einfaerbung2(F1, F2, F3, F4, F5) :-
+farbe(F1), farbe(F2), farbe(F3), farbe(F4), farbe(F5),
+F1\=F2, F1\=F2, F1\=F5, F2\=F3, F2\=F4, F3\=F4, F3\=F5, F4\=F5.
+```
+@tau_prolog_query(vier_farben.pro)
+
+
+****************************************
+
+*******************************************************************************
+
+### Interna
 
 <!-- style="max-width: 315px;" -->
 ```yml
