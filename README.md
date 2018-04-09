@@ -63,40 +63,6 @@ script:   https://cdn.rawgit.com/liaScript/tau-prolog_template/master/js/tau-pro
 @end
 
 
-script:   https://unpkg.com/mermaid@7.1.0/dist/mermaid.min.js
-
-@mermaid
-<script>
-  mermaid.initialize({});
-
-  mermaid.render("id@0",
-                 `@1`,
-                 function(svgCode) {
-                     var elem = document.getElementById("id@0");
-                     elem.innerHTML = svgCode;
-                     elem.firstChild.style.height = elem.getAttribute('viewbox').split(' ')[3] + 'px';
-                 });
-</script>
-<span class="mermaid" id="id@0"></span>
-@end
-
-@mermaid_eval
-<script>
-var elem = document.getElementById('id@0');
-
-if(elem != null)
-  elem.remove();
-
-mermaid.initialize({});
-var graphDefinition = `{X}`
-var cb = function(svgGraph) {
-    return true;
-}
-mermaid.render('id@0',graphDefinition,cb)
-</script>
-@end
-
-
 -->
 
 # Arbeitsbuch PROLOG
@@ -197,13 +163,12 @@ können den Willkommensstrauß auch kurz mit einfachen Worten wie:
 * Das Veilchen ist blau.
 <!-- --{{1}}-- Die Rose ist rot, die Tulpe ist gelb oder das Veilchen ist blau. -->
 
-#### PROLOG-Notation
 
-                            --{{0}}--
+                            --{{2}}--
 Solche **Fakten** (Tatsachen) wie die Zusammensetzung eines Straußes können in
 PROLOG wie folgt abgebildet werden:
 
-
+{{2}}
 ```prolog
 rot(rose).
 gelb(tulpe).
@@ -212,9 +177,9 @@ blau(vergissmeinnicht).
 blau(veilchen).
 ```
 
-                            --{{1}}--
-Die **Prädikate** (Eigenschaften) *rot*, *gelb*, *weiss* und *blau* treffen auf
-gewisse Konstanten wie zum Beispiel *rose* zu, dies schreiben wir in der obigen
+                            --{{2}}--
+Die **Prädikate** (Eigenschaften) _rot_, _gelb_, _weiss_ und _blau_ treffen auf
+gewisse Konstanten wie zum Beispiel _rose_ zu, dies schreiben wir in der obigen
 Form. Sowohl Prädikate als auch Konstanten werden mit kleinem Anfangsbuchstaben
 geschrieben, deutsche Sonderzeichen vermeiden wir. Jedes Faktum wird mit einem
 Punkt und dem Drücken der RETURN-Taste abgeschlossen.
@@ -240,7 +205,7 @@ weiss(nelke).
 blau(vergissmeinnicht).
 blau(veilchen)
 ```
-@tau_prolog_program(blumenstrauss.pl)
+@tau_prolog_program(blumenstrauss.pro)
 
                              --{{2}}--
 Um anfragen an deine Datenbasis zu stellen, benötigst du noch eine zweite
@@ -250,7 +215,7 @@ Eingabemöglichkeit:
 ```prolog
 rot(rose).
 ```
-@tau_prolog_query(blumenstrauss.pl)
+@tau_prolog_query(blumenstrauss.pro)
 
                           --{{3}}--
 Solche Eingaben werden als Fragen aufgefasst. Umgangsprachlich formuliert heißt
@@ -266,7 +231,7 @@ Faktum in der Datenbasis vor, so antwortet PROLOG mit `true`, andernfalls mit
 ```prolog
 gelb(veilchen).
 ```
-@tau_prolog_query(blumenstrauss.pl)
+@tau_prolog_query(blumenstrauss.pro)
 
 
 #### Variablen
@@ -280,7 +245,7 @@ Gibt es schließlich keine weitere Lösung mehr, so erscheint `false.`.
 ```prolog
 blau(X).
 ```
-@tau_prolog_query(blumenstrauss.pl)
+@tau_prolog_query(blumenstrauss.pro)
 
                               --{{1}}--
 Variablen werden mit einem großen Anfangsbuchstaben geschrieben. Dieselbe Frage
@@ -291,7 +256,7 @@ Beachte wie sich die Ausgabe verändert.
 ```prolog
 blau(Blume).
 ```
-@tau_prolog_query(blumenstrauss.pl)
+@tau_prolog_query(blumenstrauss.pro)
 
 
 #### Zweistellige Prädikate
@@ -315,7 +280,7 @@ faehrt_nach(dagmar,italien).
 faehrt_nach(elmar,frankreich).
 faehrt_nach(frederike,frankreich).
 ```
-@tau_prolog_program(urlaubsplanung.pl)
+@tau_prolog_program(urlaubsplanung.pro)
 
                                --{{1}}--
 In dieser **Datenbasis** gibt es nur ein Prädikat, das zweistellige Prädikat
@@ -326,7 +291,7 @@ England?" heißt in PROLOG:
 ```prolog
 faehrt_nach(X,england).
 ```
-@tau_prolog_query(urlaubsplanung.pl)
+@tau_prolog_query(urlaubsplanung.pro)
 
               --{{2}}--
 Beantworte die folgenden Fragen, indem du sie in PROLOG übersetzt und vergleiche
@@ -343,7 +308,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(axel, griechenland).
    ```
-   @tau_prolog_query(urlaubsplanung.pl)
+   @tau_prolog_query(urlaubsplanung.pro)
 
    ********************************
 2. Wohin fährt Beate?
@@ -357,7 +322,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(beate, Urlaubsziel).
    ```
-   @tau_prolog_query(urlaubsplanung.pl)
+   @tau_prolog_query(urlaubsplanung.pro)
    ********************************
 3. Wohin fährt Xaver?
 
@@ -372,7 +337,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(xaver, Urlaubsziel).
    ```
-   @tau_prolog_query(urlaubsplanung.pl)
+   @tau_prolog_query(urlaubsplanung.pro)
    ********************************
 4. Wer fährt nach Frankreich?
 
@@ -386,7 +351,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(Wer, frankreich).
    ```
-   @tau_prolog_query(urlaubsplanung.pl)
+   @tau_prolog_query(urlaubsplanung.pro)
    ********************************
 5. Wer fährt wohin?
 
@@ -395,7 +360,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(Person, Ziel).
    ```
-   @tau_prolog_query(urlaubsplanung.pl)
+   @tau_prolog_query(urlaubsplanung.pro)
    ********************************
 
 #### _und_ & _oder_ Operatoren
@@ -405,7 +370,7 @@ deine Anfragen mit den Auflösungen:
 
                               --{{0}}--
 Die Vorlieben und Abneigungen am Frühstückstisch seien in der folgenden
-PROLOG-Datenbasis mit dem Namen 'fruehstueck.pl' festgehalten:
+PROLOG-Datenbasis mit dem Namen 'fruehstueck.pro' festgehalten:
 
 ```prolog
 mag(papa,muesli).
@@ -421,12 +386,12 @@ hasst(oma,muesli).
 hasst(oma,kuchen).
 hasst(baby,brot).
 ```
-@tau_prolog_program(fruehstueck.pl)
+@tau_prolog_program(fruehstueck.pro)
 
 ```prolog
 mag(papa, brot).
 ```
-@tau_prolog_query(fruehstueck.pl)
+@tau_prolog_query(fruehstueck.pro)
 
                   --{{1}}--
 Bis jetzt jetzt soltest du in der Lage sein, vier Arten von Fragen stellen. Du
@@ -456,7 +421,7 @@ Damit ergeben sich folgende PROLOG-Fragen:
   ```prolog
   hasst(X,kuchen), mag(X,muesli).
   ```
-  @tau_prolog_query(fruehstueck.pl)
+  @tau_prolog_query(fruehstueck.pro)
   ***********************************
 * Wer mag Kuchen _und_ Brot?
 
@@ -465,7 +430,7 @@ Damit ergeben sich folgende PROLOG-Fragen:
   ```prolog
   mag(X,brot), mag(X,kuchen).
   ```
-  @tau_prolog_query(fruehstueck.pl)
+  @tau_prolog_query(fruehstueck.pro)
   ***********************************
 * Wer mag Brot _oder_ Kuchen?
 
@@ -474,7 +439,7 @@ Damit ergeben sich folgende PROLOG-Fragen:
   ```prolog
   mag(X,brot); mag(X,kuchen).
   ```
-  @tau_prolog_query(fruehstueck.pl)
+  @tau_prolog_query(fruehstueck.pro)
   ***********************************
 
 
@@ -493,7 +458,7 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    ```prolog
    mag(X, kuchen), mag(X, muesli).
    ```
-   @tau_prolog_query(fruehstueck.pl)
+   @tau_prolog_query(fruehstueck.pro)
    **************************
 2. Was mögen sowohl Papa als auch Mami?
 
@@ -504,7 +469,7 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    ```prolog
    mag(papa, X), mag(mami, X).
    ```
-   @tau_prolog_query(fruehstueck.pl)
+   @tau_prolog_query(fruehstueck.pro)
    *********************************
 3. Wer mag Kuchen und haßt Müsli?
 
@@ -516,7 +481,7 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    ```prolog
    mag(X, kuchen), hasst(X, muesli).
    ```
-   @tau_prolog_query(fruehstueck.pl)
+   @tau_prolog_query(fruehstueck.pro)
    **************************
 
 #### Aufgabe 1
@@ -531,12 +496,12 @@ weiss(nelke).
 blau(vergissmeinnicht).
 blau(veilchen).
 ```
-@tau_prolog_program(blumenstrauss2.pl)
+@tau_prolog_program(blumenstrauss2.pro)
 
 ```prolog
 
 ```
-@tau_prolog_query(blumenstrauss2.pl)
+@tau_prolog_query(blumenstrauss2.pro)
 
 Welchen Vorteil hat diese zweistellige Darstellung?
 
@@ -573,7 +538,7 @@ blume(weiss, nelke).
 * Felix liebt sich selbst.
 
 ```prolog
-@tau_prolog(beziehungen.pl, `% und hier deine fragen`)
+@tau_prolog(beziehungen.pro, `% und hier deine fragen`)
 % gib hier die Beziehungen ein
 ```
 
@@ -633,20 +598,21 @@ vergleichst:
 Der folgende Stammbaum von Donald und Daisy läßt eine gewisse Systematik bei der
 Namensgebung erkennen, die den Überblick erleichtert:
 
+
 ```yml
- Adam ♂ ═════╗
-             ╠════ Baldur ♂ ═════╗
- Adele ♀ ════╝                   ╠════ Casanova ♂
- Alfred ♂ ═══╗                   ╠════ Clemens ♂ ════╗
-             ╠════ Barbara ♀ ════╝                   ║
- Alwine ♀ ═══╝                                       ╠═══ Donald ♂
- Anton ♂ ════╗                                       ╠═══ Daisy ♀
-             ╠════ Berta ♀ ══════╗                   ║
- Anna ♀ ═════╝                   ╠════ Cleopatra ♀ ══╝
- Arthur ♂ ═══╗                   ╠════ Cosima ♀
-             ╠════ Bernd ♂ ══════╝
-             ╠════ Boris ♂
- Adriane ♀ ══╝
+ ♂ Adam ═════╗
+             ╠════ ♂ Baldur ═════╗
+ ♀ Adele ════╝                   ╠════ ♂ Casanova
+ ♂ Alfred ═══╗                   ╠════ ♂ Clemens ════╗
+             ╠════ ♀ Barbara ════╝                   ║
+ ♀ Alwine ═══╝                                       ╠═══ ♂ Donald
+ ♂ Anton ════╗                                       ╠═══ ♀ Daisy
+             ╠════ ♀ Berta ══════╗                   ║
+ ♀ Anna ═════╝                   ╠════ ♀ Cleopatra ══╝
+ ♂ Arthur ═══╗                   ╠════ ♀ Cosima
+             ╠════ ♂ Bernd ══════╝
+             ╠════ ♂ Boris
+ ♀ Adriane ══╝
 ```
 
        --{{1}}--
@@ -721,12 +687,12 @@ elter(donald,cleopatra).
 elter(daisy,clemens).
 elter(daisy,cleopatra).
 ```
-@tau_prolog_program(stammbaum.pl)
+@tau_prolog_program(stammbaum.pro)
 
 ```prolog
 % Anfragen hier eingeben.
 ```
-@tau_prolog_query(stammbaum.pl)
+@tau_prolog_query(stammbaum.pro)
 *******************************************************************************
 
                           --{{2}}--
@@ -751,12 +717,35 @@ beantworten:
 *******************************************************************************
 * Wer sind die Eltern von Daisy?
 
-  [[!]]
+      [[eltern(daisy, Y).]]
+      <script>
+        console.log("{X}");
+        var query = `(elter(daisy, X)) = ({X}).`;
+
+        var rslt  = false;
+
+        try {
+            window['stammbaum.pro']['session'].query(query);
+        }
+        catch(e) {
+            throw {message: "'stammbaum.pro' has not been consulted"};
+        }
+
+
+        var callback = function(answer) {
+            rslt =  window.pl.format_answer( answer );
+        };
+        window['stammbaum.pro']['session'].answer(callback);
+
+        console.log(rslt);
+
+        rslt == "true ;";
+      </script>
   *************************************
   ```prolog
   elter(daisy, Y).
   ```
-  @tau_prolog_query(stammbaum.pl)
+  @tau_prolog_query(stammbaum.pro)
   *************************************
 
 * Mit wem ist Baldur verheiratet?
@@ -766,7 +755,7 @@ beantworten:
   ```prolog
   verheiratet(baldur, X).
   ```
-  @tau_prolog_query(stammbaum.pl)
+  @tau_prolog_query(stammbaum.pro)
   *************************************
 
 * Wie heißen die Kinder von Adam?
@@ -776,7 +765,7 @@ beantworten:
   ```prolog
   elter(X, adam).
   ```
-  @tau_prolog_query(stammbaum.pl)
+  @tau_prolog_query(stammbaum.pro)
   *************************************
 
 *******************************************************************************
@@ -795,14 +784,14 @@ Wer ist die Mutter von Cosima?
 ```prolog
 elter(cosima,X), weibl(X).
 ```
-@tau_prolog_query(stammbaum.pl)
+@tau_prolog_query(stammbaum.pro)
 
 oder ...
 
 ```prolog
 weibl(X), elter(cosima,X).
 ```
-@tau_prolog_query(stammbaum.pl)
+@tau_prolog_query(stammbaum.pro)
 ****************************************************************************
 
 
@@ -820,7 +809,7 @@ und _G_ Elternteil von _E_ ist.
 ```prolog
 elter(donald,E), elter(E,G).
 ```
-@tau_prolog_query(stammbaum.pl)
+@tau_prolog_query(stammbaum.pro)
 
     --{{7}}--
 Versuche selbst die folgenden Fragen zu lösen!
@@ -836,7 +825,7 @@ die Schwiegermutter von Bernd! -->
   ```prolog
   weibl(Oma), elter(E, Oma), elter(clemens, E).
   ```
-  @tau_prolog_query(stammbaum.pl)
+  @tau_prolog_query(stammbaum.pro)
   *******************************
 * Wer sind die Urgroßeltern von Daisy?
 
@@ -845,7 +834,7 @@ die Schwiegermutter von Bernd! -->
   ```prolog
   elter(G, E), elter(E, G), elter(daisy, E).
   ```
-  @tau_prolog_query(stammbaum.pl)
+  @tau_prolog_query(stammbaum.pro)
   *******************************
 * Wie heißt die Schwiegermutter von Bernd?
 
@@ -854,7 +843,7 @@ die Schwiegermutter von Bernd! -->
   ```prolog
   verheiratet(bernd, F), elter(F, S), weibl(S).
   ```
-  @tau_prolog_query(stammbaum.pl)
+  @tau_prolog_query(stammbaum.pro)
   *******************************
 
                   --{{8}}--
@@ -870,7 +859,7 @@ wird die Anfrage abgeschlossen.
 elter(clemens, V), maennl(V), elter(clemens, M), weibl(M),
 elter(X, V), elter(X, M), maennl(X).
 ```
-@tau_prolog_query(stammbaum.pl)
+@tau_prolog_query(stammbaum.pro)
 
                  --{{9}}--
 Diese Anfrage nach den Brüdern von Clemens ist jedoch noch fehlerhaft. Außer der
@@ -884,7 +873,7 @@ folgt:
 elter(clemens, V), maennl(V), elter(clemens, M), weibl(M),
 elter(X, V), elter(X, M), maennl(X), X \= clemens.
 ```
-@tau_prolog_query(stammbaum.pl)
+@tau_prolog_query(stammbaum.pro)
 
 --{{10}}-- Versuch diese Anfrage selbst verändern um auch nach den Schwestern
 --von Cosima zu suchen.
@@ -914,7 +903,7 @@ schwiegermutter(X,Y) :- verheiratet(X,Z), mutter(Z,Y).
 bruder(X,Y) :- vater(X,V), mutter(X,M),
                vater(Y,V), mutter(Y,M), maennl(Y), Y\=X.
 
-/* ursprüngliche Fakten aus stammbaum.pl */
+/* ursprüngliche Fakten aus stammbaum.pro */
 maennl(adam).
 maennl(alfred).
 maennl(anton).
@@ -976,12 +965,12 @@ elter(donald,cleopatra).
 elter(daisy,clemens).
 elter(daisy,cleopatra).
 ```
-@tau_prolog_program(stammbaum2.pl)
+@tau_prolog_program(stammbaum2.pro)
 
 ```prolog
 
 ```
-@tau_prolog_query(stammbaum2.pl)
+@tau_prolog_query(stammbaum2.pro)
 
 
 {{1-5}} **Neues Zeichen:** `:-` ==> falls
@@ -1026,29 +1015,40 @@ Programm `stammbaum2.pro` um Regeln für die folgenden Verwandtschaftsbeziehunge
 und schreibe vor jedes Prädikat einen Kommentar zur Erläuterung:
 
 {{4-5}}
-1. Vater:
+1. Sohn
 
-        [[!]]
+      [[!]]
    ************************
-
-   `todo`
-
+   ```prolog
+   /* sohn(X, Y) heißt: Y ist Kind von X und Y ist männlich */
+   sohn(X, Y) :- kind(X, Y), maennl(Y).
+   ```
    ************************
-2. Mutter
+2. Tochter
 
-   [[!]]
+      [[!]]
    ************************
-
-   `todo`
-
+   ```prolog
+   /* tochter(X,Y) heißt: Y ist Kind von X und Y ist weiblich */
+   tochter(X, Y) :- kind(X, Y), weibl(Y).
+   ```
    ************************
-3. Kind
-4. Sohn
-5. Tochter
-6. Bruder
-7. Schwester
-8. Großeltern
-9. Füge Kommentare ein, w. z. B. `/* vater(X,Y) heißt: Y ist Vater von X */`
+3. Schwester
+
+       [[!]]
+   ************************
+   ```prolog
+   /* schwester(X,Y) heißt: Y ist die Schwester von X, wenn beide den gleichen
+   Vater und die gleiche Mutter haben und Y ist weiblich und X und Y nicht die
+   gleiche Person sind. */
+   schwester(X,Y) :- vater(X,V), mutter(X,M),
+                     vater(Y,V), mutter(Y,M), weibl(Y), Y\=X.
+   ```
+   ************************
+4. Großeltern
+
+
+5. Füge Kommentare ein, w. z. B. `/* vater(X,Y) heißt: Y ist Vater von X */`
 
 
           --{{5}}--
@@ -1059,6 +1059,7 @@ gibt, die du aufgrund des Stammbaums erwartest.
 
 #### Regeln 2.
 
+                      --{{0}}--
 Bis jetzt haben wir Regeln verwendet, um neue Prädikate mit Hilfe der schon
 bekannten zu definieren. Man kann Regeln auch dazu benutzen, den Geltungsbereich
 von schon bekannten Prädikaten zu erweitern; z. B. haben wir in der Datei
@@ -1066,7 +1067,200 @@ fruehst.pro die Prädikate mag und hasst vorliegen, die Vorlieben und Abneigunge
 beim Frühstück beschreiben. Nun sei bekannt, dass der Opa dieser Familie alles
 mag, was Oma haßt. Diese Regel lautet dann in PROLOG:
 
+```prolog
 mag(opa,X):- hasst(oma,X).
+```
 
 2) Nehmen Sie diese Regel in das PROLOG-Programm auf. Welche Antworten erwarten Sie
 bei den Fragen
+
+?- mag(opa,X).
+?- mag(X,kuchen).
+?- mag(opa,muesli).
+?- hasst(opa,X).
+
+3) Zur Gruppe aus der Datei urlaub.pro stößt Romeo. Er fährt überall hin, wo Beate hinfährt.
+Wie lautet diese Regel in PROLOG? Ergänzen Sie die Datei urlaub.pro.
+
+Der Nibelungen Not:
+
+
+1. Siegfried liebt Krimhild und mag Gunther.
+2. Krimhild liebt Siegfried und haßt Brunhild.
+3. Gunther liebt Brunhild und mag Krimhild und Hagen.
+4. Brunhild haßt Siegfried, Gunther und Krimhild.
+5. Hagen haßt Siegfried und alle, die Siegfried lieben.
+6. Brunhild mag alle, die Siegfried hassen.
+7. Alberich haßt alle, mit Ausnahme von sich selbst.
+
+Schreiben Sie die obigen Aussagen als PROLOG-Programm in eine Datei `nibelungen.pro`. Stellen Sie Fragen:
+
+1. Wer haßt Siegfried?
+2. Wen mag Brunhild?
+3. Wer haßt wen?
+4. Wer liebt wen?
+
+Definieren Sie ein Prädikat _ideales\_paar_, das auf _(X,Y)_ zutrifft, falls _X_
+von _Y_ und _Y_ von _X_ geliebt wird.
+
+#### Regeln 3.
+
+Regeln kennen wir auch aus der Grammatik. An einem sehr einfachen Beispiel
+wollen wir einen Zusammenhang mit PROLOG aufzeigen.
+
+* Der Hund bellt.
+* Der Hase flieht.
+* Der Fuchs flieht.
+* Der Jäger schießt.
+
+Diese Sätze sind alle nach demselben Schema gebildet, das wir als PROLOG-Regel
+schreiben können:
+
+```prolog
+artikel(der).
+
+nomen(hund).
+nomen(hase).
+nomen(fuchs).
+nomen(jaeger).
+
+verb(bellt).
+verb(flieht).
+verb(schiesst).
+
+satz(X,Y,Z):- artikel(X), nomen(Y), verb(Z).
+```
+@tau_prolog_program(grammatik.pro)
+
+```prolog
+
+```
+@tau_prolog_query(grammatik.pro)
+
+
+Damit haben wir eine kleine Sprache definiert, die über einen sehr begrenzten
+Wortschatz und über eine einzige grammatikalische Regel verfügt und natürlich
+nur einen ganz engen Bereich unserer Umgangssprache abdeckt.
+
+Verwenden Sie das Prädikat satz, um zu überprüfen, ob drei Worte einen Satz
+unserer Sprache bilden. Beispiele:
+
+```prolog
+satz(der,jaeger,bellt).
+```
+@tau_prolog_query(grammatik.pro)
+
+```prolog
+satz(flieht,der,hund).
+```
+@tau_prolog_query(grammatik.pro)
+
+Verwenden Sie das Prädikat satz auch, um alle möglichen Sätze dieser Sprache zu
+erzeugen:
+
+```prolog
+satz(A,B,C).
+```
+@tau_prolog_query(grammatik.pro)
+
+Wieviele verschiedene Sätze erwarten Sie?
+
+
+#### Aufgabe
+
+In einer Gaststätte gibt es
+
+* __Vorspeisen:__    Tomatensuppe, Lauchsuppe, Fleischbrühe mit Backerbsen.
+* __Hauptgerichte:__ Sauerbraten mit Spätzle, Leberkäse mit Kartoffeln,
+                     Hackbraten mit Reis.
+* __Nachspeisen:__   Eis, Obstsalat, Bienenstich.
+
+
+Ein Menü besteht aus Vorspeise, Hauptgericht und Nachspeise.
+
+Schreiben Sie ein Programm, das ein dreistelliges Prädikat menue enthält. Dieses
+Prädikat soll Menüvorschläge überprüfen und erzeugen können.
+
+#### Aufgaben
+
+
+<!-- style="max-width: 315px;" -->
+```yml
+
+ ╔═════════════╦═══════════════════╗
+ ║             ║                   ║
+ ║      1      ║         2         ║
+ ║             ║                   ║
+ ╠═════════════╩═════╦═════════════╣
+ ║                   ║             ║
+ ║         4         ║      3      ║
+ ║                   ║             ║
+ ╚═══════════════════╩═════════════╝
+
+```
+
+
+<!-- style="max-width: 315px;" -->
+```yml
+
+ ╔════════════════╦════════════════╗
+ ║                ║                ║
+ ║     1     ╔════╩════╗     2     ║
+ ║           ║         ║           ║
+ ╠═══════════╣    3    ╠═══════════╣
+ ║           ║         ║           ║
+ ║     5     ╚════╦════╝     4     ║
+ ║                ║                ║
+ ╚════════════════╩════════════════╝
+
+```
+
+<!-- style="max-width: 315px;" -->
+```yml
+  .       .       .       ┏━━ rrrr
+  .       .       ┏━━ r ━━╋━━ rrrg
+  .       .       ┃       ┗━━ rrrb
+  .       .       ┃       .
+  .       .       ┃       ┏━━ rrgr
+  .       ┏━━ r ━━╋━━ g ━━╋━━ rrgg
+  .       ┃       ┃       ┗━━ rrgb
+  .       ┃       ┃       .
+  .       ┃       ┃       ┏━━ rrbr
+  .━━(r)━━┫       ┗━━ b ━━╋━━ rrbg
+  .       ┃       .       ┗━━ rrbb
+  .       ┃       .       .
+  .       ┃       .       ┏━━ rgrr
+  .       ┗━━ g ━━━━━ r ━━╋━━ rgrg
+  .       .       .       ┗━━ rgrb
+  .       .       .       .
+ F.1     F.2     F.3     F.4
+```
+
+
+
+```yml
+                          ┌─────┐
+                          │  7  │
+                          ├─────┤
+                          │  6  │
+  ┌─────┐                 ├─────┤
+  │  2  │                 │  5  │
+  ├─────┤     ┌─────┐     ├─────┤
+  │  1  │     │  3  │     │  4  │
+ ━┷━━━━━┷━━━━━┷━━━━━┷━━━━━┷━━━━━┷━
+     a           b           c
+```
+
+```yml
+                          ┌─────┐
+                          │  7  │
+                          ├──🠦───┤
+   ▒▒▒▒▒▒▒                      │  6  │
+  ┌─────┐▒                 ├─────┤
+  │  2  │▒                 │  5  │
+  ├─────┤⍑▒    ⍅ ┌─────┐⍅     ├─🡪──⇸⇥⟼──┤
+  │  1  │▒     │  3  │     │  4  │
+  ⟼
+ ━┷━━━━━┷━━━━━┷━━━━━┷━━━━━┷━━━━━┷━
+     a           b           c
+```
