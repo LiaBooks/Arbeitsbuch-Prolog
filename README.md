@@ -599,21 +599,22 @@ Der folgende Stammbaum von Donald und Daisy läßt eine gewisse Systematik bei d
 Namensgebung erkennen, die den Überblick erleichtert:
 
 
-```yml
- ♂ Adam ═════╗
-             ╠════ ♂ Baldur ═════╗
- ♀ Adele ════╝                   ╠════ ♂ Casanova
- ♂ Alfred ═══╗                   ╠════ ♂ Clemens ════╗
-             ╠════ ♀ Barbara ════╝                   ║
- ♀ Alwine ═══╝                                       ╠═══ ♂ Donald
- ♂ Anton ════╗                                       ╠═══ ♀ Daisy
-             ╠════ ♀ Berta ══════╗                   ║
- ♀ Anna ═════╝                   ╠════ ♀ Cleopatra ══╝
- ♂ Arthur ═══╗                   ╠════ ♀ Cosima
-             ╠════ ♂ Bernd ══════╝
-             ╠════ ♂ Boris
- ♀ Adriane ══╝
 ```
+ ♂ Adam ━━━━━┓
+             ┣━━━━ ♂ Baldur ━━━━━┓
+ ♀ Adele ━━━━┛                   ┣━━━━ ♂ Casanova
+ ♂ Alfred ━━━┓                   ┣━━━━ ♂ Clemens ━━━━┓
+             ┣━━━━ ♀ Barbara ━━━━┛                   ┃
+ ♀ Alwine ━━━┛                                       ┣━━━━ ♂ Donald
+ ♂ Anton ━━━━┓                                       ┣━━━━ ♀ Daisy
+             ┣━━━━ ♀ Berta ━━━━━━┓                   ┃
+ ♀ Anna ━━━━━┛                   ┣━━━━ ♀ Cleopatra ━━┛
+ ♂ Arthur ━━━┓                   ┣━━━━ ♀ Cosima
+             ┣━━━━ ♂ Bernd ━━━━━━┛
+             ┣━━━━ ♂ Boris
+ ♀ Adriane ━━┛
+```
+
 
        --{{1}}--
 Es gibt verschiedene Möglichkeiten, die Informationen dieses Stammbaumes in
@@ -1188,15 +1189,15 @@ Prädikat soll Menüvorschläge überprüfen und erzeugen können.
 ```yml
 
  ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
- ┃             ┃                   ┃ ▒▒
- ┃      1      ┃         2         ┃ ▒▒
- ┃             ┃                   ┃ ▒▒
- ┣━━━━━━━━━━━━━┻━━━━━┳━━━━━━━━━━━━━┫ ▒▒
- ┃                   ┃             ┃ ▒▒
- ┃         4         ┃      3      ┃ ▒▒
- ┃                   ┃             ┃ ▒▒
- ┗━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛ ▒▒
-    ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+ ┃             ┃                   ┃
+ ┃      1      ┃         2         ┃
+ ┃             ┃                   ┃
+ ┣━━━━━━━━━━━━━┻━━━━━┳━━━━━━━━━━━━━┫
+ ┃                   ┃             ┃
+ ┃         4         ┃      3      ┃
+ ┃                   ┃             ┃
+ ┗━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
+
 ```
 
 
@@ -1204,15 +1205,15 @@ Prädikat soll Menüvorschläge überprüfen und erzeugen können.
 ```
 
  ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
- ┃                ┃                ┃ ▒▒
- ┃     1     ┏━━━━┻━━━━┓     2     ┃ ▒▒
- ┃           ┃         ┃           ┃ ▒▒
- ┣━━━━━━━━━━━┫    3    ┣━━━━━━━━━━━┫ ▒▒
- ┃           ┃         ┃           ┃ ▒▒
- ┃     5     ┗━━━━┳━━━━┛     4     ┃ ▒▒
- ┃                ┃                ┃ ▒▒
- ┗━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┛ ▒▒
-   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+ ┃                ┃                ┃
+ ┃     1     ┏━━━━┻━━━━┓     2     ┃
+ ┃           ┃         ┃           ┃
+ ┣━━━━━━━━━━━┫    3    ┣━━━━━━━━━━━┫
+ ┃           ┃         ┃           ┃
+ ┃     5     ┗━━━━┳━━━━┛     4     ┃
+ ┃                ┃                ┃
+ ┗━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┛
+
 ```
 
 <!-- style="max-width: 315px;" -->
