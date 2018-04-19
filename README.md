@@ -10,8 +10,31 @@ script:   https://cdn.rawgit.com/liaScript/tau-prolog_template/master/js/tau-pro
 
 @tau_prolog_program
 <script>
-    window['@0'] = {session: window.pl.create(), query: null, rslt: "", query_str: ""};
-    var c = window['@0']['session'].consult(`{X}`);
+    var db = `{{0}}`;
+    window['@0'] = {session: window.pl.create(),
+                    query: null,
+                    rslt: "",
+                    query_str: "",
+                    db: db};
+    var c = window['@0']['session'].consult(db);
+
+    if( c !== true )
+        throw {message: "parsing program '@0' => " + c.args[0]};
+    else
+        "database '@0' loaded";
+</script>
+@end
+
+@tau_prolog_programX
+<script>
+    var db = `@1`;
+    window['@0'] = {session: window.pl.create(),
+                    query: null,
+                    rslt: "",
+                    query_str: "",
+                    db: db};
+    var c = window['@0']['session'].consult(db);
+
     if( c !== true )
         throw {message: "parsing program '@0' => " + c.args[0]};
     else
@@ -21,7 +44,7 @@ script:   https://cdn.rawgit.com/liaScript/tau-prolog_template/master/js/tau-pro
 
 @tau_prolog_query
 <script>
-    var query = `{X}`;
+    var query = `{{0}}`;
 
     try {
         if(window['@0']['query'] == null || window['@0']['query_str'] != query) {
@@ -38,25 +61,51 @@ script:   https://cdn.rawgit.com/liaScript/tau-prolog_template/master/js/tau-pro
         throw {message: "parsing query for '@0' => " + window['@0']['query'].args[0]};
     }
     else {
-        var callback = function(answer) {
-            window['@0']['rslt'] +=  window.pl.format_answer( answer ) + "<br>";
-        };
-        window['@0']['session'].answer(callback);
-
+        window['@0']['session'].answer(e => {
+            window['@0']['rslt'] +=  window.pl.format_answer(e) + "<br>";
+        });
         window['@0']['rslt'];
     }
 </script>
 @end
 
+@tau_prolog_check
+<script>
+    var db = null;
+
+
+    try {
+        db = window['@0']['db'];
+    }
+    catch(e) {
+        throw {message: "'@0' has not been consulted"};
+    }
+
+    var session = window.pl.create();
+
+    var c = session.consult(db);
+
+    if( c !== true )
+        throw {message: "parsing program '@0' => " + c.args[0]};
+
+    session.query(`@1`);
+
+    var rslt = false;
+
+    session.answer(e => {rslt = window.pl.format_answer( e );});
+
+    rslt != "false.";
+</script>
+@end
 
 @tau_prolog
-```prolog
+```prolog @0
 @2
 ```
 @tau_prolog_program(@0)
 
 
-```prolog
+```prolog Anfrage:
 @1
 ```
 @tau_prolog_query(@0)
@@ -196,7 +245,7 @@ den fehlenden Punkt am Ende der letzten Zeile einfügen. Wenn du dann wieder auf
 Ausführen klickst, so wird dir angezeigt, dass deine Datenbasis erfolgreich
 geladen werden konnte.
 
-```prolog
+```prolog blumenstrauss.pro
 rot(rose).
 gelb(tulpe).
 weiss(nelke).
@@ -269,7 +318,7 @@ Formulierung kann ganz einfach in eine PROLOG-Programm übersetzt werden.
 
 ----
 
-```prolog
+```prolog urlaubsplanung.pro
 faehrt_nach(axel,england).
 faehrt_nach(beate,griechenland).
 faehrt_nach(beate,tuerkei).
@@ -286,7 +335,7 @@ In dieser **Datenbasis** gibt es nur ein Prädikat, das zweistellige Prädikat
 England?" heißt in PROLOG:
 
 {{1}}
-```prolog
+```prolog Anfrage:
 faehrt_nach(X,england).
 ```
 @tau_prolog_query(urlaubsplanung.pro)
@@ -302,12 +351,10 @@ deine Anfragen mit den Auflösungen:
        [( )] Ja
        [(X)] Nein
    ********************************
-
    ```prolog
    faehrt_nach(axel, griechenland).
    ```
    @tau_prolog_query(urlaubsplanung.pro)
-
    ********************************
 2. Wohin fährt Beate?
 
@@ -318,7 +365,7 @@ deine Anfragen mit den Auflösungen:
        [[X]] tuerkei
    ********************************
    ```prolog
-   faehrt_nach(beate, Urlaubsziel).
+   faehrt_nach(beate, X).
    ```
    @tau_prolog_query(urlaubsplanung.pro)
    ********************************
@@ -370,7 +417,7 @@ deine Anfragen mit den Auflösungen:
 Die Vorlieben und Abneigungen am Frühstückstisch seien in der folgenden
 PROLOG-Datenbasis mit dem Namen 'fruehstueck.pro' festgehalten:
 
-```prolog
+```prolog fruehstueck.pro
 mag(papa,muesli).
 mag(papa,brot).
 mag(mami,kuchen).
@@ -386,7 +433,7 @@ hasst(baby,brot).
 ```
 @tau_prolog_program(fruehstueck.pro)
 
-```prolog
+```prolog Anfrage:
 mag(papa, brot).
 ```
 @tau_prolog_query(fruehstueck.pro)
@@ -494,7 +541,7 @@ durch die Nutzung von Regeln abbildet.
 Stellen Sie die Gegebenheiten des Willkommensstraußes von Aufgabe 1 mit Hilfe
 eines zweistelligen Prädikates farbe dar.
 
-```prolog
+```prolog blumenstrauss2.pro
 rot(rose).
 gelb(tulpe).
 weiss(nelke).
@@ -503,7 +550,7 @@ blau(veilchen).
 ```
 @tau_prolog_program(blumenstrauss2.pro)
 
-```prolog
+```prolog Anfrage:
 
 ```
 @tau_prolog_query(blumenstrauss2.pro)
@@ -543,7 +590,7 @@ blume(weiss, nelke).
 * Felix liebt sich selbst.
 
 ```prolog
-@tau_prolog(beziehungen.pro, `% und hier deine fragen`)
+@tau_prolog(beziehungen.pro,% und hier deine fragen)
 % gib hier die Beziehungen ein
 ```
 
@@ -604,7 +651,7 @@ Der folgende Stammbaum von Donald und Daisy läßt eine gewisse Systematik bei d
 Namensgebung erkennen, die den Überblick erleichtert:
 
 
-```
+```bash Stammbaum-Diagramm
  ♂ Adam ━━━━━┓
              ┣━━━━ ♂ Baldur ━━━━━┓
  ♀ Adele ━━━━┛                   ┣━━━━ ♂ Casanova
@@ -630,8 +677,7 @@ wird.
 
                                    {{1}}
 *******************************************************************************
-<!-- style="max-height: 300px; overflow: auto;" -->
-```prolog
+```prolog stammbaum.pro
 maennl(adam).
 maennl(alfred).
 maennl(anton).
@@ -695,7 +741,7 @@ elter(daisy,cleopatra).
 ```
 @tau_prolog_program(stammbaum.pro)
 
-```prolog
+```prolog Anfrage:
 % Anfragen hier eingeben.
 ```
 @tau_prolog_query(stammbaum.pro)
@@ -725,8 +771,8 @@ beantworten:
 
       [[eltern(daisy, Y).]]
       <script>
-        console.log("{X}");
-        var query = `(elter(daisy, X)) = ({X}).`;
+        console.log("{{0}}");
+        var query = `unify_with_occurs_check((elter(daisy, X)), ({{0}})).`;
 
         var rslt  = false;
 
@@ -896,8 +942,7 @@ Schwiegermutter oder Bruder mussten wir bei Anfragen in diese Grundbegriffe
 den Fakten unserer Datenbasis noch **Regeln** hinzufügen. Im Beispiel wären das
 die Regeln
 
-<!-- style="max-height: 300px; overflow: auto;" -->
-```prolog
+```prolog +regeln.pro
 mutter(X,Y) :- elter(X,Y), weibl(Y).
 
 vater(X,Y) :-  elter(X,Y), maennl(Y).
@@ -909,6 +954,8 @@ schwiegermutter(X,Y) :- verheiratet(X,Z), mutter(Z,Y).
 bruder(X,Y) :- vater(X,V), mutter(X,M),
                vater(Y,V), mutter(Y,M), maennl(Y), Y\=X.
 
+```
+```prolog -stammbaum.pro
 /* ursprüngliche Fakten aus stammbaum.pro */
 maennl(adam).
 maennl(alfred).
@@ -971,12 +1018,12 @@ elter(donald,cleopatra).
 elter(daisy,clemens).
 elter(daisy,cleopatra).
 ```
-@tau_prolog_program(stammbaum2.pro)
+@tau_prolog_programX(stammbaum+regeln.pro,{{0}}{{1}})
 
 ```prolog
-
+mutter(X,Y).
 ```
-@tau_prolog_query(stammbaum2.pro)
+@tau_prolog_query(stammbaum+regeln.pro)
 
 
 {{1-5}} **Neues Zeichen:** `:-` ==> falls
@@ -1095,8 +1142,8 @@ bei den Fragen
 
 #### Urlaub #2
 
-3) Zur Gruppe aus der Datei urlaub.pro stößt Romeo. Er fährt überall hin, wo Beate hinfährt.
-Wie lautet diese Regel in PROLOG? Ergänzen Sie die Datei urlaub.pro.
+Zur Gruppe aus der Datei urlaub.pro stößt Romeo. Er fährt überall hin, wo Beate
+hinfährt. Wie lautet diese Regel in PROLOG? Ergänzen Sie die Datei urlaub.pro.
 
 #### Nibelungen
 
@@ -1233,7 +1280,7 @@ _gelb_ und _blau_ so eingefärbt werden sollen, dass keine gleichfarbigen Gebiet
 längs einer Linie aneinandergrenzen.
 
 <!-- style="max-width: 315px;" -->
-```yml
+```
 
  ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
  ┃             ┃                   ┃
@@ -1254,14 +1301,16 @@ bezeichnen wir mit der Variablen `F1`, und so weiter. Dabei bedeutet
 erlaubte Einfärbung des Rechtecks liefern.
 
 {{1}}
-```prolog
+```prolog vier_farben.pro
 farbe(rot).
 farbe(gelb).
 farbe(blau).
 
-einfaerbung(F1, F2, F3, F4):-
+einfaerbung(F1, F2, F3, F4) :-
   farbe(F1), farbe(F2), farbe(F3), farbe(F4),
-  F1\=F2,  F1\=F4,  F2\=F3,  F2\=F4,  F3\=F4.
+  F1\==F2, F1\==F4, F2\==F3, F2\==F4, F3\==F4.
+
+% todo: einfaerbung2
 ```
 @tau_prolog_program(vier_farben.pro)
 
@@ -1269,7 +1318,7 @@ einfaerbung(F1, F2, F3, F4):-
 Wir bekommen also die Lösungen durch die folgende Anfrage:
 
 {{2}}
-```prolog
+```prolog Anfrage:
 einfaerbung(F1, F2, F3, F4).
 ```
 @tau_prolog_query(vier_farben.pro)
@@ -1298,24 +1347,163 @@ aneinandergrenzen?
 
 ```
 
-Wieviel Lösungen existieren?
+Überprüfe deine Regel.
 
-   [[X]] 12
+    [[!]]
+```prolog
+@tau_prolog_check(vier_farben.pro)
+
+setof([A,B,C,D,E], einfaerbung2(A,B,C,D,E), R),
+R == [[blau, gelb, rot, blau, gelb],
+      [blau, rot, gelb, blau, rot],
+      [gelb, blau, rot, gelb, blau],
+      [gelb, rot, blau, gelb, rot],
+      [rot, blau, gelb, rot, blau],
+      [rot, gelb, blau, rot, gelb]].
+```
 ****************************************
+Der Körper der Regel `einfaerbung2` müßte in etwa wie folgt aussehen:
 
 ```prolog
-% einfaerbung2(F1, F2, F3, F4, F5) :-
-farbe(F1), farbe(F2), farbe(F3), farbe(F4), farbe(F5),
-F1\=F2, F1\=F2, F1\=F5, F2\=F3, F2\=F4, F3\=F4, F3\=F5, F4\=F5.
+% einfaerbung2(F1,F2,F3,F4,F5) :-
+   farbe(F1), farbe(F2), farbe(F3), farbe(F4), farbe(F5),
+   F1\==F2, F1\==F3, F1\==F5,
+   F2\==F3, F2\==F4,
+   F3\==F4, F3\==F5,
+   F4\==F5.
 ```
 @tau_prolog_query(vier_farben.pro)
-
-
 ****************************************
 
 *******************************************************************************
 
-### Interna
+## So arbeitet Prolog
+
+![cinderella](img/cinderella.png)
+
+Der junge Prinz sucht die schöne Tänzerin der vergangenen Nacht. Auf der Flucht
+hat sie ihren goldenen Schuh verloren. Mit diesem besucht er nun die Töchter des
+Landes, um nachzuschauen, bei welcher der Fuß in den Schuh passt. Die Suche wäre
+weniger mühsam, wenn die Daten der Untertanen schon auf dem Computer verfügbar
+wären. Es sei etwa auf dem königlichen Hofcomputer eine PROLOG-Datenbasis
+abgelegt:
+
+```prolog
+schuhgroesse(adelheid,34).
+schuhgroesse(agnes,28).
+schuhgroesse(aschenputtel,26).
+schuhgroesse(brunhilde,44).
+schuhgroesse(kunigunde,28).
+schuhgroesse(walburga,38).
+```
+@tau_prolog_program(aschenputtel.pro)
+
+Es werde die Anfrage gestellt
+
+```prolog
+schuhgroesse(aschenputtel,26).
+```
+@tau_prolog_query(aschenputtel.pro)
+
+
+PROLOG vergleicht diese Anfrage der Reihe nach mit den Fakten der Datenbasis.
+Beim dritten Faktum erreicht es eine Deckung, die Anfrage und dieses Faktum
+matchen (sprich: mätschen, vom englischen to match, zusammenpassen).
+
+PROLOG arbeitet hier also genau wie unser Prinz. Die Anfrage (der Schuh) wird
+mit einem Faktum (einem Fuß) verglichen. Passen beide nicht zusammen, so geht
+PROLOG zum nächsten Faktum; passen sie, wird das dem Benutzer mit yes
+mitgeteilt. Wurde die ganze Datenbasis durchlaufen, ohne dass ein zur Frage
+passendes Faktum gefunden wurde, so gibt PROLOG die Meldung no aus.
+
+Es ist einleuchtend, dass diese schematische Suche von einer Maschine verrichtet
+werden kann; und Sie haben schon oft beobachtet, dass PROLOG diese Fertigkeit
+fehlerfrei beherrscht. Als Modell können wir uns vorstellen, dass die Maschine
+eine Schablone mit der Anfrage
+
+`schuhgroesse(aschenputtel,26).`
+
+über die Datenbasis zieht, bis eine Deckung erreicht ist. Nehmen wir an, der
+Prinz mit dem Schuh in der Hand stelle die Anfrage
+
+```prolog
+schuhgroesse(X, 26).
+```
+@tau_prolog_query(aschenputtel.pro)
+
+Wieder macht sich PROLOG ans Suchen, ob zu dieser Anfrage ein Faktum passt.
+Hierbei befolgt es den Grundsatz:
+
+**Eine Variable kann mit jeder Konstanten matchen.**
+
+Die Anfrage matcht mit dem dritten Faktum der Datenbasis, dabei matcht `X` mit
+`aschenputtel`. Das Ergebnis der erfolgreichen Suche wird ausgegeben als
+
+```prolog
+X = aschenputtel ;
+```
+
+das heißt, die Anfrage ist erfüllbar, wenn die Variable `X` an die Konstante
+`aschenputtel` gebunden wird.
+
+Verlangen wir vom System weitere Antworten auf die Frage, so löst PROLOG die
+Variable `X` von der Konstanten aschenputtel und setzt die Suche fort. Da es in
+der Datenbasis keine weitere Möglichkeit des Matchens findet, gibt es die
+Antwort `false` aus.
+
+Betrachten wir die Abarbeitung einer Frage, die mehrere Antworten zuläßt:
+
+```prolog
+schuhgroesse(X, 28).
+```
+@tau_prolog_query(aschenputtel.pro)
+
+PROLOG vergleicht Faktum für Faktum mit der Frage und kann beim zweiten Faktum
+matchen, indem es `X` mit `agnes` belegt. Die Antwort lautet also
+
+```prolog
+X = agnes ;
+```
+
+Fordern wir PROLOG auf, weiter zu suchen, so wird `X` wieder von `agnes` gelöst
+und die Frage mit dem dritten, vierten und fünften Faktum verglichen. Erst beim
+fünften ist wieder das Matchen möglich, also
+
+```prolog
+X = kunigunde ;
+```
+
+Lassen wir nochmals weitersuchen, so wird `X` wieder von `kunigunde` gelöst und die
+Frage mit dem sechsten Faktum verglichen. Dort ist Matchen nicht möglich, und
+damit ist die Datenbasis erschöpft, also erhalten wir die Antwort `false`.
+
+Damit verlassen wir das schlichte Aschenputtel und wenden uns einem
+reichhaltigeren Beispiel zu, dem Stammbaum von Donald und Daisy aus Kapitel 1
+(Datei stammb.pro). Dort hatten Sie in Aufgabe 8 nach dem Vater von Daisy
+gesucht
+
+?- elter(daisy,X), maennl(X).
+
+Das Ziel von PROLOG ist es, die zwei Forderungen an X zu erfüllen. Dies macht es, indem es
+nacheinander zwei Teilziele anstrebt. Zunächst versucht es, das erste Teilziel
+elter(daisy,X) zu
+erreichen und findet auch nach etlichen Vergleichen eine Möglichkeit zu matchen mit
+X=clemens. Die Variable X ist damit instantiiert (belegt) mit clemens. Das zweite Teilziel
+lautet damit maennl(clemens), diese Forderung kann beim Durchsuchen der Datenbasis bestä-
+tigt werden. Erst wenn beide Teilziele erreicht sind, wird die Antwort ausgegeben:
+
+X=clemens.
+
+Wir fragen nochmals nach dem Vater von Daisy, diesmal mit der Anfrage
+
+?- maennl(X), elter(daisy,X).
+
+PROLOG versucht das erste Teilziel maennl(X) zu erreichen, und dies gelingt auch sofort mit
+X=adam. Mit dieser Instantiierung von X wird das zweite Teilziel angegangen, also
+elter(daisy,adam). Sie haben wahrscheinlich genug Überblick über den Stammbaum, um zu se-
+hen, dass dies nicht stimmt; PROLOG muss Faktum für Faktum mit der Frage vergleichen und
+
+
 
 <!-- style="max-width: 315px;" -->
 ```yml
@@ -1338,7 +1526,60 @@ F1\=F2, F1\=F2, F1\=F5, F2\=F3, F2\=F4, F3\=F4, F3\=F5, F4\=F5.
  F.1     F.2     F.3     F.4
 ```
 
+## Rekursion
 
+![recursion](img/recursion.png)
+
+Hier sehen Sie ein Bild von Donald, dessen Stammbaum uns schon in den Kapiteln 1
+und 2 beschäftigt hat. Donald hat sich vor dem Bild seines Vaters (Clemens)
+fotografieren lassen. Als dieses Bild von Clemens vor etwa 25 Jahren aufgenommen
+wurde, hat sich Clemens vor das Bild seines Vaters (Baldur) gestellt, der sich
+vor 50 Jahren vor dem Bild seines Vaters (Adam) aufgestellt hatte. Auf diese
+Weise ist in einem Bild eine ganze Galerie von Vorfahren eingefangen.
+
+Um den Begriff 'Vorfahr' geht es in diesem Abschnitt. Schon einem kleinen Kind
+können wir diesen Begriff schnell erklären:
+
+Vorfahren sind die Eltern, Großeltern, Urgroßeltern, Ururgroßeltern,
+Urururgroßeltern usw.
+
+Wir erklären PROLOG zunächst diese Begriffe:
+
+```prolog Großeltern
+      grosselter(X,Y):- elter(X,Z), elter(Z,Y).
+    urgrosselter(X,Y):- elter(X,Z), grosselter(Z,Y).
+  ururgrosselter(X,Y):- elter(X,Z), urgrosselter(Z,Y).
+urururgrosselter(X,Y):- elter(X,Z), ururgrosselter(Z,Y).
+```
+
+Schwierig ist nur die Verallgemeinerung, der Begriff 'Vorfahr', da PROLOG im
+Gegensatz zu uns mit dem 'usw.' nichts anzufangen weiß. Dieses 'usw.' dient uns
+dazu, die unendlich vielen Möglichkeiten einzufangen. In PROLOG benötigen wir
+hierfür die Rekursion. Die rekursive Definition von 'Vorfahr' lautet:
+
+vorfahr(X,Y):- elter(X,Y).
+vorfahr(X,Y):- elter(X,Z), vorfahr(Z,Y).
+
+Das heißt: Vorfahren von X sind die Eltern von X und die Vorfahren der Eltern
+von X. Der Begriff 'Vorfahr' wird also teilweise durch sich selbst erklärt. Dass
+dies trotzdem keine unsinnige, in sich kreisende Definition ist, sieht man am
+besten, wenn man sie prozedural betrachtet.
+
+Dann sind die obigen Regeln eine Anweisung an PROLOG:
+
+* Wenn du einen Vorfahr von X suchen sollst, so suche zunächst die Eltern von X.
+* Wenn du noch weiter nach Vorfahren suchen sollst, so suche ein Elternteil Z
+  und von diesem einen Vorfahr.
+
+Dieses Vorgehen wollen wir für eine spezielle Anfrage nachvollziehen. Es sei
+gefragt:
+
+
+## Listen
+
+## Arithmetik
+
+## NOT und CUT
 
 ```yml
                           ┏━━━━━┓
@@ -1366,3 +1607,5 @@ F1\=F2, F1\=F2, F1\=F5, F2\=F3, F2\=F4, F3\=F4, F3\=F5, F4\=F5.
  ━┷━━━━━┷━━━━━┷━━━━━┷━━━━━┷━━━━━┷━
      a           b           c
 ```
+
+# Vertiefung
