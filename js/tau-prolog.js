@@ -874,6 +874,14 @@
 		}
 	}
 
+	// List to Prolog list
+	function arrayToList( array ) {
+		var list = new pl.type.Term( "[]", [] );
+		for(var i = array.length-1; i >= 0; i-- )
+			list = new pl.type.Term( ".", [array[i], list] );
+		return list;
+	}
+
 	// Remove element from array
 	function remove( array, element ) {
 		for( var i = array.length - 1; i >= 0; i-- ) {
@@ -1427,8 +1435,32 @@
 	};
 
 	// Consult a program from a string
-	Session.prototype.consult = function( string ) {
+	Session.prototype.consult = function( program ) {
 		this.__stack_comma = [true];
+		var string = "";
+		if( typeof program === "string" ) {
+			string = program;
+			var len = string.length;
+			if( string.substring( len-3, len ) === ".pl" && document.getElementById( string ) ) {
+				var script = document.getElementById( string );
+				var type = script.getAttribute( "type" );
+				if( type !== null && type.replace( / /g, "" ).toLowerCase() === "text/prolog" ) {
+					string = script.text;
+				}
+			}
+		} else if( program.nodeName ) {
+			switch( program.nodeName.toLowerCase() ) {
+				case "input":
+				case "textarea":
+					string = program.value;
+					break;
+				default:
+					string = program.innerHTML;
+					break;
+			}
+		} else {
+			return false;
+		}
 		return parseProgram( this, string );
 	};
 
@@ -1562,7 +1594,7 @@
 
 	// Find next computed answer
 	Session.prototype.answer = function( success ) {
-		success = success || console.log;
+		success = success || function( _ ) { };
 		this.__calls.push( success );
 		if( this.__calls.length > 1 ) {
 			return;
@@ -1571,23 +1603,15 @@
 	};
 
 	// Find all computed answers
-	Session.prototype.answers = function( limit, callback, answers ) {
-		answers = answers || [];
+	Session.prototype.answers = function( callback, max ) {
+		answers = max || 1000;
 		var session = this;
-		this.__calls = [];
-		if( limit > 0 ) {
-			this.answer( function( answer ) {
-				answers.push( answer );
-				if( answer !== null && answer !== false ) {
-					session.answers( limit - 1, callback, answers );
-				} else {
-					callback( answers );
-				}
-			} );
-		} else {
-			answers.push( null );
-			callback( answers );
-		}
+		if( max <= 0 ) return;
+		this.answer( function( answer ) {
+			callback( answer );
+			if( answer !== false )
+				session.answers( callback, max-1 );
+		} );
 	};
 
 	// Again finding next computed answer
@@ -2369,6 +2393,7 @@
 					var points = session.points;
 					session.points = [new State( atom.args[0], point.substitution, point )];
 					var callback = function( answer ) {
+						session.points = points;
 						if( answer === false )
 							session.success( point );
 						else if( pl.type.is_error( answer ) )
@@ -3834,6 +3859,46 @@
 			}
 		},
 
+		// Flatten default errors
+		flatten_error: function( error ) {
+			if( !pl.type.is_error( error ) ) return null;
+			error = error.args[0];
+			var obj = {};
+			obj.type = error.args[0].id;
+			obj.thrown = obj.type == "syntax_error" ? null : error.args[1].id;
+			obj.expected = null;
+			obj.found = null;
+			obj.representation = null;
+			obj.existence = null;
+			obj.existence_type = null;
+			obj.line = null;
+			obj.column = null;
+			obj.permission_operation = null;
+			obj.permission_type = null;
+			obj.evaluation_type = null;
+			if( obj.type == "type_error" || obj.type == "domain_error" ) {
+				obj.expected = error.args[0].args[0].id;
+				obj.found = error.args[0].args[1].toString();
+			} else if( obj.type == "syntax_error" ) {
+				obj.expected = error.args[0].args[3].args[0].id;
+				obj.found = error.args[0].args[2].id == "token_not_found" ? "token_not_found" : error.args[0].args[2].args[0].id;
+				obj.line = error.args[0].args[0].args[0].value;
+				obj.column = error.args[0].args[1].args[0].value;
+			} else if( obj.type == "permission_error" ) {
+				obj.found = error.args[0].args[2].toString();
+				obj.permission_operation = error.args[0].args[0].id;
+				obj.permission_type = error.args[0].args[1].id;
+			} else if( obj.type == "evaluation_error" ) {
+				obj.evaluation_type = error.args[0].args[0].id;
+			} else if( obj.type == "representation_error" ) {
+				obj.representation = error.args[0].args[0].id;
+			} else if( obj.type == "existence_error" ) {
+				obj.existence = error.args[0].args[1].toString();
+				obj.existence_type = error.args[0].args[0].id;
+			}
+			return obj;
+		},
+
 		// Create new session
 		create: function( limit ) {
 			return new pl.type.Session( limit );
@@ -3892,6 +3957,12 @@ new pl.type.Module( "lists", {
 	"include/3": [
 		new pl.type.Rule(new pl.type.Term("include", [new pl.type.Var("_"),new pl.type.Term("[]", []),new pl.type.Term("[]", [])]), null),
 		new pl.type.Rule(new pl.type.Term("include", [new pl.type.Var("P"),new pl.type.Term(".", [new pl.type.Var("H"),new pl.type.Var("T")]),new pl.type.Var("L")]), new pl.type.Term(",", [new pl.type.Term("=..", [new pl.type.Var("P"),new pl.type.Var("A")]),new pl.type.Term(",", [new pl.type.Term("append", [new pl.type.Var("A"),new pl.type.Term(".", [new pl.type.Var("H"),new pl.type.Term("[]", [])]),new pl.type.Var("B")]),new pl.type.Term(",", [new pl.type.Term("=..", [new pl.type.Var("F"),new pl.type.Var("B")]),new pl.type.Term(",", [new pl.type.Term(";", [new pl.type.Term(",", [new pl.type.Term("call", [new pl.type.Var("F")]),new pl.type.Term(",", [new pl.type.Term("=", [new pl.type.Var("L"),new pl.type.Term(".", [new pl.type.Var("H"),new pl.type.Var("S")])]),new pl.type.Term("!", [])])]),new pl.type.Term("=", [new pl.type.Var("L"),new pl.type.Var("S")])]),new pl.type.Term("include", [new pl.type.Var("P"),new pl.type.Var("T"),new pl.type.Var("S")])])])])]))
+	],
+
+	// exclude/3
+	"exclude/3": [
+		new pl.type.Rule(new pl.type.Term("exclude", [new pl.type.Var("_"),new pl.type.Term("[]", []),new pl.type.Term("[]", [])]), null),
+		new pl.type.Rule(new pl.type.Term("exclude", [new pl.type.Var("P"),new pl.type.Term(".", [new pl.type.Var("H"),new pl.type.Var("T")]),new pl.type.Var("S")]), new pl.type.Term(",", [new pl.type.Term("exclude", [new pl.type.Var("P"),new pl.type.Var("T"),new pl.type.Var("E")]),new pl.type.Term(",", [new pl.type.Term("=..", [new pl.type.Var("P"),new pl.type.Var("L")]),new pl.type.Term(",", [new pl.type.Term("append", [new pl.type.Var("L"),new pl.type.Term(".", [new pl.type.Var("H"),new pl.type.Term("[]", [])]),new pl.type.Var("Q")]),new pl.type.Term(",", [new pl.type.Term("=..", [new pl.type.Var("R"),new pl.type.Var("Q")]),new pl.type.Term(";", [new pl.type.Term(",", [new pl.type.Term("call", [new pl.type.Var("R")]),new pl.type.Term(",", [new pl.type.Term("!", []),new pl.type.Term("=", [new pl.type.Var("S"),new pl.type.Var("E")])])]),new pl.type.Term("=", [new pl.type.Var("S"),new pl.type.Term(".", [new pl.type.Var("H"),new pl.type.Var("E")])])])])])])]))
 	],
 
 	// reduce/4
@@ -4137,6 +4208,50 @@ new pl.type.Module( "random", {
 					gen = Math.floor( gen );
 				session.prepend( [new pl.type.State(
 					point.goal.replace( new pl.type.Term( "=", [rand, new pl.type.Num( gen, float )] ) ),
+					point.substitution, point
+				)] );
+			}
+		}
+	},
+
+	//random_between/3
+	"random_between/3": function( session, point, atom ) {
+		var lower = atom.args[0], upper = atom.args[1], rand = atom.args[2];
+		if( pl.type.is_variable( lower ) || pl.type.is_variable( upper ) ) {
+			session.throwError( pl.error.instantiation( atom.indicator ) );
+		} else if( !pl.type.is_integer( lower ) ) {
+			session.throwError( pl.error.type( "integer", lower, atom.indicator ) );
+		} else if( !pl.type.is_integer( upper ) ) {
+			session.throwError( pl.error.type( "integer", upper, atom.indicator ) );
+		} else if( !pl.type.is_variable( rand ) && !pl.type.is_integer( rand ) ) {
+			session.throwError( pl.error.type( "integer", rand, atom.indicator ) );
+		} else {
+			if( lower.value < upper.value ) {
+				var gen = Math.floor(lower.value + Math.random() * (upper.value - lower.value + 1));
+				session.prepend( [new pl.type.State(
+					point.goal.replace( new pl.type.Term( "=", [rand, new pl.type.Num( gen, false )] ) ),
+					point.substitution, point
+				)] );
+			}
+		}
+	},
+
+	// random_member/2
+	"random_member/2": function( session, point, atom ) {
+		var member = atom.args[0], list = atom.args[1];
+		if( pl.type.is_variable( list ) ) {
+			session.throwError( pl.error.instantiation( atom.indicator ) );
+		} else {
+			var array = [];
+			var pointer = list;
+			while( pointer.indicator == "./2" ) {
+				array.push(pointer.args[0]);
+				pointer = pointer.args[1];
+			}
+			if( array.length > 0 ) {
+				var gen = Math.floor(Math.random() * array.length);
+				session.prepend( [new pl.type.State(
+					point.goal.replace( new pl.type.Term( "=", [member, array[gen]] ) ),
 					point.substitution, point
 				)] );
 			}
