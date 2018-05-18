@@ -6,10 +6,11 @@ version:  1.0.0
 language: en_US
 narrator: Deutsch Female
 
-script:   https://cdn.rawgit.com/liaScript/tau-prolog_template/master/js/tau-prolog.js
+script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prolog.min.js
 
 @tau_prolog_program
 <script>
+
     var db = `{{0}}`;
     window['@0'] = {session: window.pl.create(),
                     query: null,
@@ -18,8 +19,12 @@ script:   https://cdn.rawgit.com/liaScript/tau-prolog_template/master/js/tau-pro
                     db: db};
     var c = window['@0']['session'].consult(db);
 
-    if( c !== true )
-        throw {message: "parsing program '@0' => " + c.args[0]};
+    if( c !== true ){
+        var err = new LiaError("parsing program '@0' => " + c.args[0], 1);
+        var c_err = window.pl.flatten_error(c);
+        err.add_detail(0, c_err.type+" => " + c_err.found + "; expected => " +c_err.expected, "error", c_err.line - 1, c_err.column);
+        throw err;
+    }
     else
         "database '@0' loaded";
 </script>
@@ -35,8 +40,12 @@ script:   https://cdn.rawgit.com/liaScript/tau-prolog_template/master/js/tau-pro
                     db: db};
     var c = window['@0']['session'].consult(db);
 
-    if( c !== true )
-        throw {message: "parsing program '@0' => " + c.args[0]};
+    if( c !== true ){
+        var err = new LiaError("parsing program '@0' => " + c.args[0], 1);
+        var c_err = window.pl.flatten_error(c);
+        err.add_detail(0, c_err.type+" => " + c_err.found + "; expected => " +c_err.expected, "error", c_err.line - 1, c_err.column);
+        throw err;
+    }
     else
         "database '@0' loaded";
 </script>
@@ -58,7 +67,12 @@ script:   https://cdn.rawgit.com/liaScript/tau-prolog_template/master/js/tau-pro
     }
 
     if( window['@0']['query'] !== true ) {
-        throw {message: "parsing query for '@0' => " + window['@0']['query'].args[0]};
+        //throw {message: "parsing query for '@0' => " + window['@0']['query'].args[0]};
+
+        var err = new LiaError("parsing query for '@0' => " + window['@0']['query'].args[0], 1);
+        var c_err = window.pl.flatten_error(window['@0']['query']);
+        err.add_detail(0, c_err.type+" => " + c_err.found + "; expected => " +c_err.expected, "error", c_err.line - 1, c_err.column);
+        throw err;
     }
     else {
         window['@0']['session'].answer(e => {
@@ -279,7 +293,6 @@ Faktum in der Datenbasis vor, so antwortet PROLOG mit `true`, andernfalls mit
 gelb(veilchen).
 ```
 @tau_prolog_query(blumenstrauss.pro)
-
 
 ### Variablen
 
