@@ -11,7 +11,7 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
 @tau_prolog_program
 <script>
 
-    var db = `{{0}}`;
+    var db = `@file(0)`;
     window['@0'] = {session: window.pl.create(),
                     query: null,
                     rslt: "",
@@ -53,7 +53,7 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
 
 @tau_prolog_query
 <script>
-    var query = `{{0}}`;
+    var query = `@file(0)`;
 
     try {
         if(window['@0']['query'] == null || window['@0']['query_str'] != query) {
@@ -784,8 +784,8 @@ beantworten:
 
       [[eltern(daisy, Y).]]
       <script>
-        console.log("{{0}}");
-        var query = `unify_with_occurs_check((elter(daisy, X)), ({{0}})).`;
+        console.log("@file(0)");
+        var query = `unify_with_occurs_check((elter(daisy, X)), (@file(0))).`;
 
         var rslt  = false;
 
@@ -1031,7 +1031,7 @@ elter(donald,cleopatra).
 elter(daisy,clemens).
 elter(daisy,cleopatra).
 ```
-@tau_prolog_programX(stammbaum+regeln.pro,{{0}}{{1}})
+@tau_prolog_programX(stammbaum+regeln.pro,`@file(0)@file(1)`)
 
 ```prolog
 mutter(X,Y).
