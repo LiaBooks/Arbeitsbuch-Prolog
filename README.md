@@ -87,7 +87,6 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
 <script>
     var db = null;
 
-
     try {
         db = window['@0']['db'];
     }
@@ -102,18 +101,13 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
     if( c !== true )
         throw {message: "parsing program '@0' => " + c.args[0]};
 
-    session.query(`@1`);
+    session.query(`@1`.replace(/[.]/g, "") + ".");
 
-    var rslt = false;
+    let rslt = false;
 
     session.answer(e => {rslt = window.pl.format_answer( e );});
 
-    alert(rslt);
-
-    alert("@1");
-    alert("@2");
-
-    rslt != "false.";
+    rslt == "true ;";
 </script>
 @end
 
@@ -792,7 +786,7 @@ beantworten:
 * Wer sind die Eltern von Daisy?
 
       [[elter(daisy, X).]]
-@tau_prolog_check(stammbaum.pro,`setof(X, @input, [clemens, cleopatra]).`)
+@tau_prolog_check(stammbaum.pro,`setof(X, @input, [clemens, cleopatra])`)
   *************************************
   ```prolog
   elter(daisy, X).
