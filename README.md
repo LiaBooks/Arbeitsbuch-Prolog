@@ -11,7 +11,7 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
 @tau_prolog_program
 <script>
 
-    var db = `@code`;
+    var db = `@input`;
     window['@0'] = {session: window.pl.create(),
                     query: null,
                     rslt: "",
@@ -53,7 +53,7 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
 
 @tau_prolog_query
 <script>
-    var query = `@code`;
+    var query = `@input`;
 
     try {
         if(window['@0']['query'] == null || window['@0']['query_str'] != query) {
@@ -107,6 +107,11 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
     var rslt = false;
 
     session.answer(e => {rslt = window.pl.format_answer( e );});
+
+    alert(rslt);
+
+    alert("@1");
+    alert("@2");
 
     rslt != "false.";
 </script>
@@ -229,7 +234,7 @@ können den Willkommensstrauß auch kurz mit einfachen Worten wie:
 Solche **Fakten** (Tatsachen) wie die Zusammensetzung eines Straußes können in
 PROLOG wie folgt abgebildet werden:
 
-{{2}}
+    {{2}}
 ```prolog
 rot(rose).
 gelb(tulpe).
@@ -254,10 +259,12 @@ Da dieses Programm jedoch einen syntaktischen Fehler hat, erhältst du zunächst
 eine Fehlermeldung, die auf ein Syntax-Problem hinweist.
 
                                  --{{1}}--
-Mit einem Doppel-Klick auf den Code gelangst du in den Editiermodus und kannst
-den fehlenden Punkt am Ende der letzten Zeile einfügen. Wenn du dann wieder auf
-Ausführen klickst, so wird dir angezeigt, dass deine Datenbasis erfolgreich
-geladen werden konnte.
+Du kannst den Code auch direkt editieren und den fehlenden Punkt am Ende der
+letzten Zeile einfügen. Wenn du dann wieder auf Ausführen klickst, so wird dir
+angezeigt, dass deine Datenbasis erfolgreich geladen werden konnte. Und falls du
+dir später mal wegen einer Änderung nicht sicher bist, so kannst du auch jede
+beliebige Version wieder herstellen, indem du einfach auf die Pfeil-Buttons
+neben der aktuellen Versionnummer klickst.
 
 ```prolog blumenstrauss.pro
 rot(rose).
@@ -268,7 +275,7 @@ blau(veilchen)
 ```
 @tau_prolog_program(blumenstrauss.pro)
 
-                             --{{2}}--
+                                 --{{2}}--
 Um anfragen an deine Datenbasis zu stellen, benötigst du noch eine zweite
 Eingabemöglichkeit:
 
@@ -278,17 +285,17 @@ rot(rose).
 ```
 @tau_prolog_query(blumenstrauss.pro)
 
-                          --{{3}}--
+                                 --{{3}}--
 Solche Eingaben werden als Fragen aufgefasst. Umgangsprachlich formuliert heißt
 das: "Ist die Rose rot?". Als Antwort erscheint `true`.
 
-                     --{{4}}--
+                                 --{{4}}--
 Und auf die Frage `gelb(veilchen).` erhalten wir `false`. Versuch weitere
 solcher Fragen einzugeben. Du wirst sehen: Kommt die Frage buchstabengetreu als
 Faktum in der Datenbasis vor, so antwortet PROLOG mit `true`, andernfalls mit
 `false`.
 
-{{4}}
+    {{4}}
 ```prolog
 gelb(veilchen).
 ```
@@ -300,14 +307,15 @@ gelb(veilchen).
 Wir können mit Hilfe von Variablen auch etwas anspruchsvoller fragen: "Was ist
 blau?". Gibt es mehrere Lösungen, so wird zunächst immer nur eine angeboten. Du
 kannst  weitere Lösungen anfordern, indem du wiederholt auf Ausführen klickst.
-Gibt es schließlich keine weitere Lösung mehr, so erscheint `false.`.
+Gibt es schließlich keine weitere Lösung mehr, so erscheint `false.` mit einem
+einem abschließenden Punkt.
 
 ```prolog
 blau(X).
 ```
 @tau_prolog_query(blumenstrauss.pro)
 
-                              --{{1}}--
+                                 --{{1}}--
 Variablen werden mit einem großen Anfangsbuchstaben geschrieben. Dieselbe Frage
 können wir auch mit einer anderen (mehr aussagekräftigeren) Variablen stellen.
 Beachte wie sich die Ausgabe verändert.
@@ -321,15 +329,15 @@ blau(Blume).
 
 ### Zweistellige Prädikate
 
-                           --{{0}}--
+                                 --{{0}}--
 Dies ist die Urlaubsplanung für die nächsten Ferien, die umgangssprachliche
 Formulierung kann ganz einfach in eine PROLOG-Programm übersetzt werden.
 
 **Umgangsprachlich:** Axel fährt nach England, Beate fährt nach Griechenland und
-**in die Türkei, Clemens, Elmar und Frederike fahren nach Frankreich, Dagmar
-**fährt nach Italien.
+in die Türkei, Clemens, Elmar und Frederike fahren nach Frankreich, Dagmar fährt
+nach Italien.
 
-----
+--------------------------------------------------------------------------------
 
 ```prolog urlaubsplanung.pro
 faehrt_nach(axel,england).
@@ -342,33 +350,33 @@ faehrt_nach(frederike,frankreich).
 ```
 @tau_prolog_program(urlaubsplanung.pro)
 
-                               --{{1}}--
+                                 --{{1}}--
 In dieser **Datenbasis** gibt es nur ein Prädikat, das zweistellige Prädikat
 `faehrt_nach`. Laden die obige Datenbasis in PROLOG. Die Frage "Wer fährt nach
 England?" heißt in PROLOG:
 
-{{1}}
+    {{1}}
 ```prolog Anfrage:
 faehrt_nach(X,england).
 ```
 @tau_prolog_query(urlaubsplanung.pro)
 
-              --{{2}}--
+                                 --{{2}}--
 Beantworte die folgenden Fragen, indem du sie in PROLOG übersetzt und vergleiche
 deine Anfragen mit den Auflösungen:
 
 
-{{2}}
+              {{2}}
 1. Fährt Axel nach Griechenland?
 
        [( )] Ja
        [(X)] Nein
-   ********************************
+   *************************************
    ```prolog
    faehrt_nach(axel, griechenland).
    ```
    @tau_prolog_query(urlaubsplanung.pro)
-   ********************************
+   *************************************
 2. Wohin fährt Beate?
 
        [[ ]] england
@@ -376,12 +384,12 @@ deine Anfragen mit den Auflösungen:
        [[X]] griechenland
        [[ ]] italien
        [[X]] tuerkei
-   ********************************
+   *************************************
    ```prolog
    faehrt_nach(beate, X).
    ```
    @tau_prolog_query(urlaubsplanung.pro)
-   ********************************
+   *************************************
 3. Wohin fährt Xaver?
 
        [[ ]] england
@@ -389,14 +397,14 @@ deine Anfragen mit den Auflösungen:
        [[ ]] griechenland
        [[ ]] italien
        [[ ]] tuerkei
-   ********************************
+   *************************************
    Xaver fährt nirgends hin, er ist nicht in der Datenbasis enthalten.
 
    ```prolog
    faehrt_nach(xaver, Urlaubsziel).
    ```
    @tau_prolog_query(urlaubsplanung.pro)
-   ********************************
+   *************************************
 4. Wer fährt nach Frankreich?
 
        [[ ]] Axel
@@ -405,21 +413,22 @@ deine Anfragen mit den Auflösungen:
        [[ ]] Dagmar
        [[X]] Elmar
        [[X]] Frederike
-   ********************************
+   *************************************
    ```prolog
    faehrt_nach(Wer, frankreich).
    ```
    @tau_prolog_query(urlaubsplanung.pro)
-   ********************************
+   *************************************
 5. Wer fährt wohin?
 
        [[!]]
-   ********************************
+       <script>true;</script>
+   *************************************
    ```prolog
    faehrt_nach(Person, Ziel).
    ```
    @tau_prolog_query(urlaubsplanung.pro)
-   ********************************
+   *************************************
 
 ### _und_ & _oder_ Operatoren
 
@@ -782,33 +791,11 @@ beantworten:
 *******************************************************************************
 * Wer sind die Eltern von Daisy?
 
-      [[eltern(daisy, Y).]]
-      <script>
-        console.log("@code");
-        var query = `unify_with_occurs_check((elter(daisy, X)), (@code)).`;
-
-        var rslt  = false;
-
-        try {
-            window['stammbaum.pro']['session'].query(query);
-        }
-        catch(e) {
-            throw {message: "'stammbaum.pro' has not been consulted"};
-        }
-
-
-        var callback = function(answer) {
-            rslt =  window.pl.format_answer( answer );
-        };
-        window['stammbaum.pro']['session'].answer(callback);
-
-        console.log(rslt);
-
-        rslt == "true ;";
-      </script>
+      [[elter(daisy, X).]]
+@tau_prolog_check(stammbaum.pro,`setof(X, @input, [clemens, cleopatra]).`)
   *************************************
   ```prolog
-  elter(daisy, Y).
+  elter(daisy, X).
   ```
   @tau_prolog_query(stammbaum.pro)
   *************************************
@@ -1031,7 +1018,7 @@ elter(donald,cleopatra).
 elter(daisy,clemens).
 elter(daisy,cleopatra).
 ```
-@tau_prolog_programX(stammbaum+regeln.pro,`@code(0)@code(1)`)
+@tau_prolog_programX(stammbaum+regeln.pro,`@input(0)@input(1)`)
 
 ```prolog
 mutter(X,Y).
