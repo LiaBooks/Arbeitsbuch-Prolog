@@ -667,21 +667,21 @@ Der folgende Stammbaum von Donald und Daisy läßt eine gewisse Systematik bei d
 Namensgebung erkennen, die den Überblick erleichtert:
 
 
-```bash Stammbaum-Diagramm
- ♂ Adam ━━━━━┓
-             ┣━━━━ ♂ Baldur ━━━━━┓
- ♀ Adele ━━━━┛                   ┣━━━━ ♂ Casanova
- ♂ Alfred ━━━┓                   ┣━━━━ ♂ Clemens ━━━━┓
-             ┣━━━━ ♀ Barbara ━━━━┛                   ┃
- ♀ Alwine ━━━┛                                       ┣━━━━ ♂ Donald
- ♂ Anton ━━━━┓                                       ┣━━━━ ♀ Daisy
-             ┣━━━━ ♀ Berta ━━━━━━┓                   ┃
- ♀ Anna ━━━━━┛                   ┣━━━━ ♀ Cleopatra ━━┛
- ♂ Arthur ━━━┓                   ┣━━━━ ♀ Cosima
-             ┣━━━━ ♂ Bernd ━━━━━━┛
-             ┣━━━━ ♂ Boris
- ♀ Adriane ━━┛
-```
+````
+♂ Adam ━━━━━┓
+            ┣━━━━ ♂ Baldur ━━━━━┓
+♀ Adele ━━━━┛                   ┣━━━━ ♂ Casanova
+♂ Alfred ━━━┓                   ┣━━━━ ♂ Clemens ━━━━┓
+            ┣━━━━ ♀ Barbara ━━━━┛                   ┃
+♀ Alwine ━━━┛                                       ┣━━━━ ♂ Donald
+♂ Anton ━━━━┓                                       ┣━━━━ ♀ Daisy
+            ┣━━━━ ♀ Berta ━━━━━━┓                   ┃
+♀ Anna ━━━━━┛                   ┣━━━━ ♀ Cleopatra ━━┛
+♂ Arthur ━━━┓                   ┣━━━━ ♀ Cosima
+            ┣━━━━ ♂ Bernd ━━━━━━┛
+            ┣━━━━ ♂ Boris
+♀ Adriane ━━┛
+````
 
 
        --{{1}}--
@@ -1273,9 +1273,8 @@ Das dargestellte Rechteck besteht aus 4 Gebieten, die mit den drei Farben _rot_,
 _gelb_ und _blau_ so eingefärbt werden sollen, dass keine gleichfarbigen Gebiete
 längs einer Linie aneinandergrenzen.
 
-<!-- style="max-width: 315px;" -->
-```
-
+<!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 315px;" -->
+````
  ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
  ┃             ┃                   ┃
  ┃      1      ┃         2         ┃
@@ -1285,8 +1284,7 @@ längs einer Linie aneinandergrenzen.
  ┃         4         ┃      3      ┃
  ┃                   ┃             ┃
  ┗━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-
-```
+````
 
                         --{{1}}--
 Wir lassen ein Programm nach den Lösungen suchen. Die Farbe des Gebietes 1
@@ -1326,9 +1324,8 @@ folgende Rechteck, bestehend aus 5 Gebieten, zu definieren. Nutze wieder nur
 drei Farben und achte darauf, dass keine gleichfarbigen Gebiete
 aneinandergrenzen?
 
-<!-- style="max-width: 315px;" -->
-```
-
+<!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 315px;" -->
+````
  ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
  ┃                ┃                ┃
  ┃     1     ┏━━━━┻━━━━┓     2     ┃
@@ -1338,8 +1335,7 @@ aneinandergrenzen?
  ┃     5     ┗━━━━┳━━━━┛     4     ┃
  ┃                ┃                ┃
  ┗━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┛
-
-```
+````
 
 Überprüfe deine Regel.
 
@@ -1499,26 +1495,26 @@ hen, dass dies nicht stimmt; PROLOG muss Faktum für Faktum mit der Frage vergle
 
 
 
-<!-- style="max-width: 315px;" -->
-```yml
-  .       .       .       ┏━━ rrrr
-  .       .       ┏━━ r ━━╋━━ rrrg
-  .       .       ┃       ┗━━ rrrb
-  .       .       ┃       .
-  .       .       ┃       ┏━━ rrgr
-  .       ┏━━ r ━━╋━━ g ━━╋━━ rrgg
-  .       ┃       ┃       ┗━━ rrgb
-  .       ┃       ┃       .
-  .       ┃       ┃       ┏━━ rrbr
-  .━━(r)━━┫       ┗━━ b ━━╋━━ rrbg
-  .       ┃       .       ┗━━ rrbb
-  .       ┃       .       .
-  .       ┃       .       ┏━━ rgrr
-  .       ┗━━ g ━━━━━ r ━━╋━━ rgrg
-  .       .       .       ┗━━ rgrb
-  .       .       .       .
- F.1     F.2     F.3     F.4
-```
+<!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 350px;" -->
+````
+  .         .         .         ┏━━━ rrrr
+  .         .         ┏━━━ r ━━━╋━━━ rrrg
+  .         .         ┃         ┗━━━ rrrb
+  .         .         ┃         .
+  .         .         ┃         ┏━━━ rrgr
+  .         ┏━━━ r ━━━╋━━━ g ━━━╋━━━ rrgg
+  .         ┃         ┃         ┗━━━ rrgb
+  .         ┃         ┃         .
+  .         ┃         ┃         ┏━━━ rrbr
+  .━━━ r ━━━┫         ┗━━━ b ━━━╋━━━ rrbg
+  .         ┃         .         ┗━━━ rrbb
+  .         ┃         .         .
+  .         ┃         .         ┏━━━ rgrr
+  .         ┗━━━ g ━━━━━━ r ━━━━╋━━━ rgrg
+  .         .         .         ┗━━━ rgrb
+  .         .         .         .
+ F.1       F.2       F.3       F.4
+````
 
 ## Rekursion
 
