@@ -246,13 +246,13 @@ Punkt und dem Drücken der RETURN-Taste abgeschlossen.
 
 ### PROLOG-Programme
 
-                                 --{{0}}--
+                            --{{0}}--
 Die hier genuzte PROLOG-IDE besteht immer aus zwei Teilen, einer Eingabe für das
 Programm. Wenn du hier auf Ausführen klickst, so wird dieses Programm geladen.
 Da dieses Programm jedoch einen syntaktischen Fehler hat, erhältst du zunächst
 eine Fehlermeldung, die auf ein Syntax-Problem hinweist.
 
-                                 --{{1}}--
+                            --{{1}}--
 Du kannst den Code auch direkt editieren und den fehlenden Punkt am Ende der
 letzten Zeile einfügen. Wenn du dann wieder auf Ausführen klickst, so wird dir
 angezeigt, dass deine Datenbasis erfolgreich geladen werden konnte. Und falls du
@@ -269,7 +269,7 @@ blau(veilchen)
 ```
 @tau_prolog_program(blumenstrauss.pro)
 
-                                 --{{2}}--
+                            --{{2}}--
 Um anfragen an deine Datenbasis zu stellen, benötigst du noch eine zweite
 Eingabemöglichkeit:
 
@@ -279,11 +279,11 @@ rot(rose).
 ```
 @tau_prolog_query(blumenstrauss.pro)
 
-                                 --{{3}}--
+                            --{{3}}--
 Solche Eingaben werden als Fragen aufgefasst. Umgangsprachlich formuliert heißt
 das: "Ist die Rose rot?". Als Antwort erscheint `true`.
 
-                                 --{{4}}--
+                            --{{4}}--
 Und auf die Frage `gelb(veilchen).` erhalten wir `false`. Versuch weitere
 solcher Fragen einzugeben. Du wirst sehen: Kommt die Frage buchstabengetreu als
 Faktum in der Datenbasis vor, so antwortet PROLOG mit `true`, andernfalls mit
@@ -297,7 +297,7 @@ gelb(veilchen).
 
 ### Variablen
 
-                                 --{{0}}--
+                            --{{0}}--
 Wir können mit Hilfe von Variablen auch etwas anspruchsvoller fragen: "Was ist
 blau?". Gibt es mehrere Lösungen, so wird zunächst immer nur eine angeboten. Du
 kannst  weitere Lösungen anfordern, indem du wiederholt auf Ausführen klickst.
@@ -309,7 +309,7 @@ blau(X).
 ```
 @tau_prolog_query(blumenstrauss.pro)
 
-                                 --{{1}}--
+                            --{{1}}--
 Variablen werden mit einem großen Anfangsbuchstaben geschrieben. Dieselbe Frage
 können wir auch mit einer anderen (mehr aussagekräftigeren) Variablen stellen.
 Beachte wie sich die Ausgabe verändert.
@@ -323,7 +323,7 @@ blau(Blume).
 
 ### Zweistellige Prädikate
 
-                                 --{{0}}--
+                            --{{0}}--
 Dies ist die Urlaubsplanung für die nächsten Ferien, die umgangssprachliche
 Formulierung kann ganz einfach in eine PROLOG-Programm übersetzt werden.
 
@@ -344,7 +344,7 @@ faehrt_nach(frederike,frankreich).
 ```
 @tau_prolog_program(urlaubsplanung.pro)
 
-                                 --{{1}}--
+                            --{{1}}--
 In dieser **Datenbasis** gibt es nur ein Prädikat, das zweistellige Prädikat
 `faehrt_nach`. Laden die obige Datenbasis in PROLOG. Die Frage "Wer fährt nach
 England?" heißt in PROLOG:
@@ -355,7 +355,7 @@ faehrt_nach(X,england).
 ```
 @tau_prolog_query(urlaubsplanung.pro)
 
-                                 --{{2}}--
+                            --{{2}}--
 Beantworte die folgenden Fragen, indem du sie in PROLOG übersetzt und vergleiche
 deine Anfragen mit den Auflösungen:
 
@@ -426,10 +426,10 @@ deine Anfragen mit den Auflösungen:
 
 ### _und_ & _oder_ Operatoren
 
-{{0-1}}
+    {{0-1}}
 ![breakfast](img/breakfast.png)<!-- style="max-width: 100%" -->
 
-                              --{{0}}--
+                            --{{0}}--
 Die Vorlieben und Abneigungen am Frühstückstisch seien in der folgenden
 PROLOG-Datenbasis mit dem Namen 'fruehstueck.pro' festgehalten:
 
@@ -454,11 +454,11 @@ mag(papa, brot).
 ```
 @tau_prolog_query(fruehstueck.pro)
 
-                  --{{1}}--
+                            --{{1}}--
 Bis jetzt jetzt soltest du in der Lage sein, vier Arten von Fragen stellen. Du
 kannst dich selber testen und PROLOG dazu bringen, diese Fragen zu beantworten.
 
-                   {{1-2}}
+      {{1-2}}
 1. Mag Papa Kuchen?
 2. Wer haßt Müsli?
 3. Was mag Oma?
@@ -466,15 +466,15 @@ kannst dich selber testen und PROLOG dazu bringen, diese Fragen zu beantworten.
 
 
 
-                               --{{2}}--
+                            --{{2}}--
 Für die Frühstücksplanung sind aber auch zusammengesetzte Fragen wichtig die
 Prädikate mit _und_ oder _oder_ verknüpft. Das Zeichen in PROLOG für _und_ ist
 ein Komma, für _oder_ schreibt man Semikolon.
 
-                               --{{3}}--
+                            --{{3}}--
 Damit ergeben sich folgende PROLOG-Fragen:
 
-               {{2-4}}
+    {{2-4}}
 * Wer haßt Kuchen _und_ mag Müsli?
 
       {{3}}
@@ -504,11 +504,11 @@ Damit ergeben sich folgende PROLOG-Fragen:
   ***********************************
 
 
-      --{{4}}--
+                            --{{4}}--
 Teste jetzt dein Wissen und versuch die folgenden Fragen mit PROLOG zu
 beantworten und  vergleiche deine Lösungen mit den Auflösungen.
 
-       {{4}}
+          {{4}}
 1. Wer mag Kuchen und Müsli?
 
        [[X]] Baby
@@ -547,7 +547,7 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
 
 ### Aufgaben
 
-                             --{{0}}--
+                            --{{0}}--
 Die folgenden beiden Abschnitte sollen dazu dienen, das bereits gelernte zu
 wiederholen und zu festigen, bevor wir lernen wie man komplexere Sachverhalte
 durch die Nutzung von Regeln abbildet.
@@ -591,11 +591,12 @@ blume(weiss, nelke).
 
 #### Beziehungen
 
-                    --{{0}}--
+                            --{{0}}--
 Übersetz die folgenden Sätze in eine PROLOG-Datenbasis.
 
 
-{{0-1}} ![cats](img/cats.png)
+    {{0-1}}
+![cats](img/cats.png)
 
 * Peter liebt Susi.
 * Hans liebt Susi und Sabine.
@@ -611,7 +612,7 @@ blume(weiss, nelke).
 ```
 
 
-                           --{{1}}--
+                            --{{1}}--
 Versuch die folgenden Anfragen selbst zu lösen, bevor du sie mit den Auflösungen
 vergleichst:
 
@@ -620,7 +621,7 @@ vergleichst:
     {{1}}
 * Wen liebt Sabine?
 
-  [[!]]
+      [[!]]
   *************************
   ```prolog
   liebt(sabine, X).
@@ -628,7 +629,7 @@ vergleichst:
   *************************
 * Wer liebt Sabine?
 
-  [[!]]
+      [[!]]
   *************************
   ```prolog
   liebt(X, sabine).
@@ -636,7 +637,7 @@ vergleichst:
   *************************
 * Wer liebt wen?
 
-  [[!]]
+      [[!]]
   *************************
   ```prolog
   liebt(Wer, Wen).
@@ -644,7 +645,7 @@ vergleichst:
   *************************
 * Wer liebt jemanden, der ihn auch liebt?
 
-  [[!]]
+      [[!]]
   *************************
   ```prolog
   liebt(X, Y), liebt(Y, X).
@@ -652,7 +653,7 @@ vergleichst:
   *************************
 * Wessen Liebe wird mit Haß vergolten?
 
-  [[!]]
+      [[!]]
   *************************
   ```prolog
   liebt(X, Y), hasst(Y, X).
@@ -662,11 +663,11 @@ vergleichst:
 
 #### Stammbaum
 
-                 --{{0}}--
+                            --{{0}}--
 Der folgende Stammbaum von Donald und Daisy läßt eine gewisse Systematik bei der
 Namensgebung erkennen, die den Überblick erleichtert:
 
-
+<!-- style = "max-width: 600px" -->
 ````
 ♂ Adam ━━━━━┓
             ┣━━━━ ♂ Baldur ━━━━━┓
@@ -684,14 +685,14 @@ Namensgebung erkennen, die den Überblick erleichtert:
 ````
 
 
-       --{{1}}--
+                            --{{1}}--
 Es gibt verschiedene Möglichkeiten, die Informationen dieses Stammbaumes in
 einer Datenbasis festzuhalten. Wir wählen dazu die Prädikate _maennl_, _weibl_,
 _verheiratet_ und _elter_. Die Datenbasis wird schon recht groß. In Ihrer Datei
 erscheint sie einspaltig, da jedes Faktum mit Punkt und RETURN abgeschlossen
 wird.
 
-                                   {{1}}
+                              {{1}}
 *******************************************************************************
 ```prolog stammbaum.pro
 maennl(adam).
@@ -763,60 +764,45 @@ elter(daisy,cleopatra).
 @tau_prolog_query(stammbaum.pro)
 *******************************************************************************
 
-                          --{{2}}--
-Beachte, wie sich die Symmetrie des Prädikats _verheiratet_ in der Datenbasis
-ausdrückt. Das Prädikat _elter_ bedarf einer Erläuterung. Hierzu wurde ein
+                            --{{2}}--
+Beachte, wie sich die Symmetrie des Prädikats `verheiratet` in der Datenbasis
+ausdrückt. Das Prädikat `elter` bedarf einer Erläuterung. Hierzu wurde ein
 noch einen Kommentar eingefügt:
 
-                           {{2-3}}
+                             {{2-3}}
 **Kommentar:** `/* elter(X,Y) heißt: Y ist Elternteil von X */ `
 
-                           --{{2}}--
+                            --{{2}}--
 Alles was zwischen den Kommentarzeichen `/*` und `*/` steht, wird von PROLOG
 ignoriert. Für den Benutzer ist im obigen Fall ein solcher Kommentar notwendig,
 da die Reihenfolge von X und Y von uns willkürlich (in Anlehnung an
 Gepflogenheiten der Mathematiker) festgelegt wurde.
 
-                          --{{3}}--
+                            --{{3}}--
 Lade das Programm und versuche die folgenden Fragen zu stellen und zu
-beantworten:
+beantworten. Nutze bei deinen Anfragen `X` als freie Variable!
 
-                                   {{3-4}}
+                             {{3-4}}
 *******************************************************************************
 * Wer sind die Eltern von Daisy?
 
       [[elter(daisy, X).]]
-@tau_prolog_check(stammbaum.pro,`setof(X, @input, [clemens, cleopatra])`)
-  *************************************
-  ```prolog
-  elter(daisy, X).
-  ```
-  @tau_prolog_query(stammbaum.pro)
-  *************************************
+      @tau_prolog_check(stammbaum.pro,`setof(X, @input, [clemens, cleopatra])`)
 
 * Mit wem ist Baldur verheiratet?
 
-  [[!]]
-  *************************************
-  ```prolog
-  verheiratet(baldur, X).
-  ```
-  @tau_prolog_query(stammbaum.pro)
-  *************************************
+      [[verheiratet(baldur, X).]]
+      @tau_prolog_check(stammbaum.pro,`setof(X, @input, [barbara])`)
 
-* Wie heißen die Kinder von Adam?
 
-  [[!]]
-  *************************************
-  ```prolog
-  elter(X, adam).
-  ```
-  @tau_prolog_query(stammbaum.pro)
-  *************************************
+* Wie heißen die Kinder von Arthur?
+
+      [[elter(X, arthur).]]
+      @tau_prolog_check(stammbaum.pro,`setof(X, @input, [barbara])`)
 
 *******************************************************************************
 
-                           --{{4}}--
+                            --{{4}}--
 Wenn wir nun die Mutter von Cosima suchen, müssen wir eine zusammengesetzte
 Frage stellen: _Welchen weiblichen Elternteil hat Cosima?_. In PROLOG lautet das
 wie folgt. Beide Fragen sind logisch gleichwertig und erzielen dieselbe Antwort.
@@ -841,29 +827,29 @@ weibl(X), elter(cosima,X).
 ****************************************************************************
 
 
-                         {{5}}
+                              {{5}}
 Versuche selbst als kleine Fingerübung auf jeweils zwei verschiedene Arten nach
 dem Vater von Daisy, nach den Söhnen von Barbara und nach den Töchtern von
 Anton!
 
-                       --{{6}}--
+                            --{{6}}--
 Suchen wir die Großeltern von Donald, dann erreichen wir dies durch die folgende
 Anfrage. In Worten: "Gesucht sind _E_ und _G_, so dass _E_ Elternteil von Donald
 und _G_ Elternteil von _E_ ist.
 
-{{6-7}}
+    {{6-7}}
 ```prolog
 elter(donald,E), elter(E,G).
 ```
 @tau_prolog_query(stammbaum.pro)
 
-    --{{7}}--
+                            --{{7}}--
 Versuche selbst die folgenden Fragen zu lösen!
 
 <!-- --{{7}}-- Und suche die Großmütter von Clemens, die Urgroßeltern von Daisy,
 die Schwiegermutter von Bernd! -->
 
-{{7-8}}
+    {{7-8}}
 * Wer ist die Großmütter von Clemens?
 
       [[!]]
@@ -892,7 +878,7 @@ die Schwiegermutter von Bernd! -->
   @tau_prolog_query(stammbaum.pro)
   *******************************
 
-                  --{{8}}--
+                            --{{8}}--
 Eine besondere Schwierigkeit tritt auf, wenn wir den Bruder von Clemens suchen.
 Der Bruder ist das Kind der beiden Eltern von Clemens, das ergibt die folgende
 Anfrage. Da sich diese Frage sich nicht mehr in einer Zeile unterbringen läßt,
@@ -907,28 +893,29 @@ elter(X, V), elter(X, M), maennl(X).
 ```
 @tau_prolog_query(stammbaum.pro)
 
-                 --{{9}}--
+                            --{{9}}--
 Diese Anfrage nach den Brüdern von Clemens ist jedoch noch fehlerhaft. Außer der
 richtigen Lösung Casanova erscheint auch Clemens selbst als Antwort. Wir
 benötigen hier ein Prädikat für die Ungleichheit, dies wird in PROLOG
 geschrieben als `\=`. Unsere Frage nach dem Bruder von Clemens lautet damit wie
 folgt:
 
-{{9}}
+    {{9}}
 ```prolog
 elter(clemens, V), maennl(V), elter(clemens, M), weibl(M),
 elter(X, V), elter(X, M), maennl(X), X \= clemens.
 ```
 @tau_prolog_query(stammbaum.pro)
 
---{{10}}-- Versuch diese Anfrage selbst verändern um auch nach den Schwestern
+                           --{{10}}--
+Versuch diese Anfrage selbst verändern um auch nach den Schwestern
 von Cosima zu suchen.
 
 
 
 ## Regeln
 
-                      --{{0}}--
+                            --{{0}}--
 Im vorigen Beispiel waren einige Grundbegriffe wie Elternteil, männlich,
 weiblich durch die Datenbasis erklärt, andere Begriffe wie Vater,
 Schwiegermutter oder Bruder mussten wir bei Anfragen in diese Grundbegriffe
@@ -1022,23 +1009,22 @@ mutter(X,Y).
 
 {{1-5}} **Neues Zeichen:** `:-` ==> falls
 
-             --{{1}}--
+                            --{{1}}--
 Dabei wird das Zeichen `:-` gelesen als 'falls' oder 'wenn'.  Der Regelteil vor
 dem Zeichen `:-` heißt **Kopf der Regel**, der Rest heißt **Rumpf der Regel**.
 
-             --{{1}}--
+                            --{{1}}--
 Umgangssprachlich lesen wir die Regel für mutter als:
-__Y ist Mutter von X, wenn Y Elternteil von X ist und Y weiblich ist.__
+_Y ist Mutter von X, wenn Y Elternteil von X ist und Y weiblich ist._
 
-
-             --{{1}}--
+                            --{{1}}--
 Die Regel für schwiegermutter heißt:
-__Y ist Schwiegermutter von X, falls eine Person Z mit X verheiratet ist und Y Mutter von Z ist.__
+_Y ist Schwiegermutter von X, falls eine Person Z mit X verheiratet ist und Y Mutter von Z ist._
 
-             --{{2}}--
+                            --{{2}}--
 Manche Prädikate werden durch mehrere Regeln beschrieben:
 
-               {{2-3}}
+                             {{2-3}}
 *******************************************************************************
 ```prolog
 schwager(X,Y) :- verheiratet(X,Z), bruder(Z,Y).
@@ -1051,17 +1037,17 @@ verheiratet ist.
 
 *******************************************************************************
 
-                 --{{3}}--
+                            --{{3}}--
 Sowohl Fakten als auch Regeln bezeichnen wir als **Klauseln**. Die Gesamtheit
 aller Klauseln bildet ein PROLOG-**Programm**. Dieses wird mit Hilfe des Editors
 als Datei angelegt. Mit _consult_ wird das Programm geladen.
 
-                 --{{4}}--
-Lies die Regel für das Prädikat _bruder_ umgangssprachlich. Ergänze die das
+                            --{{4}}--
+Lies die Regel für das Prädikat `bruder` umgangssprachlich. Ergänze die das
 Programm `stammbaum2.pro` um Regeln für die folgenden Verwandtschaftsbeziehungen
 und schreibe vor jedes Prädikat einen Kommentar zur Erläuterung:
 
-{{4-5}}
+    {{4-5}}
 1. Sohn
 
       [[!]]
@@ -1096,12 +1082,12 @@ und schreibe vor jedes Prädikat einen Kommentar zur Erläuterung:
 5. Füge Kommentare ein, w. z. B. `/* vater(X,Y) heißt: Y ist Vater von X */`
 
 
-          --{{5}}--
+                            --{{5}}--
 Lade dein Programm und frage mit Hilfe der neuen Prädikate nach den Großeltern
 von Donald, dem Bruder von Clemens usw. Überprüfen Sie, ob PROLOG die Antworten
 gibt, die du aufgrund des Stammbaums erwartest.
 
-             {{5}}
+                              {{5}}
 ******************************************************
 **Frage nach:**
 
@@ -1112,7 +1098,7 @@ gibt, die du aufgrund des Stammbaums erwartest.
 
 ### Geltungsbereiche
 
-                      --{{0}}--
+                            --{{0}}--
 Bis jetzt haben wir Regeln verwendet, um neue Prädikate mit Hilfe der schon
 bekannten zu definieren. Man kann Regeln auch dazu benutzen, den Geltungsbereich
 von schon bekannten Prädikaten zu erweitern; zum Beispiel haben wir in der Datei
@@ -1151,12 +1137,12 @@ Der Nibelungen Not:
 6. Brunhild mag alle, die Siegfried hassen.
 7. Alberich haßt alle, mit Ausnahme von sich selbst.
 
-             --{{0}}--
+                            --{{0}}--
 Schreibe die obigen Aussagen als PROLOG-Programm in eine Datei `nibelungen.pro`.
 
 @tau_prolog(nibelungen.pro,%program,%fragen)
 
-             --{{1}}--
+                            --{{1}}--
 Stelle die folgenden Fragen:
 
     {{1-2}}
@@ -1166,7 +1152,7 @@ Stelle die folgenden Fragen:
 4. Wer liebt wen?
 
 
-   {{2}}
+                              {{2}}
 *******************************************************************************
 Definieren ein Prädikat _ideales\_paar_, das auf _(X,Y)_ zutrifft, falls _X_
 von _Y_ und _Y_ von _X_ geliebt wird.
@@ -1187,7 +1173,7 @@ schwester(X,Y) :- vater(X,V), mutter(X,M),
 
 #### Grammtiken
 
-               --{{0}}--
+                            --{{0}}--
 Regeln kennen wir auch aus der Grammatik. An einem sehr einfachen Beispiel
 wollen wir einen Zusammenhang mit PROLOG aufzeigen.
 
@@ -1197,11 +1183,11 @@ wollen wir einen Zusammenhang mit PROLOG aufzeigen.
 * Der Jäger schießt.
 
 
-              --{{1}}--
+                            --{{1}}--
 Diese Sätze sind alle nach demselben Schema gebildet, das wir als PROLOG-Regel
 schreiben können:
 
-{{1}}
+                              {{1}}
 ```prolog
 artikel(der).
 
@@ -1218,32 +1204,36 @@ satz(X,Y,Z):- artikel(X), nomen(Y), verb(Z).
 ```
 @tau_prolog_program(grammatik.pro)
 
-          --{{1}}--
+                            --{{1}}--
 Damit haben wir eine kleine Sprache definiert, die über einen sehr begrenzten
 Wortschatz und über eine einzige grammatikalische Regel verfügt und natürlich
 nur einen ganz engen Bereich unserer Umgangssprache abdeckt.
 
-                 --{{2}}--
+                            --{{2}}--
 Verwenden Sie das Prädikat satz, um zu überprüfen, ob drei Worte einen Satz
 unserer Sprache bilden. Beispiele:
 
-{{2-3}}
+
+                             {{2-3}}
+********************************************************************************
 ```prolog
 satz(der,jaeger,bellt).
 ```
 @tau_prolog_query(grammatik.pro)
 
-{{2-3}}
+
 ```prolog
 satz(flieht,der,hund).
 ```
 @tau_prolog_query(grammatik.pro)
+********************************************************************************
 
-              --{{3}}--
+
+                            --{{3}}--
 Verwende das Prädikat _satz_ auch, um alle möglichen Sätze dieser Sprache zu
 erzeugen (Wieviele verschiedene Sätze erwartest du):
 
-{{3}}
+                              {{3}}
 ```prolog
 satz(A,B,C).
 ```
@@ -1268,7 +1258,7 @@ Prädikat soll Menüvorschläge überprüfen und erzeugen können.
 
 #### 4-Farbenproblem
 
-                    --{{0}}--
+                            --{{0}}--
 Das dargestellte Rechteck besteht aus 4 Gebieten, die mit den drei Farben _rot_,
 _gelb_ und _blau_ so eingefärbt werden sollen, dass keine gleichfarbigen Gebiete
 längs einer Linie aneinandergrenzen.
@@ -1286,13 +1276,13 @@ längs einer Linie aneinandergrenzen.
  ┗━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
 ````
 
-                        --{{1}}--
+                            --{{1}}--
 Wir lassen ein Programm nach den Lösungen suchen. Die Farbe des Gebietes 1
 bezeichnen wir mit der Variablen `F1`, und so weiter. Dabei bedeutet
 `einfaerbung(F1, F2, F3, F4)`, dass die Farben `F1`, `F2`, `F3`, `F4` eine
 erlaubte Einfärbung des Rechtecks liefern.
 
-{{1}}
+    {{1}}
 ```prolog vier_farben.pro
 farbe(rot).
 farbe(gelb).
@@ -1306,17 +1296,17 @@ einfaerbung(F1, F2, F3, F4) :-
 ```
 @tau_prolog_program(vier_farben.pro)
 
-      --{{2}}--
+                            --{{2}}--
 Wir bekommen also die Lösungen durch die folgende Anfrage:
 
-{{2}}
+    {{2}}
 ```prolog Anfrage:
 einfaerbung(F1, F2, F3, F4).
 ```
 @tau_prolog_query(vier_farben.pro)
 
 
-                     {{3}}
+                              {{3}}
 ***********************************************************************
 
 Versuche nun selbst eine Regel `einfaerbung2(F1, F2, F3, F4, F5)` für das das
@@ -1369,16 +1359,21 @@ Der Körper der Regel `einfaerbung2` müßte in etwa wie folgt aussehen:
 
 ## So arbeitet Prolog
 
-![cinderella](img/cinderella.png)
-
+                            --{{0}}--
 Der junge Prinz sucht die schöne Tänzerin der vergangenen Nacht. Auf der Flucht
 hat sie ihren goldenen Schuh verloren. Mit diesem besucht er nun die Töchter des
-Landes, um nachzuschauen, bei welcher der Fuß in den Schuh passt. Die Suche wäre
-weniger mühsam, wenn die Daten der Untertanen schon auf dem Computer verfügbar
-wären. Es sei etwa auf dem königlichen Hofcomputer eine PROLOG-Datenbasis
-abgelegt:
+Landes, um nachzuschauen, bei welcher der Fuß in den Schuh passt.
 
-```prolog
+![cinderella](img/cinderella.png)
+
+                            --{{1}}--
+Die Suche wäre weniger mühsam, wenn die Daten der Untertanen schon auf dem
+Computer verfügbar wären. Es sei etwa auf dem königlichen Hofcomputer eine
+PROLOG-Datenbasis abgelegt:
+
+
+    {{1}}
+```prolog aschenputtel.pro
 schuhgroesse(adelheid,34).
 schuhgroesse(agnes,28).
 schuhgroesse(aschenputtel,26).
@@ -1388,84 +1383,104 @@ schuhgroesse(walburga,38).
 ```
 @tau_prolog_program(aschenputtel.pro)
 
-Es werde die Anfrage gestellt
 
+    {{2-6}}
 ```prolog
 schuhgroesse(aschenputtel,26).
 ```
 @tau_prolog_query(aschenputtel.pro)
 
+                            --{{3}}--
+Bei der der obigen Abfrage vergleicht PROLOG vergleicht diese der Reihe nach mit
+den Fakten der Datenbasis in `aschenputtel.pro`. Beim dritten Faktum erreicht es
+eine Deckung, die Anfrage und dieses Faktum matchen (sprich: mätschen, vom
+englischen to match, zusammenpassen).
 
-PROLOG vergleicht diese Anfrage der Reihe nach mit den Fakten der Datenbasis.
-Beim dritten Faktum erreicht es eine Deckung, die Anfrage und dieses Faktum
-matchen (sprich: mätschen, vom englischen to match, zusammenpassen).
-
+                            --{{4}}--
 PROLOG arbeitet hier also genau wie unser Prinz. Die Anfrage (der Schuh) wird
 mit einem Faktum (einem Fuß) verglichen. Passen beide nicht zusammen, so geht
-PROLOG zum nächsten Faktum; passen sie, wird das dem Benutzer mit yes
+PROLOG zum nächsten Faktum; passen sie, wird das dem Benutzer mit `true`
 mitgeteilt. Wurde die ganze Datenbasis durchlaufen, ohne dass ein zur Frage
-passendes Faktum gefunden wurde, so gibt PROLOG die Meldung no aus.
+passendes Faktum gefunden wurde, so gibt PROLOG die Meldung `false` aus.
 
+                            --{{5}}--
 Es ist einleuchtend, dass diese schematische Suche von einer Maschine verrichtet
-werden kann; und Sie haben schon oft beobachtet, dass PROLOG diese Fertigkeit
+werden kann; und du hast auch schon oft beobachtet, dass PROLOG diese Fertigkeit
 fehlerfrei beherrscht. Als Modell können wir uns vorstellen, dass die Maschine
-eine Schablone mit der Anfrage
+eine Schablone mit der Anfrage über die Datenbasis zieht, bis eine Deckung
+erreicht ist.
 
-`schuhgroesse(aschenputtel,26).`
+{{5-6}} **Schablone ==>** `schuhgroesse(aschenputtel,26).`
 
-über die Datenbasis zieht, bis eine Deckung erreicht ist. Nehmen wir an, der
-Prinz mit dem Schuh in der Hand stelle die Anfrage
 
+                            --{{6}}--
+Nehmen wir an, der Prinz mit dem Schuh in der Hand stelle die folgende Anfrage.
+
+    {{6-10}}
 ```prolog
 schuhgroesse(X, 26).
 ```
 @tau_prolog_query(aschenputtel.pro)
 
+
+                            --{{7}}--
 Wieder macht sich PROLOG ans Suchen, ob zu dieser Anfrage ein Faktum passt.
 Hierbei befolgt es den Grundsatz:
 
-**Eine Variable kann mit jeder Konstanten matchen.**
+{{7-8}} **Eine Variable kann mit jeder Konstanten matchen.**
 
+                            --{{8}}--
 Die Anfrage matcht mit dem dritten Faktum der Datenbasis, dabei matcht `X` mit
-`aschenputtel`. Das Ergebnis der erfolgreichen Suche wird ausgegeben als
+`aschenputtel`. Das Ergebnis der erfolgreichen Suche wird wie unten dargestellt
+zurückgegeben. Das heißt, die Anfrage ist erfüllbar, wenn die Variable `X` an
+die Konstante `aschenputtel` gebunden wird.
 
+    {{8-10}}
 ```prolog
 X = aschenputtel ;
 ```
 
-das heißt, die Anfrage ist erfüllbar, wenn die Variable `X` an die Konstante
-`aschenputtel` gebunden wird.
-
+                            --{{9}}--
 Verlangen wir vom System weitere Antworten auf die Frage, so löst PROLOG die
-Variable `X` von der Konstanten aschenputtel und setzt die Suche fort. Da es in
-der Datenbasis keine weitere Möglichkeit des Matchens findet, gibt es die
+Variable `X` von der Konstanten `aschenputtel` und setzt die Suche fort. Da es
+in der Datenbasis keine weitere Möglichkeit des Matchens findet, gibt es die
 Antwort `false` aus.
 
+                            --{{10}}--
 Betrachten wir die Abarbeitung einer Frage, die mehrere Antworten zuläßt:
 
+    {{10}}
 ```prolog
 schuhgroesse(X, 28).
 ```
 @tau_prolog_query(aschenputtel.pro)
 
+                            --{{11}}--
 PROLOG vergleicht Faktum für Faktum mit der Frage und kann beim zweiten Faktum
-matchen, indem es `X` mit `agnes` belegt. Die Antwort lautet also
+matchen, indem es `X` mit `agnes` belegt. Die Antwort lautet also:
 
+    {{11}}
 ```prolog
 X = agnes ;
 ```
 
+                            --{{11}}--
 Fordern wir PROLOG auf, weiter zu suchen, so wird `X` wieder von `agnes` gelöst
 und die Frage mit dem dritten, vierten und fünften Faktum verglichen. Erst beim
-fünften ist wieder das Matchen möglich, also
+fünften ist wieder das Matchen möglich:
 
+    {{12}}
 ```prolog
 X = kunigunde ;
 ```
 
-Lassen wir nochmals weitersuchen, so wird `X` wieder von `kunigunde` gelöst und die
-Frage mit dem sechsten Faktum verglichen. Dort ist Matchen nicht möglich, und
-damit ist die Datenbasis erschöpft, also erhalten wir die Antwort `false`.
+                            --{{12}}--
+Lassen wir nochmals weitersuchen, so wird `X` wieder von `kunigunde` gelöst und
+die Frage mit dem sechsten Faktum verglichen. Dort ist Matchen nicht möglich,
+und damit ist die Datenbasis erschöpft, also erhalten wir die Antwort `false`.
+
+
+### So arbeitet Prolog 2
 
 Damit verlassen wir das schlichte Aschenputtel und wenden uns einem
 reichhaltigeren Beispiel zu, dem Stammbaum von Donald und Daisy aus Kapitel 1
@@ -1571,7 +1586,7 @@ gefragt:
 
 ## NOT und CUT
 
-```yml
+````
                           ┏━━━━━┓
                           ┃  7  ┃
                           ┣━━━━━┫
@@ -1582,20 +1597,10 @@ gefragt:
   ┃  1  ┃     ┃  3  ┃     ┃  4  ┃
  ━┻━━━━━┻━━━━━┻━━━━━┻━━━━━┻━━━━━┻━
      a           b           c
-```
+````
 
-```yml
-                          ┌─────┐
-                          │  7  │
-                          ├──🠦───┤
-   ▒▒▒▒▒▒▒                      │  6  │
-  ┌─────┐▒                 ├─────┤
-  │  2  │▒                 │  5  │
-  ├─────┤⍑▒    ⍅ ┌─────┐⍅     ├─🡪──⇸⇥⟼──┤
-  │  1  │▒     │  3  │     │  4  │
-  ⟼
- ━┷━━━━━┷━━━━━┷━━━━━┷━━━━━┷━━━━━┷━
-     a           b           c
-```
+
 
 # Vertiefung
+
+# Anhang
