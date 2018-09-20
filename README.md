@@ -125,6 +125,71 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
 @end
 
 
+@stammbaum_db
+```prolog @0
+maennl(adam).
+maennl(alfred).
+maennl(anton).
+maennl(arthur).
+maennl(baldur).
+maennl(bernd).
+maennl(boris).
+maennl(casanova).
+maennl(clemens).
+maennl(donald).
+
+weibl(adele).
+weibl(alwine).
+weibl(anna).
+weibl(ariadne).
+weibl(barbara).
+weibl(berta).
+weibl(cleopatra).
+weibl(cosima).
+weibl(daisy).
+
+verheiratet(adam,adele).
+verheiratet(adele,adam).
+verheiratet(alfred,alwine).
+verheiratet(alwine,alfred).
+verheiratet(anton,anna).
+verheiratet(anna,anton).
+verheiratet(arthur,ariadne).
+verheiratet(ariadne,arthur).
+verheiratet(baldur,barbara).
+verheiratet(barbara,baldur).
+verheiratet(bernd,berta).
+verheiratet(berta,bernd).
+verheiratet(clemens,cleopatra).
+verheiratet(cleopatra,clemens).
+
+/* elter(X,Y) heißt: Y ist Elternteil von X */
+
+elter(baldur,adam).
+elter(baldur,adele).
+elter(barbara,alfred).
+elter(barbara,alwine).
+elter(bernd,anton).
+elter(bernd,anna).
+elter(berta,arthur).
+elter(berta,ariadne).
+elter(boris,arthur).
+elter(boris,ariadne).
+elter(casanova,baldur).
+elter(casanova,barbara).
+elter(clemens,baldur).
+elter(clemens,barbara).
+elter(cleopatra,bernd).
+elter(cleopatra,berta).
+elter(cosima,bernd).
+elter(cosima,berta).
+elter(donald,clemens).
+elter(donald,cleopatra).
+elter(daisy,clemens).
+elter(daisy,cleopatra).
+```
+@end
+
 -->
 
 # Arbeitsbuch PROLOG
@@ -923,6 +988,7 @@ Schwiegermutter oder Bruder mussten wir bei Anfragen in diese Grundbegriffe
 den Fakten unserer Datenbasis noch **Regeln** hinzufügen. Im Beispiel wären das
 die Regeln
 
+@stammbaum_db(-stammbaum.pro)
 ```prolog +regeln.pro
 mutter(X,Y) :- elter(X,Y), weibl(Y).
 
@@ -934,70 +1000,6 @@ schwiegermutter(X,Y) :- verheiratet(X,Z), mutter(Z,Y).
 
 bruder(X,Y) :- vater(X,V), mutter(X,M),
                vater(Y,V), mutter(Y,M), maennl(Y), Y\=X.
-
-```
-```prolog -stammbaum.pro
-/* ursprüngliche Fakten aus stammbaum.pro */
-maennl(adam).
-maennl(alfred).
-maennl(anton).
-maennl(arthur).
-maennl(baldur).
-maennl(bernd).
-maennl(boris).
-maennl(casanova).
-maennl(clemens).
-maennl(donald).
-
-weibl(adele).
-weibl(alwine).
-weibl(anna).
-weibl(ariadne).
-weibl(barbara).
-weibl(berta).
-weibl(cleopatra).
-weibl(cosima).
-weibl(daisy).
-
-verheiratet(adam,adele).
-verheiratet(adele,adam).
-verheiratet(alfred,alwine).
-verheiratet(alwine,alfred).
-verheiratet(anton,anna).
-verheiratet(anna,anton).
-verheiratet(arthur,ariadne).
-verheiratet(ariadne,arthur).
-verheiratet(baldur,barbara).
-verheiratet(barbara,baldur).
-verheiratet(bernd,berta).
-verheiratet(berta,bernd).
-verheiratet(clemens,cleopatra).
-verheiratet(cleopatra,clemens).
-
-/* elter(X,Y) heißt: Y ist Elternteil von X */
-
-elter(baldur,adam).
-elter(baldur,adele).
-elter(barbara,alfred).
-elter(barbara,alwine).
-elter(bernd,anton).
-elter(bernd,anna).
-elter(berta,arthur).
-elter(berta,ariadne).
-elter(boris,arthur).
-elter(boris,ariadne).
-elter(casanova,baldur).
-elter(casanova,barbara).
-elter(clemens,baldur).
-elter(clemens,barbara).
-elter(cleopatra,bernd).
-elter(cleopatra,berta).
-elter(cosima,bernd).
-elter(cosima,berta).
-elter(donald,clemens).
-elter(donald,cleopatra).
-elter(daisy,clemens).
-elter(daisy,cleopatra).
 ```
 @tau_prolog_programX(stammbaum+regeln.pro,`@input(0)@input(1)`)
 
@@ -1480,34 +1482,225 @@ die Frage mit dem sechsten Faktum verglichen. Dort ist Matchen nicht möglich,
 und damit ist die Datenbasis erschöpft, also erhalten wir die Antwort `false`.
 
 
-### So arbeitet Prolog 2
+### Stammbaum #2
 
+                            --{{0}}--
 Damit verlassen wir das schlichte Aschenputtel und wenden uns einem
-reichhaltigeren Beispiel zu, dem Stammbaum von Donald und Daisy aus Kapitel 1
-(Datei stammb.pro). Dort hatten Sie in Aufgabe 8 nach dem Vater von Daisy
-gesucht
+reichhaltigeren Beispiel zu, dem Stammbaum von Donald und Daisy aus
+[Kapitel 1](#11). Dort hattest du in einer Aufgabe nach dem Vater von Daisy
+gesucht:
 
-?- elter(daisy,X), maennl(X).
+@stammbaum_db(stammbaum2.pro)
+@tau_prolog_program(stammbaum2.pro)
 
-Das Ziel von PROLOG ist es, die zwei Forderungen an X zu erfüllen. Dies macht es, indem es
-nacheinander zwei Teilziele anstrebt. Zunächst versucht es, das erste Teilziel
-elter(daisy,X) zu
-erreichen und findet auch nach etlichen Vergleichen eine Möglichkeit zu matchen mit
-X=clemens. Die Variable X ist damit instantiiert (belegt) mit clemens. Das zweite Teilziel
-lautet damit maennl(clemens), diese Forderung kann beim Durchsuchen der Datenbasis bestä-
-tigt werden. Erst wenn beide Teilziele erreicht sind, wird die Antwort ausgegeben:
 
-X=clemens.
+```prolog Anfrage
+elter(daisy, X), maennl(X).
+```
+@tau_prolog_query(stammbaum2.pro)
 
-Wir fragen nochmals nach dem Vater von Daisy, diesmal mit der Anfrage
 
-?- maennl(X), elter(daisy,X).
 
-PROLOG versucht das erste Teilziel maennl(X) zu erreichen, und dies gelingt auch sofort mit
-X=adam. Mit dieser Instantiierung von X wird das zweite Teilziel angegangen, also
-elter(daisy,adam). Sie haben wahrscheinlich genug Überblick über den Stammbaum, um zu se-
-hen, dass dies nicht stimmt; PROLOG muss Faktum für Faktum mit der Frage vergleichen und
+                            --{{1}}--
+Das Ziel von PROLOG ist es, die zwei Forderungen an `X` zu erfüllen. Dies macht
+es, indem es nacheinander zwei Teilziele anstrebt. Zunächst versucht es, das
+erste Teilziel `elter(daisy, X)` zu erreichen und findet auch nach etlichen
+Vergleichen eine Möglichkeit zu matchen mit `X = clemens`. Die Variable `X` ist
+damit instantiiert (belegt) mit `clemens`. Das zweite Teilziel lautet damit
+`maennl(clemens)`, diese Forderung kann beim Durchsuchen der Datenbasis
+bestätigt werden. Erst wenn beide Teilziele erreicht sind, wird die Antwort
+ausgegeben:
 
+
+    {{1}}
+```prolog
+X = clemens;
+false.
+```
+
+                            --{{2}}--
+Fragen wir nochmals nach dem Vater von Daisy, dann versucht PROLOG in dieser
+Anfrage das erste Teilziel `maennl(X)` zu erreichen, und dies gelingt auch
+sofort mit `X = adam`. Mit dieser Instantiierung von `X` wird das zweite
+Teilziel angegangen, also `elter(daisy, adam)`. Diese Ergebnisse können leicht
+mit dem originalen [Stammbaum](#11) verglichen werden; PROLOG muss Faktum für
+Faktum mit der Frage vergleichen und geht die ganze Datenbasis durch, bis es zum
+gleichen Ergebnis kommt. Die Instantiierung von `X` mit `adam` führt also nicht
+zum Ziel und wird deshalb rückgängig gemacht. PROLOG gibt die Variable `X`
+wieder frei und versucht `maennl(X)` mit einem anderen Faktum zu matchen. Schon
+beim nächsten Faktum ist dies möglich und ergibt `X = alfred`. Aber auch damit
+scheitert es am zweiten Teilziel, und so probiert PROLOG nacheinander `adam`,
+`alfred`, `anton` usw. aus, bis es schließlich mit `X = clemens` beide
+Teilforderungen erfüllen kann.
+
+
+    {{2}}
+```prolog
+maennl(X), elter(daisy,X).
+
+% 1: maennl(X)
+%    1: X = adam
+%    2: eltern(daisy, adam) -> false
+% 2: maennl(X)
+%    1: X = alfred
+%    2: eltern(daisy, alfred) -> false
+% .: ...
+%
+% 9: maennl(X)
+%    1: X = clemens
+%    2: eltern(daisy, clemens) -> true
+```
+
+
+Die folgende Anfragen ist vom deklarativen (beschreibenden) Standpunkt aus
+gleichwertig zu der gerade besprochenen; sie sind aber verschieden, wenn man sie
+unter prozeduralen Gesichtspunkten betrachtet, das heißt, ihre Abarbeitung
+verfolgt. Fragen an das System können vom prozeduralen Standpunkt aus als
+Anweisungen gesehen werden. Die untere Anfrage  können wir deklarativ übersetzen
+mit _"Wer ist Elternteil von Daisy und männlich?"_ oder prozedural mit
+_"Suche ein Elternteil X von Daisy, suche solange, bis du ein männliches X mit dieser Eigenschaft findest"_.
+
+
+```prolog
+elter(daisy,X), maennl(X).
+```
+
+Mit einer Anfrage geben wir PROLOG ein Ziel für eine Suche. Dieses Ziel besteht
+meist aus mehreren Teilzielen, die PROLOG nacheinander anstrebt. Ein Teilziel
+ist erreicht, wenn PROLOG geeignete Variablenbelegungen gefunden hat, welche die
+Forderung des Teilziels erfüllen. Man sagt dann kurz (und sprachlich unsauber):
+"Das Teilziel ist erfüllt".
+
+1) Es werde die Frage nach der Mutter von Daisy gestellt:
+
+?- elter(daisy,X), weibl(X).
+
+Beschreiben Sie das Vorgehen von PROLOG, insbesondere, mit welchen Konstanten X in-
+stantiiert wird. Begründen Sie, warum die Anfrage
+
+?- weibl(X), elter(daisy,X).
+
+vom prozeduralen Standpunkt aus ungünstiger ist. Es gibt eine Möglichkeit,
+PROLOG bei seiner Arbeit Protokoll führen zu lassen, und zwar mit Hilfe des
+Prädikats write. Dieses Prädikat ist vom deklarativen Standpunkt nicht
+beschreibbar; man kann höchstens die Eigenschaft festhalten, dass es immer wahr
+ist. Es hat aber den 'Seiteneffekt', dass write(X) die jeweilige Belegung der
+Variablen X auf den Bildschirm bringt. Durch Einfügen dieses Prädikats können
+wir also Zwischenergebnisse sichtbar machen.
+
+2) Überprüfen Sie Ihre Überlegungen von Aufgabe 1 durch Einfügen von write(X) in die obigen Abfragen:
+?- elter(daisy,X), write(X), nl, weibl(X).
+?- weibl(X), write(X), nl, elter(daisy,X).
+
+(Das Prädikat nl bedeutet 'new line' und bewirkt einen Zeilenvorschub.) In
+Kapitel 2 haben wir mit Regeln gearbeitet. Auch sie wollen wir noch kurz
+prozedural betrachten. Zur Datenbasis des Stammbaums wurde z. B. die Regel
+hinzugefügt
+
+vater(X,Y):- elter(X,Y), maennl(Y).
+
+Die deklarative Lesart dieser Regel kennen wir schon: "Y ist Vater von X, falls
+Y Elternteil von X und männlich ist." Prozedural gesehen ist diese Regel eine
+Anweisung für den Computer, wie er bei der Suche nach dem Vater vorzugehen hat:
+"Ist der Vater Y von X gesucht, so suche zunächst ein Elternteil Y und versuche
+auch noch die Bedingung zu erfüllen, dass dieses männlich ist." Also wird z. B.
+die Anfrage
+
+?- vater(daisy,V).
+
+intern ersetzt durch die Frage
+
+?- elter(daisy,V), maennl(V).
+
+Die Abarbeitung dieser Frage haben wir schon oben betrachtet. Manche Prädikate
+werden durch mehrere Regeln festgelegt; z. B. brauchen wir für den Begriff
+
+'Schwager' zwei Regeln:
+
+`/* schwager(X,Y) heißt: Y ist Schwager von X */`
+
+schwager(X,Y):- verheiratet(X,Z), bruder(Z,Y).
+schwager(X,Y):- schwester(X,Z), verheiratet(Z,Y).
+Es werde jetzt die Frage gestellt
+
+?- schwager(cosima,S).
+
+Nach der ersten Regel versucht PROLOG zunächst die Teilziele
+verheiratet(cosima,Z) und bruder(Z,S) zu erfüllen. Dies gelingt nicht. Deshalb
+wird diese Regel verlassen und der Schwager von Cosima wird nach der zweiten
+Regel gesucht. Dazu versucht PROLOG die beiden Teilziele schwester(cosima,Z) und
+verheiratet(Z,S) zu erfüllen, was schließlich auch gelingt.
+
+Wie Sie gesehen haben, verfügt PROLOG bei der Suche nach Lösungen über einen
+recht leistungsfähigen Grundalgorithmus. Entscheidungen, die in eine Sackgasse
+führen, werden wieder rückgängig gemacht und es wird die nächste Möglichkeit
+ausprobiert. Ein solches Vorgehen wird von den Informatikern Backtracking
+(Rücksetzen) genannt. Dieses Backtracking wollen wir zum Schluß noch am letzten
+Beispiel des vorigen Kapitels er- läutern. Es ging dort um die Einfärbung eines
+Gebietes mit drei Farben und wir hatten folgen- des Programm angegeben:
+
+einfaerbung(F1,F2,F3,F4):-
+farbe(F1), farbe(F2), farbe(F3), farbe(F4),
+F1\=F2, F1\=F4, F2\=F3, F2\=F4, F3\=F4.
+Wir fragen jetzt nach der Lösung des Problems
+?- einfaerbung(F1,F2,F3,F4).
+
+PROLOG will diese Anfrage mit Hilfe der Regel lösen. Dazu versucht es
+nacheinander die Teilziele auf der rechten Seite zu erfüllen. Die ersten
+Teilziele farbe(F1), farbe(F2), farbe(F3), farbe(F4) sind schnell erfüllbar,
+indem alle Variablen F1 bis F4 mit rot belegt werden: F1=rot, F2=rot, F3=rot,
+F4=rot. Damit sind alle Variablen, die in der obigen Regel vorkommen, belegt; es
+ist eine vollständige Belegung der Variablenmenge erzeugt. Die nächsten
+Teilziele F1\=F2, F1\=F4,... überprüfen nun, ob diese Variablenbelegungen das
+Einfärbeproblem lösen. Schon die erste Überprüfung F1\=F2 scheitert, damit setzt
+das Backtracking ein. Als erstes wird die letzte Entscheidung (F4=rot)
+rückgängig gemacht; F4 wird wieder freigegeben und versuchsweise mit gelb bzw.
+blau belegt. Da dies auch nicht zum Ziel führt, wird dann die vorletzte
+Entscheidung (F3=rot) aufgehoben; die Variable F3 ist nun frei und es werden die
+Belegungen probiert
+
+
+F3=gelb,F3=gelb,F3=gelb,F3=blau,F3=blau,F3=blau,F4=rot
+F4=gelb
+F4=blau
+F4=rot
+F4=gelb
+F4=blau
+
+
+Sicher haben Sie schon bemerkt, dass diese Versuche für die Erfüllung des
+Teilziels F1\=F2 alle zwecklos sind; PROLOG kommt durch braves Ausprobieren zum
+selben Schluß und hebt nun auch die drittletzte Entscheidung (F2=rot) auf. Es
+versucht die nächste Möglichkeit F2=gelb, F3=rot, F4=rot, und damit sind die
+ersten fünf Teilziele der rechten Seite erfüllt. PROLOG wendet sich nun dem
+sechsten Teilziel zu: F1\=F4. Mit der derzeitigen Variablenbelegung ist dieses
+Teilziel nicht erfüllt, also beginnt wieder das Bachtracking. Die letzte
+Entscheidung F4=rot wird aufgehoben und die nächste Möglichkeit, die die
+Datenbasis anbietet, wird versucht: F4=gelb. Wir haben jetzt also die Belegung
+F1=rot, F2=gelb, F3=rot, F4=gelb, die die ersten sechs Teilziele erfüllt. Diese
+Belegung erfüllt allerdings noch nicht die beiden letzten Teilziele F2\=F4 und
+F3\=F4. Durch nochmaliges Backtracking landen wir aber schließlich bei der
+Belegung F1=rot, F2=gelb, F3=rot, F4=blau, die sämtliche Bedingungen erfüllt.
+
+Wir veranschaulichen uns das Backtracking in einem Diagramm (siehe nächste
+Seite). Es sind 4 Entscheidungen zu treffen, die Belegungen der Variablen F1,
+F2, F3, F4. Bei jeder Entscheidung gibt es 3 Möglichkeiten, damit gibt es
+insgesamt 34=81 Möglichkeiten, die in einem Baum (der hier von links nach rechts
+wächst) dargestellt werden können. Hier ist nur ein Teil des Baumes gezeichnet.
+
+Wir durchlaufen den Entscheidungsbaum von links nach rechts, die Entscheidung
+für rot wird symbolisiert durch einen Weg nach schräg oben, gelb entspricht
+waagrecht nach rechts, blau wird dargestellt durch schräg nach unten. Nach vier
+Entscheidungen landet man ganz rechts bei einer Belegung der vier Variablen. Der
+Rücknahme einer Entscheidung entspricht das Zurückgehen nach links bis zum
+vorigen Knoten, wo dann eine neue Entscheidung getroffen werden kann. Wir waren
+zunächst beim Endpunkt 'rrrr' angelangt, durch Überprüfen, Zurückgehen und
+nochmaliges Versuchen kamen wir zu den Zuständen 'rrrg' und 'rrrb'; da diese
+auch nicht die Bedingungen erfüllten, mussten wir noch eine Entscheidungsebene
+zurückgehen usw. So können Sie im Baumdiagramm die Entscheidungen und das
+Backtracking verfolgen, die uns schließlich zum Zustand 'rgrb' geführt haben.
+Sie sehen, dass PROLOG zwölf Belegungen der vier Variablen ausprobieren musste,
+bis es fündig wurde.
 
 
 <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 350px;" -->
@@ -1530,6 +1723,33 @@ hen, dass dies nicht stimmt; PROLOG muss Faktum für Faktum mit der Frage vergle
   .         .         .         .
  F.1       F.2       F.3       F.4
 ````
+
+
+Das Programm arbeitet nach dem Prinzip 'Erzeuge und Überprüfe' (generate and
+test). Die ersten vier Teilziele farbe(F1), ...., farbe(F4) erzeugen die
+Belegung sämtlicher Variablen, diese Belegungen werden durch die folgenden
+Teilziele F1\=F2, ..., F3\=F4 überprüft.
+
+3) Der Benutzer erfragt bei obigem Programm weitere Lösungen. Ergänzen Sie das
+obige Baumdiagramm und verfolgen Sie das Backtracking bis zur nächsten Lösung.
+
+4) Ergänzen Sie das Programm durch vier write-Befehle für die Variablen F1 bis
+F4, die nach den ersten vier Teilzielen gesetzt werden. Damit lassen Sie die
+Belegung der Variablen protokollieren. Vergleichen Sie mit dem Baumdiagramm.
+
+5) Machen Sie das obige Programm schneller, indem Sie die Reihenfolge der
+Teilziele verändern. Das Überprüfen sollte nicht erst am Schluß, sondern so bald
+wie möglich geschehen.
+
+Wenn Sie PROLOG bei seiner Suche zuschauen wollen, können Sie das im Trace-Modus
+tun (siehe Anhang). Das Schöne bei PROLOG ist aber, dass sich der Programmierer
+um die Organisation der Suche nicht kümmern muss. Für viele Probleme reicht
+daher eine deklarative Beschreibung des Problems aus, die vielleicht durch eine
+grobe Vorstellung des Suchvorgangs abgerundet wird. Keinesfalls ist es nötig,
+sich bei jeder Anfrage Gedanken darüber zu machen, welche Instantiierungen und
+Vergleiche bei der Bearbeitung vorgenommen werden.
+
+
 
 ## Rekursion
 
