@@ -8,6 +8,9 @@ narrator: Deutsch Female
 
 script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prolog.min.js
 
+
+@maxWidth: <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: @0;" -->
+
 @tau_prolog_program
 <script>
 
@@ -22,6 +25,31 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
     if( c !== true ){
         var err = new LiaError("parsing program '@0' => " + c.args[0], 1);
         var c_err = window.pl.flatten_error(c);
+        err.add_detail(0, c_err.type+" => " + c_err.found + "; expected => " +c_err.expected, "error", c_err.line - 1, c_err.column);
+        throw err;
+    }
+    else
+        "database '@0' loaded";
+</script>
+@end
+
+@tau_prolog_program2
+<script>
+
+    var db1 = `@input(0)`;
+    var db2 = `@input(1)`;
+
+    window['@0'] = {session: window.pl.create(),
+                    query: null,
+                    rslt: "",
+                    query_str: "",
+                    db: db};
+    var c = window['@0']['session'].consult(db1+db2);
+
+    if( c !== true ){
+        var err = new LiaError("parsing program '@0' => " + c.args[0], 2);
+        var c_err = window.pl.flatten_error(c);
+
         err.add_detail(0, c_err.type+" => " + c_err.found + "; expected => " +c_err.expected, "error", c_err.line - 1, c_err.column);
         throw err;
     }
@@ -76,7 +104,7 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
     }
     else {
         window['@0']['session'].answer(e => {
-            window['@0']['rslt'] +=  window.pl.format_answer(e) + "<br>";
+            window['@0']['rslt'] +=  window.pl.format_answer(e)+"\n";
         });
         window['@0']['rslt'];
     }
@@ -732,7 +760,7 @@ vergleichst:
 Der folgende Stammbaum von Donald und Daisy läßt eine gewisse Systematik bei der
 Namensgebung erkennen, die den Überblick erleichtert:
 
-<!-- style = "max-width: 600px" -->
+@maxWidth(600px)
 ````
 ♂ Adam ━━━━━┓
             ┣━━━━ ♂ Baldur ━━━━━┓
@@ -1265,7 +1293,8 @@ Das dargestellte Rechteck besteht aus 4 Gebieten, die mit den drei Farben _rot_,
 _gelb_ und _blau_ so eingefärbt werden sollen, dass keine gleichfarbigen Gebiete
 längs einer Linie aneinandergrenzen.
 
-<!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 315px;" -->
+
+@maxWidth(315px)
 ````
  ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
  ┃             ┃                   ┃
@@ -1316,7 +1345,8 @@ folgende Rechteck, bestehend aus 5 Gebieten, zu definieren. Nutze wieder nur
 drei Farben und achte darauf, dass keine gleichfarbigen Gebiete
 aneinandergrenzen?
 
-<!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 315px;" -->
+
+@maxWidth(315px)
 ````
  ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
  ┃                ┃                ┃
@@ -1482,7 +1512,7 @@ die Frage mit dem sechsten Faktum verglichen. Dort ist Matchen nicht möglich,
 und damit ist die Datenbasis erschöpft, also erhalten wir die Antwort `false`.
 
 
-### Stammbaum #2
+### Logging der Teilschritte mit _write_
 
                             --{{0}}--
 Damit verlassen wir das schlichte Aschenputtel und wenden uns einem
@@ -1498,7 +1528,6 @@ gesucht:
 elter(daisy, X), maennl(X).
 ```
 @tau_prolog_query(stammbaum2.pro)
-
 
 
                             --{{1}}--
@@ -1540,17 +1569,17 @@ maennl(X), elter(daisy,X).
 
 % 1: maennl(X)
 %    1: X = adam
-%    2: eltern(daisy, adam) -> false
+%    2: eltern(daisy, adam) = false
 % 2: maennl(X)
 %    1: X = alfred
-%    2: eltern(daisy, alfred) -> false
+%    2: eltern(daisy, alfred) = false
 % .: ...
 %
 % 9: maennl(X)
 %    1: X = clemens
-%    2: eltern(daisy, clemens) -> true
+%    2: eltern(daisy, clemens) = true
 ```
-
+@tau_prolog_query(stammbaum2.pro)
 
 Die folgende Anfragen ist vom deklarativen (beschreibenden) Standpunkt aus
 gleichwertig zu der gerade besprochenen; sie sind aber verschieden, wenn man sie
@@ -1569,14 +1598,24 @@ Mit einer Anfrage geben wir PROLOG ein Ziel für eine Suche. Dieses Ziel besteht
 meist aus mehreren Teilzielen, die PROLOG nacheinander anstrebt. Ein Teilziel
 ist erreicht, wenn PROLOG geeignete Variablenbelegungen gefunden hat, welche die
 Forderung des Teilziels erfüllen. Man sagt dann kurz (und sprachlich unsauber):
-"Das Teilziel ist erfüllt".
+_"Das Teilziel ist erfüllt"._
 
-1) Es werde die Frage nach der Mutter von Daisy gestellt:
+1. Es werde die Frage nach der Mutter von Daisy gestellt:
 
-?- elter(daisy,X), weibl(X).
+   ```prolog
+   elter(daisy,X), weibl(X).
+   ```
+       [[!]]
+   ***************************************************
 
-Beschreiben Sie das Vorgehen von PROLOG, insbesondere, mit welchen Konstanten X in-
-stantiiert wird. Begründen Sie, warum die Anfrage
+    jjj
+
+   ***************************************************
+
+
+
+Beschreiben Sie das Vorgehen von PROLOG, insbesondere, mit welchen Konstanten X
+instantiiert wird. Begründen Sie, warum die Anfrage
 
 ?- weibl(X), elter(daisy,X).
 
@@ -1587,6 +1626,17 @@ beschreibbar; man kann höchstens die Eigenschaft festhalten, dass es immer wahr
 ist. Es hat aber den 'Seiteneffekt', dass write(X) die jeweilige Belegung der
 Variablen X auf den Bildschirm bringt. Durch Einfügen dieses Prädikats können
 wir also Zwischenergebnisse sichtbar machen.
+
+Leider bringt die hier genutzte Prolog-Implementierung keine `write` Funktion
+mit sich aber mit einem kleinen Trick, können wir eine ähnlich Funktionalität
+ganz einfach nachbauen. Du musst dazu nur, den unten stehenden Code im Anfang
+von `stambaum2.pro` einfügen:
+
+```prolog
+:-use_module(library(js)).
+
+write(X) :- apply(alert, [X], X).
+```
 
 2) Überprüfen Sie Ihre Überlegungen von Aufgabe 1 durch Einfügen von write(X) in die obigen Abfragen:
 ?- elter(daisy,X), write(X), nl, weibl(X).
@@ -1636,7 +1686,11 @@ recht leistungsfähigen Grundalgorithmus. Entscheidungen, die in eine Sackgasse
 führen, werden wieder rückgängig gemacht und es wird die nächste Möglichkeit
 ausprobiert. Ein solches Vorgehen wird von den Informatikern Backtracking
 (Rücksetzen) genannt. Dieses Backtracking wollen wir zum Schluß noch am letzten
-Beispiel des vorigen Kapitels er- läutern. Es ging dort um die Einfärbung eines
+Beispiel des vorigen Kapitels erläutern.
+
+### Vier-Farben-Problem
+
+Es ging dort um die Einfärbung eines
 Gebietes mit drei Farben und wir hatten folgen- des Programm angegeben:
 
 einfaerbung(F1,F2,F3,F4):-
