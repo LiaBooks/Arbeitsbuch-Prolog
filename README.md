@@ -11,7 +11,7 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
 
 @maxWidth: <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: @0;" -->
 
-@tau_prolog_program
+@tau_prolog.program
 <script>
 
     var db = `@input`;
@@ -33,7 +33,7 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
 </script>
 @end
 
-@tau_prolog_program2
+@tau_prolog.program2
 <script>
 
     var db1 = `@input(0)`;
@@ -58,7 +58,7 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
 </script>
 @end
 
-@tau_prolog_programX
+@tau_prolog.programX
 <script>
     var db = `@1`;
     window['@0'] = {session: window.pl.create(),
@@ -79,7 +79,7 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
 </script>
 @end
 
-@tau_prolog_query
+@tau_prolog.query
 <script>
     var query = `@input`;
 
@@ -111,7 +111,7 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
 </script>
 @end
 
-@tau_prolog_check
+@tau_prolog.check
 <script>
     var db = null;
 
@@ -143,13 +143,13 @@ script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prol
 ```prolog @0
 @2
 ```
-@tau_prolog_program(@0)
+@tau_prolog.program(@0)
 
 
 ```prolog Anfrage:
 @1
 ```
-@tau_prolog_query(@0)
+@tau_prolog.query(@0)
 @end
 
 
@@ -360,7 +360,7 @@ weiss(nelke).
 blau(vergissmeinnicht).
 blau(veilchen)
 ```
-@tau_prolog_program(blumenstrauss.pro)
+@tau_prolog.program(blumenstrauss.pro)
 
                             --{{2}}--
 Um anfragen an deine Datenbasis zu stellen, benötigst du noch eine zweite
@@ -370,7 +370,7 @@ Eingabemöglichkeit:
 ```prolog
 rot(rose).
 ```
-@tau_prolog_query(blumenstrauss.pro)
+@tau_prolog.query(blumenstrauss.pro)
 
                             --{{3}}--
 Solche Eingaben werden als Fragen aufgefasst. Umgangsprachlich formuliert heißt
@@ -386,7 +386,7 @@ Faktum in der Datenbasis vor, so antwortet PROLOG mit `true`, andernfalls mit
 ```prolog
 gelb(veilchen).
 ```
-@tau_prolog_query(blumenstrauss.pro)
+@tau_prolog.query(blumenstrauss.pro)
 
 ### Variablen
 
@@ -400,7 +400,7 @@ einem abschließenden Punkt.
 ```prolog
 blau(X).
 ```
-@tau_prolog_query(blumenstrauss.pro)
+@tau_prolog.query(blumenstrauss.pro)
 
                             --{{1}}--
 Variablen werden mit einem großen Anfangsbuchstaben geschrieben. Dieselbe Frage
@@ -411,7 +411,7 @@ Beachte wie sich die Ausgabe verändert.
 ```prolog
 blau(Blume).
 ```
-@tau_prolog_query(blumenstrauss.pro)
+@tau_prolog.query(blumenstrauss.pro)
 
 
 ### Zweistellige Prädikate
@@ -435,7 +435,7 @@ faehrt_nach(dagmar,italien).
 faehrt_nach(elmar,frankreich).
 faehrt_nach(frederike,frankreich).
 ```
-@tau_prolog_program(urlaubsplanung.pro)
+@tau_prolog.program(urlaubsplanung.pro)
 
                             --{{1}}--
 In dieser **Datenbasis** gibt es nur ein Prädikat, das zweistellige Prädikat
@@ -446,7 +446,7 @@ England?" heißt in PROLOG:
 ```prolog Anfrage:
 faehrt_nach(X,england).
 ```
-@tau_prolog_query(urlaubsplanung.pro)
+@tau_prolog.query(urlaubsplanung.pro)
 
                             --{{2}}--
 Beantworte die folgenden Fragen, indem du sie in PROLOG übersetzt und vergleiche
@@ -462,7 +462,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(axel, griechenland).
    ```
-   @tau_prolog_query(urlaubsplanung.pro)
+   @tau_prolog.query(urlaubsplanung.pro)
    *************************************
 2. Wohin fährt Beate?
 
@@ -475,7 +475,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(beate, X).
    ```
-   @tau_prolog_query(urlaubsplanung.pro)
+   @tau_prolog.query(urlaubsplanung.pro)
    *************************************
 3. Wohin fährt Xaver?
 
@@ -490,7 +490,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(xaver, Urlaubsziel).
    ```
-   @tau_prolog_query(urlaubsplanung.pro)
+   @tau_prolog.query(urlaubsplanung.pro)
    *************************************
 4. Wer fährt nach Frankreich?
 
@@ -504,7 +504,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(Wer, frankreich).
    ```
-   @tau_prolog_query(urlaubsplanung.pro)
+   @tau_prolog.query(urlaubsplanung.pro)
    *************************************
 5. Wer fährt wohin?
 
@@ -514,7 +514,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(Person, Ziel).
    ```
-   @tau_prolog_query(urlaubsplanung.pro)
+   @tau_prolog.query(urlaubsplanung.pro)
    *************************************
 
 ### _und_ & _oder_ Operatoren
@@ -540,12 +540,12 @@ hasst(oma,muesli).
 hasst(oma,kuchen).
 hasst(baby,brot).
 ```
-@tau_prolog_program(fruehstueck.pro)
+@tau_prolog.program(fruehstueck.pro)
 
 ```prolog Anfrage:
 mag(papa, brot).
 ```
-@tau_prolog_query(fruehstueck.pro)
+@tau_prolog.query(fruehstueck.pro)
 
                             --{{1}}--
 Bis jetzt jetzt soltest du in der Lage sein, vier Arten von Fragen stellen. Du
@@ -575,7 +575,7 @@ Damit ergeben sich folgende PROLOG-Fragen:
   ```prolog
   hasst(X,kuchen), mag(X,muesli).
   ```
-  @tau_prolog_query(fruehstueck.pro)
+  @tau_prolog.query(fruehstueck.pro)
   ***********************************
 * Wer mag Kuchen _und_ Brot?
 
@@ -584,7 +584,7 @@ Damit ergeben sich folgende PROLOG-Fragen:
   ```prolog
   mag(X,brot), mag(X,kuchen).
   ```
-  @tau_prolog_query(fruehstueck.pro)
+  @tau_prolog.query(fruehstueck.pro)
   ***********************************
 * Wer mag Brot _oder_ Kuchen?
 
@@ -593,7 +593,7 @@ Damit ergeben sich folgende PROLOG-Fragen:
   ```prolog
   mag(X,brot); mag(X,kuchen).
   ```
-  @tau_prolog_query(fruehstueck.pro)
+  @tau_prolog.query(fruehstueck.pro)
   ***********************************
 
 
@@ -612,7 +612,7 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    ```prolog
    mag(X, kuchen), mag(X, muesli).
    ```
-   @tau_prolog_query(fruehstueck.pro)
+   @tau_prolog.query(fruehstueck.pro)
    **************************
 2. Was mögen sowohl Papa als auch Mami?
 
@@ -623,7 +623,7 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    ```prolog
    mag(papa, X), mag(mami, X).
    ```
-   @tau_prolog_query(fruehstueck.pro)
+   @tau_prolog.query(fruehstueck.pro)
    *********************************
 3. Wer mag Kuchen und haßt Müsli?
 
@@ -635,7 +635,7 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    ```prolog
    mag(X, kuchen), hasst(X, muesli).
    ```
-   @tau_prolog_query(fruehstueck.pro)
+   @tau_prolog.query(fruehstueck.pro)
    **************************
 
 ### Aufgaben
@@ -657,12 +657,12 @@ weiss(nelke).
 blau(vergissmeinnicht).
 blau(veilchen).
 ```
-@tau_prolog_program(blumenstrauss2.pro)
+@tau_prolog.program(blumenstrauss2.pro)
 
 ```prolog Anfrage:
 
 ```
-@tau_prolog_query(blumenstrauss2.pro)
+@tau_prolog.query(blumenstrauss2.pro)
 
 Welchen Vorteil hat diese zweistellige Darstellung?
 
@@ -849,12 +849,12 @@ elter(donald,cleopatra).
 elter(daisy,clemens).
 elter(daisy,cleopatra).
 ```
-@tau_prolog_program(stammbaum.pro)
+@tau_prolog.program(stammbaum.pro)
 
 ```prolog Anfrage:
 % Anfragen hier eingeben.
 ```
-@tau_prolog_query(stammbaum.pro)
+@tau_prolog.query(stammbaum.pro)
 *******************************************************************************
 
                             --{{2}}--
@@ -880,18 +880,18 @@ beantworten. Nutze bei deinen Anfragen `X` als freie Variable!
 * Wer sind die Eltern von Daisy?
 
       [[elter(daisy, X).]]
-      @tau_prolog_check(stammbaum.pro,`setof(X, @input, [clemens, cleopatra])`)
+      @tau_prolog.check(stammbaum.pro,`setof(X, @input, [clemens, cleopatra])`)
 
 * Mit wem ist Baldur verheiratet?
 
       [[verheiratet(baldur, X).]]
-      @tau_prolog_check(stammbaum.pro,`setof(X, @input, [barbara])`)
+      @tau_prolog.check(stammbaum.pro,`setof(X, @input, [barbara])`)
 
 
 * Wie heißen die Kinder von Arthur?
 
       [[elter(X, arthur).]]
-      @tau_prolog_check(stammbaum.pro,`setof(X, @input, [barbara])`)
+      @tau_prolog.check(stammbaum.pro,`setof(X, @input, [barbara])`)
 
 *******************************************************************************
 
@@ -909,14 +909,14 @@ Wer ist die Mutter von Cosima?
 ```prolog
 elter(cosima,X), weibl(X).
 ```
-@tau_prolog_query(stammbaum.pro)
+@tau_prolog.query(stammbaum.pro)
 
 oder ...
 
 ```prolog
 weibl(X), elter(cosima,X).
 ```
-@tau_prolog_query(stammbaum.pro)
+@tau_prolog.query(stammbaum.pro)
 ****************************************************************************
 
 
@@ -934,7 +934,7 @@ und _G_ Elternteil von _E_ ist.
 ```prolog
 elter(donald,E), elter(E,G).
 ```
-@tau_prolog_query(stammbaum.pro)
+@tau_prolog.query(stammbaum.pro)
 
                             --{{7}}--
 Versuche selbst die folgenden Fragen zu lösen!
@@ -950,7 +950,7 @@ die Schwiegermutter von Bernd! -->
   ```prolog
   weibl(Oma), elter(E, Oma), elter(clemens, E).
   ```
-  @tau_prolog_query(stammbaum.pro)
+  @tau_prolog.query(stammbaum.pro)
   *******************************
 * Wer sind die Urgroßeltern von Daisy?
 
@@ -959,7 +959,7 @@ die Schwiegermutter von Bernd! -->
   ```prolog
   elter(G, E), elter(E, G), elter(daisy, E).
   ```
-  @tau_prolog_query(stammbaum.pro)
+  @tau_prolog.query(stammbaum.pro)
   *******************************
 * Wie heißt die Schwiegermutter von Bernd?
 
@@ -968,7 +968,7 @@ die Schwiegermutter von Bernd! -->
   ```prolog
   verheiratet(bernd, F), elter(F, S), weibl(S).
   ```
-  @tau_prolog_query(stammbaum.pro)
+  @tau_prolog.query(stammbaum.pro)
   *******************************
 
                             --{{8}}--
@@ -984,7 +984,7 @@ wird die Anfrage abgeschlossen.
 elter(clemens, V), maennl(V), elter(clemens, M), weibl(M),
 elter(X, V), elter(X, M), maennl(X).
 ```
-@tau_prolog_query(stammbaum.pro)
+@tau_prolog.query(stammbaum.pro)
 
                             --{{9}}--
 Diese Anfrage nach den Brüdern von Clemens ist jedoch noch fehlerhaft. Außer der
@@ -998,7 +998,7 @@ folgt:
 elter(clemens, V), maennl(V), elter(clemens, M), weibl(M),
 elter(X, V), elter(X, M), maennl(X), X \= clemens.
 ```
-@tau_prolog_query(stammbaum.pro)
+@tau_prolog.query(stammbaum.pro)
 
                            --{{10}}--
 Versuch diese Anfrage selbst verändern um auch nach den Schwestern
@@ -1029,12 +1029,12 @@ schwiegermutter(X,Y) :- verheiratet(X,Z), mutter(Z,Y).
 bruder(X,Y) :- vater(X,V), mutter(X,M),
                vater(Y,V), mutter(Y,M), maennl(Y), Y\=X.
 ```
-@tau_prolog_programX(stammbaum+regeln.pro,`@input(0)@input(1)`)
+@tau_prolog.programX(stammbaum+regeln.pro,`@input(0)@input(1)`)
 
 ```prolog
 mutter(X,Y).
 ```
-@tau_prolog_query(stammbaum+regeln.pro)
+@tau_prolog.query(stammbaum+regeln.pro)
 
 
 {{1-5}} **Neues Zeichen:** `:-` ==> falls
@@ -1196,7 +1196,7 @@ gleiche Person sind. */
 schwester(X,Y) :- vater(X,V), mutter(X,M),
                   vater(Y,V), mutter(Y,M), weibl(Y), Y\=X.
 ```
-@tau_prolog_query(nibelungen.pro)
+@tau_prolog.query(nibelungen.pro)
 ************************
 
 *******************************************************************************
@@ -1232,7 +1232,7 @@ verb(schiesst).
 
 satz(X,Y,Z):- artikel(X), nomen(Y), verb(Z).
 ```
-@tau_prolog_program(grammatik.pro)
+@tau_prolog.program(grammatik.pro)
 
                             --{{1}}--
 Damit haben wir eine kleine Sprache definiert, die über einen sehr begrenzten
@@ -1249,13 +1249,13 @@ unserer Sprache bilden. Beispiele:
 ```prolog
 satz(der,jaeger,bellt).
 ```
-@tau_prolog_query(grammatik.pro)
+@tau_prolog.query(grammatik.pro)
 
 
 ```prolog
 satz(flieht,der,hund).
 ```
-@tau_prolog_query(grammatik.pro)
+@tau_prolog.query(grammatik.pro)
 ********************************************************************************
 
 
@@ -1267,7 +1267,7 @@ erzeugen (Wieviele verschiedene Sätze erwartest du):
 ```prolog
 satz(A,B,C).
 ```
-@tau_prolog_query(grammatik.pro)
+@tau_prolog.query(grammatik.pro)
 
 
 
@@ -1325,7 +1325,7 @@ einfaerbung(F1, F2, F3, F4) :-
 
 % todo: einfaerbung2
 ```
-@tau_prolog_program(vier_farben.pro)
+@tau_prolog.program(vier_farben.pro)
 
                             --{{2}}--
 Wir bekommen also die Lösungen durch die folgende Anfrage:
@@ -1334,7 +1334,7 @@ Wir bekommen also die Lösungen durch die folgende Anfrage:
 ```prolog Anfrage:
 einfaerbung(F1, F2, F3, F4).
 ```
-@tau_prolog_query(vier_farben.pro)
+@tau_prolog.query(vier_farben.pro)
 
 
                               {{3}}
@@ -1363,7 +1363,7 @@ aneinandergrenzen?
 
     [[!]]
 ```prolog
-@tau_prolog_check(vier_farben.pro)
+@tau_prolog.check(vier_farben.pro)
 
 setof([A,B,C,D,E], einfaerbung2(A,B,C,D,E), R),
 R == [[blau, gelb, rot, blau, gelb],
@@ -1384,7 +1384,7 @@ Der Körper der Regel `einfaerbung2` müßte in etwa wie folgt aussehen:
    F3\==F4, F3\==F5,
    F4\==F5.
 ```
-@tau_prolog_query(vier_farben.pro)
+@tau_prolog.query(vier_farben.pro)
 ****************************************
 
 *******************************************************************************
@@ -1413,14 +1413,14 @@ schuhgroesse(brunhilde,44).
 schuhgroesse(kunigunde,28).
 schuhgroesse(walburga,38).
 ```
-@tau_prolog_program(aschenputtel.pro)
+@tau_prolog.program(aschenputtel.pro)
 
 
     {{2-6}}
 ```prolog
 schuhgroesse(aschenputtel,26).
 ```
-@tau_prolog_query(aschenputtel.pro)
+@tau_prolog.query(aschenputtel.pro)
 
                             --{{3}}--
 Bei der der obigen Abfrage vergleicht PROLOG vergleicht diese der Reihe nach mit
@@ -1452,7 +1452,7 @@ Nehmen wir an, der Prinz mit dem Schuh in der Hand stelle die folgende Anfrage.
 ```prolog
 schuhgroesse(X, 26).
 ```
-@tau_prolog_query(aschenputtel.pro)
+@tau_prolog.query(aschenputtel.pro)
 
 
                             --{{7}}--
@@ -1485,7 +1485,7 @@ Betrachten wir die Abarbeitung einer Frage, die mehrere Antworten zuläßt:
 ```prolog
 schuhgroesse(X, 28).
 ```
-@tau_prolog_query(aschenputtel.pro)
+@tau_prolog.query(aschenputtel.pro)
 
                             --{{11}}--
 PROLOG vergleicht Faktum für Faktum mit der Frage und kann beim zweiten Faktum
@@ -1521,13 +1521,13 @@ reichhaltigeren Beispiel zu, dem Stammbaum von Donald und Daisy aus
 gesucht:
 
 @stammbaum_db(stammbaum2.pro)
-@tau_prolog_program(stammbaum2.pro)
+@tau_prolog.program(stammbaum2.pro)
 
 
 ```prolog Anfrage
 elter(daisy, X), maennl(X).
 ```
-@tau_prolog_query(stammbaum2.pro)
+@tau_prolog.query(stammbaum2.pro)
 
 
                             --{{1}}--
@@ -1579,7 +1579,7 @@ maennl(X), elter(daisy,X).
 %    1: X = clemens
 %    2: eltern(daisy, clemens) = true
 ```
-@tau_prolog_query(stammbaum2.pro)
+@tau_prolog.query(stammbaum2.pro)
 
 Die folgende Anfragen ist vom deklarativen (beschreibenden) Standpunkt aus
 gleichwertig zu der gerade besprochenen; sie sind aber verschieden, wenn man sie
