@@ -9,8 +9,6 @@ narrator: Deutsch Female
 script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prolog.min.js
 
 
-@maxWidth: <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: @0;" -->
-
 @tau_prolog.program
 <script>
 
@@ -760,7 +758,7 @@ vergleichst:
 Der folgende Stammbaum von Donald und Daisy läßt eine gewisse Systematik bei der
 Namensgebung erkennen, die den Überblick erleichtert:
 
-@maxWidth(600px)
+<!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 600px;" -->
 ````
 ♂ Adam ━━━━━┓
             ┣━━━━ ♂ Baldur ━━━━━┓
@@ -1294,7 +1292,7 @@ _gelb_ und _blau_ so eingefärbt werden sollen, dass keine gleichfarbigen Gebiet
 längs einer Linie aneinandergrenzen.
 
 
-@maxWidth(315px)
+<!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 315px;" -->
 ````
  ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
  ┃             ┃                   ┃
@@ -1346,7 +1344,7 @@ drei Farben und achte darauf, dass keine gleichfarbigen Gebiete
 aneinandergrenzen?
 
 
-@maxWidth(315px)
+<!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 315px;" -->
 ````
  ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
  ┃                ┃                ┃
