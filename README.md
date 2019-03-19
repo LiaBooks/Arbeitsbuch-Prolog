@@ -6,149 +6,7 @@ version:  1.0.0
 language: de
 narrator: Deutsch Female
 
-script: https://rawgit.com/andre-dietrich/tau-prolog_template/master/js/tau-prolog.min.js
-
-
-@tau_prolog.program
-<script>
-
-    var db = `@input`;
-    window['@0'] = {session: window.pl.create(),
-                    query: null,
-                    rslt: "",
-                    query_str: "",
-                    db: db};
-    var c = window['@0']['session'].consult(db);
-
-    if( c !== true ){
-        var err = new LiaError("parsing program '@0' => " + c.args[0], 1);
-        var c_err = window.pl.flatten_error(c);
-        err.add_detail(0, c_err.type+" => " + c_err.found + "; expected => " +c_err.expected, "error", c_err.line - 1, c_err.column);
-        throw err;
-    }
-    else
-        "database '@0' loaded";
-</script>
-@end
-
-@tau_prolog.program2
-<script>
-
-    var db1 = `@input(0)`;
-    var db2 = `@input(1)`;
-
-    window['@0'] = {session: window.pl.create(),
-                    query: null,
-                    rslt: "",
-                    query_str: "",
-                    db: db};
-    var c = window['@0']['session'].consult(db1+db2);
-
-    if( c !== true ){
-        var err = new LiaError("parsing program '@0' => " + c.args[0], 2);
-        var c_err = window.pl.flatten_error(c);
-
-        err.add_detail(0, c_err.type+" => " + c_err.found + "; expected => " +c_err.expected, "error", c_err.line - 1, c_err.column);
-        throw err;
-    }
-    else
-        "database '@0' loaded";
-</script>
-@end
-
-@tau_prolog.programX
-<script>
-    var db = `@1`;
-    window['@0'] = {session: window.pl.create(),
-                    query: null,
-                    rslt: "",
-                    query_str: "",
-                    db: db};
-    var c = window['@0']['session'].consult(db);
-
-    if( c !== true ){
-        var err = new LiaError("parsing program '@0' => " + c.args[0], 1);
-        var c_err = window.pl.flatten_error(c);
-        err.add_detail(0, c_err.type+" => " + c_err.found + "; expected => " +c_err.expected, "error", c_err.line - 1, c_err.column);
-        throw err;
-    }
-    else
-        "database '@0' loaded";
-</script>
-@end
-
-@tau_prolog.query
-<script>
-    var query = `@input`;
-
-    try {
-        if(window['@0']['query'] == null || window['@0']['query_str'] != query) {
-            window['@0']['query_str'] = query;
-            window['@0']['rslt'] = "";
-            window['@0']['query'] = window['@0']['session'].query(query);
-        }
-    }
-    catch(e) {
-        throw {message: "'@0' has not been consulted"};
-    }
-
-    if( window['@0']['query'] !== true ) {
-        //throw {message: "parsing query for '@0' => " + window['@0']['query'].args[0]};
-
-        var err = new LiaError("parsing query for '@0' => " + window['@0']['query'].args[0], 1);
-        var c_err = window.pl.flatten_error(window['@0']['query']);
-        err.add_detail(0, c_err.type+" => " + c_err.found + "; expected => " +c_err.expected, "error", c_err.line - 1, c_err.column);
-        throw err;
-    }
-    else {
-        window['@0']['session'].answer(e => {
-            window['@0']['rslt'] +=  window.pl.format_answer(e)+"\n";
-        });
-        window['@0']['rslt'];
-    }
-</script>
-@end
-
-@tau_prolog.check
-<script>
-    var db = null;
-
-    try {
-        db = window['@0']['db'];
-    }
-    catch(e) {
-        throw {message: "'@0' has not been consulted"};
-    }
-
-    var session = window.pl.create();
-
-    var c = session.consult(db);
-
-    if( c !== true )
-        throw {message: "parsing program '@0' => " + c.args[0]};
-
-    session.query(`@1`.replace(/[.]/g, "") + ".");
-
-    let rslt = false;
-
-    session.answer(e => {rslt = window.pl.format_answer( e );});
-
-    rslt == "true ;";
-</script>
-@end
-
-@tau_prolog
-```prolog @0
-@2
-```
-@tau_prolog.program(@0)
-
-
-```prolog Anfrage:
-@1
-```
-@tau_prolog.query(@0)
-@end
+import: https://raw.githubusercontent.com/liaScript/tau-prolog_template/master/README.md
 
 
 @stammbaum_db
@@ -358,7 +216,7 @@ weiss(nelke).
 blau(vergissmeinnicht).
 blau(veilchen)
 ```
-@tau_prolog.program(blumenstrauss.pro)
+@Tau.program(blumenstrauss.pro)
 
                             --{{2}}--
 Um anfragen an deine Datenbasis zu stellen, benötigst du noch eine zweite
@@ -368,7 +226,7 @@ Eingabemöglichkeit:
 ```prolog
 rot(rose).
 ```
-@tau_prolog.query(blumenstrauss.pro)
+@Tau.query(blumenstrauss.pro)
 
                             --{{3}}--
 Solche Eingaben werden als Fragen aufgefasst. Umgangsprachlich formuliert heißt
@@ -384,7 +242,7 @@ Faktum in der Datenbasis vor, so antwortet PROLOG mit `true`, andernfalls mit
 ```prolog
 gelb(veilchen).
 ```
-@tau_prolog.query(blumenstrauss.pro)
+@Tau.query(blumenstrauss.pro)
 
 ### Variablen
 
@@ -398,7 +256,7 @@ einem abschließenden Punkt.
 ```prolog
 blau(X).
 ```
-@tau_prolog.query(blumenstrauss.pro)
+@Tau.query(blumenstrauss.pro)
 
                             --{{1}}--
 Variablen werden mit einem großen Anfangsbuchstaben geschrieben. Dieselbe Frage
@@ -409,7 +267,7 @@ Beachte wie sich die Ausgabe verändert.
 ```prolog
 blau(Blume).
 ```
-@tau_prolog.query(blumenstrauss.pro)
+@Tau.query(blumenstrauss.pro)
 
 
 ### Zweistellige Prädikate
@@ -433,7 +291,7 @@ faehrt_nach(dagmar,italien).
 faehrt_nach(elmar,frankreich).
 faehrt_nach(frederike,frankreich).
 ```
-@tau_prolog.program(urlaubsplanung.pro)
+@Tau.program(urlaubsplanung.pro)
 
                             --{{1}}--
 In dieser **Datenbasis** gibt es nur ein Prädikat, das zweistellige Prädikat
@@ -444,7 +302,7 @@ England?" heißt in PROLOG:
 ```prolog Anfrage:
 faehrt_nach(X,england).
 ```
-@tau_prolog.query(urlaubsplanung.pro)
+@Tau.query(urlaubsplanung.pro)
 
                             --{{2}}--
 Beantworte die folgenden Fragen, indem du sie in PROLOG übersetzt und vergleiche
@@ -460,7 +318,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(axel, griechenland).
    ```
-   @tau_prolog.query(urlaubsplanung.pro)
+   @Tau.query(urlaubsplanung.pro)
    *************************************
 2. Wohin fährt Beate?
 
@@ -473,7 +331,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(beate, X).
    ```
-   @tau_prolog.query(urlaubsplanung.pro)
+   @Tau.query(urlaubsplanung.pro)
    *************************************
 3. Wohin fährt Xaver?
 
@@ -488,7 +346,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(xaver, Urlaubsziel).
    ```
-   @tau_prolog.query(urlaubsplanung.pro)
+   @Tau.query(urlaubsplanung.pro)
    *************************************
 4. Wer fährt nach Frankreich?
 
@@ -502,7 +360,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(Wer, frankreich).
    ```
-   @tau_prolog.query(urlaubsplanung.pro)
+   @Tau.query(urlaubsplanung.pro)
    *************************************
 5. Wer fährt wohin?
 
@@ -512,7 +370,7 @@ deine Anfragen mit den Auflösungen:
    ```prolog
    faehrt_nach(Person, Ziel).
    ```
-   @tau_prolog.query(urlaubsplanung.pro)
+   @Tau.query(urlaubsplanung.pro)
    *************************************
 
 ### _und_ & _oder_ Operatoren
@@ -538,12 +396,12 @@ hasst(oma,muesli).
 hasst(oma,kuchen).
 hasst(baby,brot).
 ```
-@tau_prolog.program(fruehstueck.pro)
+@Tau.program(fruehstueck.pro)
 
 ```prolog Anfrage:
 mag(papa, brot).
 ```
-@tau_prolog.query(fruehstueck.pro)
+@Tau.query(fruehstueck.pro)
 
                             --{{1}}--
 Bis jetzt jetzt soltest du in der Lage sein, vier Arten von Fragen stellen. Du
@@ -573,7 +431,7 @@ Damit ergeben sich folgende PROLOG-Fragen:
   ```prolog
   hasst(X,kuchen), mag(X,muesli).
   ```
-  @tau_prolog.query(fruehstueck.pro)
+  @Tau.query(fruehstueck.pro)
   ***********************************
 * Wer mag Kuchen _und_ Brot?
 
@@ -582,7 +440,7 @@ Damit ergeben sich folgende PROLOG-Fragen:
   ```prolog
   mag(X,brot), mag(X,kuchen).
   ```
-  @tau_prolog.query(fruehstueck.pro)
+  @Tau.query(fruehstueck.pro)
   ***********************************
 * Wer mag Brot _oder_ Kuchen?
 
@@ -591,7 +449,7 @@ Damit ergeben sich folgende PROLOG-Fragen:
   ```prolog
   mag(X,brot); mag(X,kuchen).
   ```
-  @tau_prolog.query(fruehstueck.pro)
+  @Tau.query(fruehstueck.pro)
   ***********************************
 
 
@@ -610,7 +468,7 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    ```prolog
    mag(X, kuchen), mag(X, muesli).
    ```
-   @tau_prolog.query(fruehstueck.pro)
+   @Tau.query(fruehstueck.pro)
    **************************
 2. Was mögen sowohl Papa als auch Mami?
 
@@ -621,7 +479,7 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    ```prolog
    mag(papa, X), mag(mami, X).
    ```
-   @tau_prolog.query(fruehstueck.pro)
+   @Tau.query(fruehstueck.pro)
    *********************************
 3. Wer mag Kuchen und haßt Müsli?
 
@@ -633,7 +491,7 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    ```prolog
    mag(X, kuchen), hasst(X, muesli).
    ```
-   @tau_prolog.query(fruehstueck.pro)
+   @Tau.query(fruehstueck.pro)
    **************************
 
 ### Aufgaben
@@ -655,12 +513,12 @@ weiss(nelke).
 blau(vergissmeinnicht).
 blau(veilchen).
 ```
-@tau_prolog.program(blumenstrauss2.pro)
+@Tau.program(blumenstrauss2.pro)
 
 ```prolog Anfrage:
 
 ```
-@tau_prolog.query(blumenstrauss2.pro)
+@Tau.query(blumenstrauss2.pro)
 
 Welchen Vorteil hat diese zweistellige Darstellung?
 
@@ -697,8 +555,7 @@ blume(weiss, nelke).
 * Peter haßt Felix.
 * Felix liebt sich selbst.
 
-```prolog
-@tau_prolog(beziehungen.pro,% und hier deine fragen)
+```prolog @Tau(beziehungen.pro,% und hier deine fragen)
 % gib hier die Beziehungen ein
 ```
 
@@ -759,7 +616,7 @@ Der folgende Stammbaum von Donald und Daisy läßt eine gewisse Systematik bei d
 Namensgebung erkennen, die den Überblick erleichtert:
 
 <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 600px;" -->
-````
+``````````
 ♂ Adam ━━━━━┓
             ┣━━━━ ♂ Baldur ━━━━━┓
 ♀ Adele ━━━━┛                   ┣━━━━ ♂ Casanova
@@ -773,7 +630,7 @@ Namensgebung erkennen, die den Überblick erleichtert:
             ┣━━━━ ♂ Bernd ━━━━━━┛
             ┣━━━━ ♂ Boris
 ♀ Adriane ━━┛
-````
+``````````
 
 
                             --{{1}}--
@@ -847,12 +704,12 @@ elter(donald,cleopatra).
 elter(daisy,clemens).
 elter(daisy,cleopatra).
 ```
-@tau_prolog.program(stammbaum.pro)
+@Tau.program(stammbaum.pro)
 
 ```prolog Anfrage:
 % Anfragen hier eingeben.
 ```
-@tau_prolog.query(stammbaum.pro)
+@Tau.query(stammbaum.pro)
 *******************************************************************************
 
                             --{{2}}--
@@ -878,18 +735,18 @@ beantworten. Nutze bei deinen Anfragen `X` als freie Variable!
 * Wer sind die Eltern von Daisy?
 
       [[elter(daisy, X).]]
-      @tau_prolog.check(stammbaum.pro,`setof(X, @input, [clemens, cleopatra])`)
+      @Tau.check(stammbaum.pro,`setof(X, @input, [clemens, cleopatra])`)
 
 * Mit wem ist Baldur verheiratet?
 
       [[verheiratet(baldur, X).]]
-      @tau_prolog.check(stammbaum.pro,`setof(X, @input, [barbara])`)
+      @Tau.check(stammbaum.pro,`setof(X, @input, [barbara])`)
 
 
 * Wie heißen die Kinder von Arthur?
 
       [[elter(X, arthur).]]
-      @tau_prolog.check(stammbaum.pro,`setof(X, @input, [barbara])`)
+      @Tau.check(stammbaum.pro,`setof(X, @input, [barbara])`)
 
 *******************************************************************************
 
@@ -907,14 +764,14 @@ Wer ist die Mutter von Cosima?
 ```prolog
 elter(cosima,X), weibl(X).
 ```
-@tau_prolog.query(stammbaum.pro)
+@Tau.query(stammbaum.pro)
 
 oder ...
 
 ```prolog
 weibl(X), elter(cosima,X).
 ```
-@tau_prolog.query(stammbaum.pro)
+@Tau.query(stammbaum.pro)
 ****************************************************************************
 
 
@@ -932,7 +789,7 @@ und _G_ Elternteil von _E_ ist.
 ```prolog
 elter(donald,E), elter(E,G).
 ```
-@tau_prolog.query(stammbaum.pro)
+@Tau.query(stammbaum.pro)
 
                             --{{7}}--
 Versuche selbst die folgenden Fragen zu lösen!
@@ -948,7 +805,7 @@ die Schwiegermutter von Bernd! -->
   ```prolog
   weibl(Oma), elter(E, Oma), elter(clemens, E).
   ```
-  @tau_prolog.query(stammbaum.pro)
+  @Tau.query(stammbaum.pro)
   *******************************
 * Wer sind die Urgroßeltern von Daisy?
 
@@ -957,7 +814,7 @@ die Schwiegermutter von Bernd! -->
   ```prolog
   elter(G, E), elter(E, G), elter(daisy, E).
   ```
-  @tau_prolog.query(stammbaum.pro)
+  @Tau.query(stammbaum.pro)
   *******************************
 * Wie heißt die Schwiegermutter von Bernd?
 
@@ -966,7 +823,7 @@ die Schwiegermutter von Bernd! -->
   ```prolog
   verheiratet(bernd, F), elter(F, S), weibl(S).
   ```
-  @tau_prolog.query(stammbaum.pro)
+  @Tau.query(stammbaum.pro)
   *******************************
 
                             --{{8}}--
@@ -982,7 +839,7 @@ wird die Anfrage abgeschlossen.
 elter(clemens, V), maennl(V), elter(clemens, M), weibl(M),
 elter(X, V), elter(X, M), maennl(X).
 ```
-@tau_prolog.query(stammbaum.pro)
+@Tau.query(stammbaum.pro)
 
                             --{{9}}--
 Diese Anfrage nach den Brüdern von Clemens ist jedoch noch fehlerhaft. Außer der
@@ -996,7 +853,7 @@ folgt:
 elter(clemens, V), maennl(V), elter(clemens, M), weibl(M),
 elter(X, V), elter(X, M), maennl(X), X \= clemens.
 ```
-@tau_prolog.query(stammbaum.pro)
+@Tau.query(stammbaum.pro)
 
                            --{{10}}--
 Versuch diese Anfrage selbst verändern um auch nach den Schwestern
@@ -1027,12 +884,12 @@ schwiegermutter(X,Y) :- verheiratet(X,Z), mutter(Z,Y).
 bruder(X,Y) :- vater(X,V), mutter(X,M),
                vater(Y,V), mutter(Y,M), maennl(Y), Y\=X.
 ```
-@tau_prolog.programX(stammbaum+regeln.pro,`@input(0)@input(1)`)
+@Tau.programX(stammbaum+regeln.pro,`@input(0)@input(1)`)
 
 ```prolog
 mutter(X,Y).
 ```
-@tau_prolog.query(stammbaum+regeln.pro)
+@Tau.query(stammbaum+regeln.pro)
 
 
 {{1-5}} **Neues Zeichen:** `:-` ==> falls
@@ -1168,7 +1025,7 @@ Der Nibelungen Not:
                             --{{0}}--
 Schreibe die obigen Aussagen als PROLOG-Programm in eine Datei `nibelungen.pro`.
 
-@tau_prolog(nibelungen.pro,%program,%fragen)
+@Tau(nibelungen.pro,%program,%fragen)
 
                             --{{1}}--
 Stelle die folgenden Fragen:
@@ -1194,7 +1051,7 @@ gleiche Person sind. */
 schwester(X,Y) :- vater(X,V), mutter(X,M),
                   vater(Y,V), mutter(Y,M), weibl(Y), Y\=X.
 ```
-@tau_prolog.query(nibelungen.pro)
+@Tau.query(nibelungen.pro)
 ************************
 
 *******************************************************************************
@@ -1230,7 +1087,7 @@ verb(schiesst).
 
 satz(X,Y,Z):- artikel(X), nomen(Y), verb(Z).
 ```
-@tau_prolog.program(grammatik.pro)
+@Tau.program(grammatik.pro)
 
                             --{{1}}--
 Damit haben wir eine kleine Sprache definiert, die über einen sehr begrenzten
@@ -1247,13 +1104,13 @@ unserer Sprache bilden. Beispiele:
 ```prolog
 satz(der,jaeger,bellt).
 ```
-@tau_prolog.query(grammatik.pro)
+@Tau.query(grammatik.pro)
 
 
 ```prolog
 satz(flieht,der,hund).
 ```
-@tau_prolog.query(grammatik.pro)
+@Tau.query(grammatik.pro)
 ********************************************************************************
 
 
@@ -1265,7 +1122,7 @@ erzeugen (Wieviele verschiedene Sätze erwartest du):
 ```prolog
 satz(A,B,C).
 ```
-@tau_prolog.query(grammatik.pro)
+@Tau.query(grammatik.pro)
 
 
 
@@ -1293,7 +1150,7 @@ längs einer Linie aneinandergrenzen.
 
 
 <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 315px;" -->
-````
+``````````
  ┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
  ┃             ┃                   ┃
  ┃      1      ┃         2         ┃
@@ -1303,7 +1160,7 @@ längs einer Linie aneinandergrenzen.
  ┃         4         ┃      3      ┃
  ┃                   ┃             ┃
  ┗━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━┛
-````
+``````````
 
                             --{{1}}--
 Wir lassen ein Programm nach den Lösungen suchen. Die Farbe des Gebietes 1
@@ -1323,7 +1180,7 @@ einfaerbung(F1, F2, F3, F4) :-
 
 % todo: einfaerbung2
 ```
-@tau_prolog.program(vier_farben.pro)
+@Tau.program(vier_farben.pro)
 
                             --{{2}}--
 Wir bekommen also die Lösungen durch die folgende Anfrage:
@@ -1332,7 +1189,7 @@ Wir bekommen also die Lösungen durch die folgende Anfrage:
 ```prolog Anfrage:
 einfaerbung(F1, F2, F3, F4).
 ```
-@tau_prolog.query(vier_farben.pro)
+@Tau.query(vier_farben.pro)
 
 
                               {{3}}
@@ -1345,7 +1202,7 @@ aneinandergrenzen?
 
 
 <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 315px;" -->
-````
+``````````
  ┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┓
  ┃                ┃                ┃
  ┃     1     ┏━━━━┻━━━━┓     2     ┃
@@ -1355,21 +1212,20 @@ aneinandergrenzen?
  ┃     5     ┗━━━━┳━━━━┛     4     ┃
  ┃                ┃                ┃
  ┗━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┛
-````
+``````````
 
 Überprüfe deine Regel.
 
     [[!]]
-```prolog
-@tau_prolog.check(vier_farben.pro)
+```prolog @Tau.check(vier_farben.pro)
 
-setof([A,B,C,D,E], einfaerbung2(A,B,C,D,E), R),
-R == [[blau, gelb, rot, blau, gelb],
+setof([A,B,C,D,E], einfaerbung2(A,B,C,D,E),
+     [[blau, gelb, rot, blau, gelb],
       [blau, rot, gelb, blau, rot],
       [gelb, blau, rot, gelb, blau],
       [gelb, rot, blau, gelb, rot],
       [rot, blau, gelb, rot, blau],
-      [rot, gelb, blau, rot, gelb]].
+      [rot, gelb, blau, rot, gelb]]).
 ```
 ****************************************
 Der Körper der Regel `einfaerbung2` müßte in etwa wie folgt aussehen:
@@ -1382,7 +1238,7 @@ Der Körper der Regel `einfaerbung2` müßte in etwa wie folgt aussehen:
    F3\==F4, F3\==F5,
    F4\==F5.
 ```
-@tau_prolog.query(vier_farben.pro)
+@Tau.query(vier_farben.pro)
 ****************************************
 
 *******************************************************************************
@@ -1411,14 +1267,14 @@ schuhgroesse(brunhilde,44).
 schuhgroesse(kunigunde,28).
 schuhgroesse(walburga,38).
 ```
-@tau_prolog.program(aschenputtel.pro)
+@Tau.program(aschenputtel.pro)
 
 
     {{2-6}}
 ```prolog
 schuhgroesse(aschenputtel,26).
 ```
-@tau_prolog.query(aschenputtel.pro)
+@Tau.query(aschenputtel.pro)
 
                             --{{3}}--
 Bei der der obigen Abfrage vergleicht PROLOG vergleicht diese der Reihe nach mit
@@ -1450,7 +1306,7 @@ Nehmen wir an, der Prinz mit dem Schuh in der Hand stelle die folgende Anfrage.
 ```prolog
 schuhgroesse(X, 26).
 ```
-@tau_prolog.query(aschenputtel.pro)
+@Tau.query(aschenputtel.pro)
 
 
                             --{{7}}--
@@ -1483,7 +1339,7 @@ Betrachten wir die Abarbeitung einer Frage, die mehrere Antworten zuläßt:
 ```prolog
 schuhgroesse(X, 28).
 ```
-@tau_prolog.query(aschenputtel.pro)
+@Tau.query(aschenputtel.pro)
 
                             --{{11}}--
 PROLOG vergleicht Faktum für Faktum mit der Frage und kann beim zweiten Faktum
@@ -1519,13 +1375,13 @@ reichhaltigeren Beispiel zu, dem Stammbaum von Donald und Daisy aus
 gesucht:
 
 @stammbaum_db(stammbaum2.pro)
-@tau_prolog.program(stammbaum2.pro)
+@Tau.program(stammbaum2.pro)
 
 
 ```prolog Anfrage
 elter(daisy, X), maennl(X).
 ```
-@tau_prolog.query(stammbaum2.pro)
+@Tau.query(stammbaum2.pro)
 
 
                             --{{1}}--
@@ -1577,7 +1433,7 @@ maennl(X), elter(daisy,X).
 %    1: X = clemens
 %    2: eltern(daisy, clemens) = true
 ```
-@tau_prolog.query(stammbaum2.pro)
+@Tau.query(stammbaum2.pro)
 
 Die folgende Anfragen ist vom deklarativen (beschreibenden) Standpunkt aus
 gleichwertig zu der gerade besprochenen; sie sind aber verschieden, wenn man sie
@@ -1756,7 +1612,7 @@ bis es fündig wurde.
 
 
 <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 350px;" -->
-````
+``````````
   .         .         .         ┏━━━ rrrr
   .         .         ┏━━━ r ━━━╋━━━ rrrg
   .         .         ┃         ┗━━━ rrrb
@@ -1774,7 +1630,7 @@ bis es fündig wurde.
   .         .         .         ┗━━━ rgrb
   .         .         .         .
  F.1       F.2       F.3       F.4
-````
+``````````
 
 
 Das Programm arbeitet nach dem Prinzip 'Erzeuge und Überprüfe' (generate and
@@ -1858,7 +1714,7 @@ gefragt:
 
 ## NOT und CUT
 
-````
+``````````
                           ┏━━━━━┓
                           ┃  7  ┃
                           ┣━━━━━┫
@@ -1869,7 +1725,7 @@ gefragt:
   ┃  1  ┃     ┃  3  ┃     ┃  4  ┃
  ━┻━━━━━┻━━━━━┻━━━━━┻━━━━━┻━━━━━┻━
      a           b           c
-````
+``````````
 
 
 
