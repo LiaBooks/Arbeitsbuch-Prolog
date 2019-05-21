@@ -1,12 +1,12 @@
 <!--
 
 author:   Andre Dietrich
-email:    dietrich@ivs.cs.uni-magdeburg.de
-version:  1.0.0
+email:    andre.dietrich@ovgu.de
+version:  1.0.1
 language: de
 narrator: Deutsch Female
 
-import: https://raw.githubusercontent.com/liaScript/tau-prolog_template/master/README.md
+import: https://raw.githubusercontent.com/liaTemplates/tau-prolog/master/README.md
 
 
 @stammbaum_db
@@ -78,7 +78,6 @@ elter(daisy,cleopatra).
 
 # Arbeitsbuch PROLOG
 
-Template for integrating the Tau-Prolog interpreter into LiaScript
 
 
 ## Originales Vorwort
