@@ -1,10 +1,20 @@
 <!--
 
-author:   Andre Dietrich
+author:   André Dietrich
 email:    andre.dietrich@ovgu.de
-version:  1.0.1
+version:  1.0.2
 language: de
 narrator: Deutsch Female
+logo:     img/logo.jpg
+
+comment:  Dieses Buch soll in die Programmiersprache PROLOG und in die mit ihr verbundene
+          'Logik-programmierung' einführen. Die Idee, 'Logik als eine Programmiersprache'
+          zu verwenden, führt zu einer völlig neuen Auffassung vom Programmieren: Das
+          Programm ist nicht eine Folge von Handlungsanweisungen, sondern eine Sammlung
+          von Fakten und Regeln. Das zu lösende Problem wird als eine Anfrage an diese
+          Sammlung formuliert. Im Idealfall führt die logisch korrekte Formulierung der
+          Regeln und der Anfrage zur Lösung des Problems.
+
 
 import: https://raw.githubusercontent.com/liaTemplates/tau-prolog/master/README.md
 
@@ -160,7 +170,7 @@ Einen kleinen Blumenstrauß zu beginn.
 ![flowers](img/flowers.png)<!-- style="max-width: 100%;" -->
 
                             --{{1}}--
-Dieses Buch ist leider im original nicht im Vierfarbendruck erscheinen aber wir
+Dieses Buch ist leider im original nicht im Vierfarbendruck erschienen aber wir
 können den Willkommensstrauß auch kurz mit einfachen Worten wie:
 
                               {{1}}
@@ -308,17 +318,20 @@ Beantworte die folgenden Fragen, indem du sie in PROLOG übersetzt und vergleich
 deine Anfragen mit den Auflösungen:
 
 
-              {{2}}
-1. Fährt Axel nach Griechenland?
 
-       [( )] Ja
-       [(X)] Nein
-   *************************************
-   ```prolog
-   faehrt_nach(axel, griechenland).
-   ```
-   @Tau.query(urlaubsplanung.pro)
-   *************************************
+Fährt Axel nach Griechenland?
+
+    [( )] Ja
+    [(X)] Nein
+*************************************
+```prolog
+faehrt_nach(axel, griechenland).
+```
+@Tau.query(urlaubsplanung.pro)
+*************************************
+
+
+
 2. Wohin fährt Beate?
 
        [[ ]] england
@@ -332,6 +345,7 @@ deine Anfragen mit den Auflösungen:
    ```
    @Tau.query(urlaubsplanung.pro)
    *************************************
+
 3. Wohin fährt Xaver?
 
        [[ ]] england
@@ -459,8 +473,8 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
           {{4}}
 1. Wer mag Kuchen und Müsli?
 
-       [[X]] Baby
        [[ ]] Mami
+       [[X]] Baby
        [[ ]] Papa
        [[ ]] Omi
    **************************
@@ -471,8 +485,8 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    **************************
 2. Was mögen sowohl Papa als auch Mami?
 
-       [[X]] Brot
        [[ ]] Kuchen
+       [[X]] Brot
        [[ ]] Müsli
    *********************************
    ```prolog
@@ -494,6 +508,9 @@ beantworten und  vergleiche deine Lösungen mit den Auflösungen.
    **************************
 
 ### Aufgaben
+
+[test](#aufgabe)
+
 
                             --{{0}}--
 Die folgenden beiden Abschnitte sollen dazu dienen, das bereits gelernte zu
