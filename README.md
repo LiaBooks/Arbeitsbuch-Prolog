@@ -2,7 +2,7 @@
 
 author:   André Dietrich
 email:    andre.dietrich@ovgu.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
 logo:     img/logo.jpg
@@ -319,18 +319,16 @@ deine Anfragen mit den Auflösungen:
 
 
 
-Fährt Axel nach Griechenland?
+1. Fährt Axel nach Griechenland?
 
-    [( )] Ja
-    [(X)] Nein
-*************************************
-```prolog
-faehrt_nach(axel, griechenland).
-```
-@Tau.query(urlaubsplanung.pro)
-*************************************
-
-
+       [( )] Ja
+       [(X)] Nein
+   *************************************
+   ```prolog
+   faehrt_nach(axel, griechenland).
+   ```
+   @Tau.query(urlaubsplanung.pro)
+   *************************************
 
 2. Wohin fährt Beate?
 
@@ -378,7 +376,7 @@ faehrt_nach(axel, griechenland).
 5. Wer fährt wohin?
 
        [[!]]
-       <script>true;</script>
+   <script>true;</script>
    *************************************
    ```prolog
    faehrt_nach(Person, Ziel).
@@ -887,7 +885,6 @@ Schwiegermutter oder Bruder mussten wir bei Anfragen in diese Grundbegriffe
 den Fakten unserer Datenbasis noch **Regeln** hinzufügen. Im Beispiel wären das
 die Regeln
 
-@stammbaum_db(-stammbaum.pro)
 ```prolog +regeln.pro
 mutter(X,Y) :- elter(X,Y), weibl(Y).
 
@@ -899,8 +896,69 @@ schwiegermutter(X,Y) :- verheiratet(X,Z), mutter(Z,Y).
 
 bruder(X,Y) :- vater(X,V), mutter(X,M),
                vater(Y,V), mutter(Y,M), maennl(Y), Y\=X.
+
+maennl(adam).
+maennl(alfred).
+maennl(anton).
+maennl(arthur).
+maennl(baldur).
+maennl(bernd).
+maennl(boris).
+maennl(casanova).
+maennl(clemens).
+maennl(donald).
+
+weibl(adele).
+weibl(alwine).
+weibl(anna).
+weibl(ariadne).
+weibl(barbara).
+weibl(berta).
+weibl(cleopatra).
+weibl(cosima).
+weibl(daisy).
+
+verheiratet(adam,adele).
+verheiratet(adele,adam).
+verheiratet(alfred,alwine).
+verheiratet(alwine,alfred).
+verheiratet(anton,anna).
+verheiratet(anna,anton).
+verheiratet(arthur,ariadne).
+verheiratet(ariadne,arthur).
+verheiratet(baldur,barbara).
+verheiratet(barbara,baldur).
+verheiratet(bernd,berta).
+verheiratet(berta,bernd).
+verheiratet(clemens,cleopatra).
+verheiratet(cleopatra,clemens).
+
+/* elter(X,Y) heißt: Y ist Elternteil von X */
+
+elter(baldur,adam).
+elter(baldur,adele).
+elter(barbara,alfred).
+elter(barbara,alwine).
+elter(bernd,anton).
+elter(bernd,anna).
+elter(berta,arthur).
+elter(berta,ariadne).
+elter(boris,arthur).
+elter(boris,ariadne).
+elter(casanova,baldur).
+elter(casanova,barbara).
+elter(clemens,baldur).
+elter(clemens,barbara).
+elter(cleopatra,bernd).
+elter(cleopatra,berta).
+elter(cosima,bernd).
+elter(cosima,berta).
+elter(donald,clemens).
+elter(donald,cleopatra).
+elter(daisy,clemens).
+elter(daisy,cleopatra).
 ```
-@Tau.programX(stammbaum+regeln.pro,`@input(0)@input(1)`)
+@Tau.program(stammbaum+regeln.pro,@input)
 
 ```prolog
 mutter(X,Y).
