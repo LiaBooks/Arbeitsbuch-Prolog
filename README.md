@@ -86,6 +86,8 @@ elter(daisy,cleopatra).
 
 -->
 
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://LiaScript.github.io/course/?https://github.com/LiaBooks/Arbeitsbuch-Prolog)
+
 # Arbeitsbuch PROLOG
 
 
