@@ -92,27 +92,38 @@ elter(daisy,cleopatra).
 
 Dieses Buch soll in die Programmiersprache PROLOG und in die mit ihr verbundene 'Logik-programmierung' einführen.
 Die Idee, 'Logik als eine Programmiersprache' zu verwenden, führt zu einer völlig neuen Auffassung vom Programmieren: Das Programm ist nicht eine Folge von Handlungsanweisungen, sondern eine Sammlung von Fakten und Regeln.
-Das zu lösende Problem wird als eine Anfrage an diese Sammlung formuliert. Im Idealfall führt die logisch korrekte Formulierung der Regeln und der Anfrage zur Lösung des Problems.
+Das zu lösende Problem wird als eine Anfrage an diese Sammlung formuliert.
+Im Idealfall führt die logisch korrekte Formulierung der Regeln und der Anfrage zur Lösung des Problems.
 
-Dieser Ansatz ist faszinierend, und das allein schon wäre Grund genug, PROLOG als zweite Programmiersprache für die Schule in Betracht zu ziehen. Hinzu kommen aber noch andere Vorteile:
+Dieser Ansatz ist faszinierend, und das allein schon wäre Grund genug, PROLOG als zweite Programmiersprache für die Schule in Betracht zu ziehen.
+Hinzu kommen aber noch andere Vorteile:
 
 * Die Beschäftigung mit einer Sprache, die sich völlig von den befehlsorientierten Sprachen wie PASCAL unterscheidet, weitet den Horizont; altbekannte Algorithmen erscheinen in einem neuen Licht und neuartige Probleme können behandelt werden.
-* Die wesentlichen Grundelemente von PROLOG bilden eine kleine, überschaubare Menge. (Sie zu beherrschen ist allerdings nicht ganz einfach.)
+* Die wesentlichen Grundelemente von PROLOG bilden eine kleine, überschaubare Menge.
+  (Sie zu beherrschen ist allerdings nicht ganz einfach.)
 * Der aktive Umgang mit logischen, deklarativen Programmen fördert (so hoffen wir) das logische Denken.
 
 Den letzten Punkt halten wir für entscheidend; daher haben wir uns in diesem Buch sehr stark auf den logischen Kern der Sprache -- auf 'pures' PROLOG -- beschränkt (und nehmen eine etwas spartanische 'Oberfläche' in Kauf).
-Es geht uns nicht um die möglichst umfassende Vermittlung der Programmiersprache, sondern um das Bekanntmachen eines neuen, mächtigen und schönen Programmierkonzeptes. Zum Vertrautwerden mit diesem neuen Konzept bedarf es vieler sinnvoller Beispiele und Aufgaben; wir hoffen, hier genügend bereitgestellt zu haben.
+Es geht uns nicht um die möglichst umfassende Vermittlung der Programmiersprache, sondern um das Bekanntmachen eines neuen, mächtigen und schönen Programmierkonzeptes.
+Zum Vertrautwerden mit diesem neuen Konzept bedarf es vieler sinnvoller Beispiele und Aufgaben; wir hoffen, hier genügend bereitgestellt zu haben.
 
-Das Buch besteht im wesentlichen aus zwei Teilen. Der erste Teil gibt eine Einführung in die Arbeitsweise von PROLOG, das grundlegende Verfahren der Rekursion und den Datentyp der Liste.
+Das Buch besteht im wesentlichen aus zwei Teilen.
+Der erste Teil gibt eine Einführung in die Arbeitsweise von PROLOG, das grundlegende Verfahren der Rekursion und den Datentyp der Liste.
 Der zweite Teil besteht aus elf Vertiefungen; diese sind weitgehend unabhängig voneinander und nach steigender
 Komplexität geordnet.
-Für einen Kurs schlagen wir vor, zuerst den ersten Teil (evtl. ohne Kapitel 7) und dann mindestens eine Vertiefung durchzuarbeiten.
-Ein 'Schnupperkurs' von wenigen Stunden (vielleicht schon in Sekundarstufe I) könnte aus Kapitel 1 und 2, dem Anfang von Kapitel 3 und der Vertiefung B, der Datenbasisprogrammierung, bestehen.
-Bei Bedarf könnte dies noch mit einigen Rätseln aus Vertiefung A gewürzt werden.
+Für einen Kurs schlagen wir vor, zuerst den ersten Teil (evtl. ohne [Kapitel 7](#7.-not-und-cut)) und dann mindestens eine Vertiefung durchzuarbeiten.
+Ein 'Schnupperkurs' von wenigen Stunden (vielleicht schon in Sekundarstufe I) könnte aus [Kapitel 1](#1-grundlagen) und [2](#2-regeln), dem Anfang von [Kapitel 3](#3-so-arbeitet-prolog) und der [Vertiefung B](#b-datenbasis-programmierung), der Datenbasisprogrammierung, bestehen.
+Bei Bedarf könnte dies noch mit einigen Rätseln aus [Vertiefung A](#a-rätsel) gewürzt werden.
 
-Wir verwenden PROLOG nach dem sogenannten Edinburgh-Standard, der durch das Buch von CLOCKSIN und MELLISH definiert wurde und sich inzwischen weitgehend durchgesetzt hat. In Versionen, die sich nach diesem Standard richten, laufen die Programme des Buches problemlos. Für einige gängige Versionen sind gezielte Hinweise im Anhang gegeben. Dort findet man auch Hinweise auf die Bezugsquellen.
+Wir verwenden PROLOG nach dem sogenannten Edinburgh-Standard, der durch das Buch von CLOCKSIN und MELLISH definiert wurde und sich inzwischen weitgehend durchgesetzt hat.
+In Versionen, die sich nach diesem Standard richten, laufen die Programme des Buches problemlos.
+Für einige gängige Versionen sind gezielte Hinweise im Anhang gegeben.
+Dort findet man auch Hinweise auf die Bezugsquellen.
 
-Wir bedanken uns bei dem Herausgeber, Herrn StD Dietrich Pohlmann, für zahlreiche Anregungen und Verbesserungsvorschläge und beim Verlag Ferd. Dümmler für die freundliche Betreuung. Wir danken weiterhin Ingrid Hafenbrak für die Illustrationen, Frau Sylvia Platz und Herrn Martin Kammerer für die Hilfe bei der Gestaltung des Manuskriptes und Herrn Dr. Klaus Scheler für das sorgfältige Korrekturlesen. Schließlich gilt unser Dank den Mannheimer Schülern und Lehrern vom Elisabeth Gymnasium und vom Gymnasium Feudenheim, die uns ermöglichten, unsere Ideen in der Schulpraxis zu erproben.
+Wir bedanken uns bei dem Herausgeber, Herrn StD Dietrich Pohlmann, für zahlreiche Anregungen und Verbesserungsvorschläge und beim Verlag Ferd.
+Dümmler für die freundliche Betreuung.
+Wir danken weiterhin Ingrid Hafenbrak für die Illustrationen, Frau Sylvia Platz und Herrn Martin Kammerer für die Hilfe bei der Gestaltung des Manuskriptes und Herrn Dr. Klaus Scheler für das sorgfältige Korrekturlesen.
+Schließlich gilt unser Dank den Mannheimer Schülern und Lehrern vom Elisabeth Gymnasium und vom Gymnasium Feudenheim, die uns ermöglichten, unsere Ideen in der Schulpraxis zu erproben.
 
 Es freut uns, dass nach recht kurzer Zeit eine Neuauflage erforderlich wurde.
 Dabei wurden nur einige Druckfehler und Unstimmigkeiten berichtigt; die beiden Auflagen sind also uneingeschränkt nebeneinander im Unterricht einsetzbar.
@@ -135,8 +146,7 @@ Einen kleinen Blumenstrauß zu beginn.
 ![flowers](img/flowers.png)<!-- style="max-width: 100%;" -->
 
                             --{{1}}--
-Dieses Buch ist leider im original nicht im Vierfarbendruck erschienen aber wir
-können den Willkommensstrauß auch kurz mit einfachen Worten wie:
+Dieses Buch ist leider im original nicht im Vierfarbendruck erschienen aber wir können den Willkommensstrauß auch kurz mit einfachen Worten wie:
 
                               {{1}}
 * Die Rose ist rot.
@@ -147,7 +157,6 @@ können den Willkommensstrauß auch kurz mit einfachen Worten wie:
 <!-- --{{1}}--
 Die Rose ist rot, die Tulpe ist gelb oder das Veilchen ist blau.
 -->
-
 
                             --{{2}}--
 Solche **Fakten** (Tatsachen) wie die Zusammensetzung eines Straußes können in PROLOG wie folgt abgebildet werden:
@@ -162,23 +171,21 @@ blau(veilchen).
 ```
 
                             --{{2}}--
-Die **Prädikate** (Eigenschaften) _rot_, _gelb_, _weiss_ und _blau_ treffen auf gewisse Konstanten wie zum Beispiel _rose_ zu, dies schreiben wir in der obigen Form. Sowohl Prädikate als auch Konstanten werden mit kleinem Anfangsbuchstaben geschrieben, deutsche Sonderzeichen vermeiden wir. Jedes Faktum wird mit einem Punkt und dem Drücken der RETURN-Taste abgeschlossen.
+Die **Prädikate** (Eigenschaften) _rot_, _gelb_, _weiss_ und _blau_ treffen auf gewisse Konstanten wie zum Beispiel _rose_ zu, dies schreiben wir in der obigen Form.
+Sowohl Prädikate als auch Konstanten werden mit kleinem Anfangsbuchstaben geschrieben, deutsche Sonderzeichen vermeiden wir.
+Jedes Faktum wird mit einem Punkt und dem Drücken der <kbd>RETURN</kbd>-Taste abgeschlossen.
 
 ### PROLOG-Programme
 
                             --{{0}}--
-Die hier genuzte PROLOG-IDE besteht immer aus zwei Teilen, einer Eingabe für das
-Programm. Wenn du hier auf Ausführen klickst, so wird dieses Programm geladen.
-Da dieses Programm jedoch einen syntaktischen Fehler hat, erhältst du zunächst
-eine Fehlermeldung, die auf ein Syntax-Problem hinweist.
+Die hier genuzte PROLOG-IDE besteht immer aus zwei Teilen, einer Eingabe für das Programm.
+Wenn du hier auf Ausführen klickst, so wird dieses Programm geladen.
+Da dieses Programm jedoch einen syntaktischen Fehler hat, erhältst du zunächst eine Fehlermeldung, die auf ein Syntax-Problem hinweist.
 
                             --{{1}}--
-Du kannst den Code auch direkt editieren und den fehlenden Punkt am Ende der
-letzten Zeile einfügen. Wenn du dann wieder auf Ausführen klickst, so wird dir
-angezeigt, dass deine Datenbasis erfolgreich geladen werden konnte. Und falls du
-dir später mal wegen einer Änderung nicht sicher bist, so kannst du auch jede
-beliebige Version wieder herstellen, indem du einfach auf die Pfeil-Buttons
-neben der aktuellen Versionnummer klickst.
+Du kannst den Code auch direkt editieren und den fehlenden Punkt am Ende der letzten Zeile einfügen.
+Wenn du dann wieder auf Ausführen klickst, so wird dir angezeigt, dass deine Datenbasis erfolgreich geladen werden konnte.
+Und falls du dir später mal wegen einer Änderung nicht sicher bist, so kannst du auch jede beliebige Version wieder herstellen, indem du einfach auf die Pfeil-Buttons neben der aktuellen Versionnummer klickst.
 
 ```prolog blumenstrauss.pro
 rot(rose).
@@ -200,14 +207,14 @@ rot(rose).
 @Tau.query(blumenstrauss.pro)
 
                             --{{3}}--
-Solche Eingaben werden als Fragen aufgefasst. Umgangsprachlich formuliert heißt
-das: "Ist die Rose rot?". Als Antwort erscheint `true`.
+Solche Eingaben werden als Fragen aufgefasst.
+Umgangsprachlich formuliert heißt das: "Ist die Rose rot?".
+Als Antwort erscheint `true`.
 
                             --{{4}}--
-Und auf die Frage `gelb(veilchen).` erhalten wir `false`. Versuch weitere
-solcher Fragen einzugeben. Du wirst sehen: Kommt die Frage buchstabengetreu als
-Faktum in der Datenbasis vor, so antwortet PROLOG mit `true`, andernfalls mit
-`false`.
+Und auf die Frage `gelb(veilchen).` erhalten wir `false`.
+Versuch weitere solcher Fragen einzugeben.
+Du wirst sehen: Kommt die Frage buchstabengetreu als Faktum in der Datenbasis vor, so antwortet PROLOG mit `true`, andernfalls mit `false`.
 
     {{4}}
 ```prolog
@@ -218,11 +225,10 @@ gelb(veilchen).
 ### Variablen
 
                             --{{0}}--
-Wir können mit Hilfe von Variablen auch etwas anspruchsvoller fragen: "Was ist
-blau?". Gibt es mehrere Lösungen, so wird zunächst immer nur eine angeboten. Du
-kannst  weitere Lösungen anfordern, indem du wiederholt auf Ausführen klickst.
-Gibt es schließlich keine weitere Lösung mehr, so erscheint `false.` mit einem
-einem abschließenden Punkt.
+Wir können mit Hilfe von Variablen auch etwas anspruchsvoller fragen: "Was ist blau?".
+Gibt es mehrere Lösungen, so wird zunächst immer nur eine angeboten.
+Du kannst  weitere Lösungen anfordern, indem du wiederholt auf Ausführen klickst.
+Gibt es schließlich keine weitere Lösung mehr, so erscheint `false.` mit einem einem abschließenden Punkt.
 
 ```prolog
 blau(X).
@@ -230,8 +236,8 @@ blau(X).
 @Tau.query(blumenstrauss.pro)
 
                             --{{1}}--
-Variablen werden mit einem großen Anfangsbuchstaben geschrieben. Dieselbe Frage
-können wir auch mit einer anderen (mehr aussagekräftigeren) Variablen stellen.
+Variablen werden mit einem großen Anfangsbuchstaben geschrieben.
+Dieselbe Frage können wir auch mit einer anderen (mehr aussagekräftigeren) Variablen stellen.
 Beachte wie sich die Ausgabe verändert.
 
     {{1}}
@@ -244,12 +250,9 @@ blau(Blume).
 ### Zweistellige Prädikate
 
                             --{{0}}--
-Dies ist die Urlaubsplanung für die nächsten Ferien, die umgangssprachliche
-Formulierung kann ganz einfach in eine PROLOG-Programm übersetzt werden.
+Dies ist die Urlaubsplanung für die nächsten Ferien, die umgangssprachliche Formulierung kann ganz einfach in eine PROLOG-Programm übersetzt werden.
 
-**Umgangsprachlich:** Axel fährt nach England, Beate fährt nach Griechenland und
-in die Türkei, Clemens, Elmar und Frederike fahren nach Frankreich, Dagmar fährt
-nach Italien.
+**Umgangsprachlich:** Axel fährt nach England, Beate fährt nach Griechenland und in die Türkei, Clemens, Elmar und Frederike fahren nach Frankreich, Dagmar fährt nach Italien.
 
 --------------------------------------------------------------------------------
 
@@ -265,9 +268,9 @@ faehrt_nach(frederike,frankreich).
 @Tau.program(urlaubsplanung.pro)
 
                             --{{1}}--
-In dieser **Datenbasis** gibt es nur ein Prädikat, das zweistellige Prädikat
-`faehrt_nach`. Laden die obige Datenbasis in PROLOG. Die Frage "Wer fährt nach
-England?" heißt in PROLOG:
+In dieser **Datenbasis** gibt es nur ein Prädikat, das zweistellige Prädikat `faehrt_nach`.
+Laden die obige Datenbasis in PROLOG.
+Die Frage "Wer fährt nach England?" heißt in PROLOG:
 
     {{1}}
 ```prolog Anfrage:
@@ -276,10 +279,7 @@ faehrt_nach(X,england).
 @Tau.query(urlaubsplanung.pro)
 
                             --{{2}}--
-Beantworte die folgenden Fragen, indem du sie in PROLOG übersetzt und vergleiche
-deine Anfragen mit den Auflösungen:
-
-
+Beantworte die folgenden Fragen, indem du sie in PROLOG übersetzt und vergleiche deine Anfragen mit den Auflösungen:
 
 1. Fährt Axel nach Griechenland?
 
@@ -352,8 +352,7 @@ deine Anfragen mit den Auflösungen:
 ![breakfast](img/breakfast.png)<!-- style="max-width: 100%" -->
 
                             --{{0}}--
-Die Vorlieben und Abneigungen am Frühstückstisch seien in der folgenden
-PROLOG-Datenbasis mit dem Namen 'fruehstueck.pro' festgehalten:
+Die Vorlieben und Abneigungen am Frühstückstisch seien in der folgenden PROLOG-Datenbasis mit dem Namen 'fruehstueck.pro' festgehalten:
 
 ```prolog fruehstueck.pro
 mag(papa,muesli).
@@ -377,16 +376,14 @@ mag(papa, brot).
 @Tau.query(fruehstueck.pro)
 
                             --{{1}}--
-Bis jetzt jetzt soltest du in der Lage sein, vier Arten von Fragen stellen. Du
-kannst dich selber testen und PROLOG dazu bringen, diese Fragen zu beantworten.
+Bis jetzt jetzt soltest du in der Lage sein, vier Arten von Fragen stellen.
+Du kannst dich selber testen und PROLOG dazu bringen, diese Fragen zu beantworten.
 
       {{1-2}}
 1. Mag Papa Kuchen?
 2. Wer haßt Müsli?
 3. Was mag Oma?
 4. Wer mag was?
-
-
 
                             --{{2}}--
 Für die Frühstücksplanung sind aber auch zusammengesetzte Fragen wichtig die
@@ -1403,45 +1400,39 @@ die Frage mit dem sechsten Faktum verglichen. Dort ist Matchen nicht möglich,
 und damit ist die Datenbasis erschöpft, also erhalten wir die Antwort `false`.
 
 
-### Logging der Teilschritte mit write
+### Logging der Teilschritte mit `write`
 
-                            --{{0}}--
-Damit verlassen wir das schlichte Aschenputtel und wenden uns einem
-reichhaltigeren Beispiel zu, dem Stammbaum von Donald und Daisy aus
-[Kapitel 1](#11). Dort hattest du in einer Aufgabe nach dem Vater von Daisy
-gesucht:
+    --{{0}}--
+Damit verlassen wir das schlichte Aschenputtel und wenden uns einem reichhaltigeren Beispiel zu, dem Stammbaum von Donald und Daisy aus Kapitel 1. Dort hattest du in einer Aufgabe nach dem Vater von Daisy gesucht:
 
+      {{0}}
 @stammbaum_db(stammbaum2.pro)
 @Tau.program(stammbaum2.pro)
 
-
+      {{0}}
 ```prolog Anfrage
 elter(daisy, X), maennl(X).
 ```
 @Tau.query(stammbaum2.pro)
 
-
                             --{{1}}--
-Das Ziel von PROLOG ist es, die zwei Forderungen an `X` zu erfüllen. Dies macht
-es, indem es nacheinander zwei Teilziele anstrebt. Zunächst versucht es, das
-erste Teilziel `elter(daisy, X)` zu erreichen und findet auch nach etlichen
-Vergleichen eine Möglichkeit zu matchen mit `X = clemens`. Die Variable `X` ist
-damit instantiiert (belegt) mit `clemens`. Das zweite Teilziel lautet damit
-`maennl(clemens)`, diese Forderung kann beim Durchsuchen der Datenbasis
-bestätigt werden. Erst wenn beide Teilziele erreicht sind, wird die Antwort
-ausgegeben:
+Das Ziel von PROLOG ist es, die zwei Forderungen an `X` zu erfüllen.
+Dies macht es, indem es nacheinander zwei Teilziele anstrebt.
+Zunächst versucht es, das erste Teilziel `elter(daisy, X)` zu erreichen und findet auch nach etlichen Vergleichen eine Möglichkeit zu matchen mit `X = clemens`.
+Die Variable `X` ist damit instantiiert (belegt) mit `clemens`.
+Das zweite Teilziel lautet damit `maennl(clemens)`, diese Forderung kann beim Durchsuchen der Datenbasis bestätigt werden.
+Erst wenn beide Teilziele erreicht sind, wird die Antwort ausgegeben:
 
-
-    {{1}}
+      {{1}}
 ```prolog
 X = clemens;
 false.
 ```
 
-                            --{{2}}--
-Fragen wir nochmals nach dem Vater von Daisy, diesmal mit der Anfrage
+    --{{2}}--
+Fragen wir nochmals nach dem Vater von Daisy, diesmal mit der Anfrage:
 
-    {{2}}
+      {{2}}
 ```prolog
 maennl(X), elter(daisy,X).
 
@@ -1459,37 +1450,28 @@ maennl(X), elter(daisy,X).
 ```
 @Tau.query(stammbaum2.pro)
 
-                           --{{2}}--
-PROLOG versucht das erste Teilziel `maennl(X)` zu erreichen, und dies gelingt auch
-sofort mit `X = adam`. Mit dieser Instantiierung von `X` wird das zweite
-Teilziel angegangen, also `elter(daisy, adam)`. Diese Ergebnisse können leicht
-mit dem originalen [Stammbaum](#11) verglichen werden; PROLOG muss Faktum für
-Faktum mit der Frage vergleichen und geht die ganze Datenbasis durch, bis es zum
-gleichen Ergebnis kommt. Die Instantiierung von `X` mit `adam` führt also nicht
-zum Ziel und wird deshalb rückgängig gemacht. PROLOG gibt die Variable `X`
-wieder frei und versucht `maennl(X)` mit einem anderen Faktum zu matchen. Schon
-beim nächsten Faktum ist dies möglich und ergibt `X = alfred`. Aber auch damit
-scheitert es am zweiten Teilziel, und so probiert PROLOG nacheinander `adam`,
-`alfred`, `anton` usw. aus, bis es schließlich mit `X = clemens` beide
-Teilforderungen erfüllen kann.
+                           --{{3}}--
+PROLOG versucht das erste Teilziel `maennl(X)` zu erreichen, und dies gelingt auch sofort mit `X = adam`.
+Mit dieser Instantiierung von `X` wird das zweite Teilziel angegangen, also `elter(daisy, adam)`.
+Diese Ergebnisse können leicht mit dem originalen [Stammbaum](#stammbaum) verglichen werden; PROLOG muss Faktum für Faktum mit der Frage vergleichen und geht die ganze Datenbasis durch, bis es zum gleichen Ergebnis kommt.
+Die Instantiierung von `X` mit `adam` führt also nicht zum Ziel und wird deshalb rückgängig gemacht.
+PROLOG gibt die Variable `X` wieder frei und versucht `maennl(X)` mit einem anderen Faktum zu matchen.
+Schon beim nächsten Faktum ist dies möglich und ergibt `X = alfred`.
+Aber auch damit scheitert es am zweiten Teilziel, und so probiert PROLOG nacheinander `adam`, `alfred`, `anton` usw. aus, bis es schließlich mit `X = clemens` beide Teilforderungen erfüllen kann.
 
-    --{{3}}--
-Die folgende Anfragen ist vom __deklarativen__ (beschreibenden) Standpunkt aus
-gleichwertig zu der gerade besprochenen; sie sind aber verschieden, wenn man sie
-unter __prozeduralen__ Gesichtspunkten betrachtet, das heißt, ihre Abarbeitung
-verfolgt. Fragen an das System können vom prozeduralen Standpunkt aus als
-Anweisungen gesehen werden. Die untere Anfrage  können wir deklarativ übersetzen
-mit _"Wer ist Elternteil von Daisy und männlich?"_ oder prozedural mit
-"Suche ein Elternteil X von Daisy, suche solange, bis du ein männliches X mit dieser Eigenschaft findest".
+    --{{4}}--
+Die folgende Anfragen ist vom __deklarativen__ (beschreibenden) Standpunkt aus gleichwertig zu der gerade besprochenen; sie sind aber verschieden, wenn man sie unter __prozeduralen__ Gesichtspunkten betrachtet, das heißt, ihre Abarbeitung verfolgt.
+Fragen an das System können vom prozeduralen Standpunkt aus als Anweisungen gesehen werden.
+Die untere Anfrage  können wir deklarativ übersetzen mit _"Wer ist Elternteil von Daisy und männlich?"_ oder prozedural mit "Suche ein Elternteil X von Daisy, suche solange, bis du ein männliches X mit dieser Eigenschaft findest".
 
-    {{3}}
+      {{4}}
 ```prolog
 elter(daisy,X), maennl(X).
 % maennl(X), elter(daisy,X).
 ```
 @Tau.query(stammbaum2.pro)
 
-    --{{4}}--
+    --{{5}}--
 Mit einer Anfrage geben wir PROLOG ein Ziel für eine Suche.
 Dieses Ziel besteht meist aus mehreren Teilzielen, die PROLOG nacheinander anstrebt.
 Ein Teilziel ist erreicht, wenn PROLOG geeignete Variablenbelegungen gefunden hat, welche die
@@ -1497,28 +1479,38 @@ Forderung des Teilziels erfüllen.
 Man sagt dann kurz (und sprachlich unsauber):
 _"Das Teilziel ist erfüllt"._
 
-     {{5}}
-1. Es werde die Frage nach der Mutter von Daisy gestellt:
+      {{6}}
+1. __Aufgabe:__
+
+              --{{6}}--
+   Es werde die Frage nach der Mutter von Daisy gestellt:
 
    ```prolog
    elter(daisy,X), weibl(X).
    ```
    @Tau.query(stammbaum2.pro)
 
+              --{{7}}--
    Beschreiben Sie das Vorgehen von PROLOG, insbesondere, mit welchen Konstanten `X` instantiiert wird.
+   Begründen Sie, warum die Anfrage vom prozeduralen Standpunkt aus ungünstiger ist.
 
+      {{7}}
    ```prolog
    weibl(X), elter(daisy,X).
    ```
    @Tau.query(stammbaum2.pro)
 
-   Begründen Sie, warum die Anfrage vom prozeduralen Standpunkt aus ungünstiger ist.
-   Es gibt eine Möglichkeit, PROLOG bei seiner Arbeit Protokoll führen zu lassen, und zwar mit Hilfe des Prädikats `write`.
-   Dieses Prädikat ist vom deklarativen Standpunkt nicht beschreibbar; man kann höchstens die Eigenschaft festhalten, dass es immer wahr ist.
-   Es hat aber den 'Seiteneffekt', dass `write(X)` die jeweilige Belegung der Variable `X` auf den Bildschirm bringt.
-   Durch Einfügen dieses Prädikats können wir also Zwischenergebnisse sichtbar machen.
+             --{{8}}--
+Es gibt eine Möglichkeit, PROLOG bei seiner Arbeit Protokoll führen zu lassen, und zwar mit Hilfe des Prädikats `write`.
+Dieses Prädikat ist vom deklarativen Standpunkt nicht beschreibbar; man kann höchstens die Eigenschaft festhalten, dass es immer wahr ist.
+Es hat aber den 'Seiteneffekt', dass `write(X)` die jeweilige Belegung der Variable `X` auf den Bildschirm bringt.
+Durch Einfügen dieses Prädikats können wir also Zwischenergebnisse sichtbar machen.
 
-2. Überprüfen Sie Ihre Überlegungen von Aufgabe 1 durch Einfügen von `write(X)` in die obigen Abfragen:
+      {{9}}
+2. __Aufgabe:__
+
+   --{{9}}--
+   Überprüfen Sie Ihre Überlegungen von Aufgabe 1 durch Einfügen von `write(X)` in die obigen Abfragen:
 
    ``` prolog
    elter(daisy,X), write(X), nl, weibl(X).
@@ -1526,58 +1518,69 @@ _"Das Teilziel ist erfüllt"._
    ```
    @Tau.query(stammbaum2.pro)
 
-  (Das Prädikat `nl` bedeutet 'new line' und bewirkt einen Zeilenvorschub.)
+       --{{10}}--
+   Das Prädikat `nl` bedeutet 'new line' und bewirkt einen Zeilenvorschub.
 
-In Kapitel 2 haben wir mit Regeln gearbeitet.
-Auch sie wollen wir noch kurz prozedural betrachten.
-Zur Datenbasis des Stammbaums wurde z. B. die Regel hinzugefügt
+      --{{11}}--
+In [Kapitel 2](#2-regeln) haben wir mit Regeln gearbeitet. Auch sie wollen wir noch kurz prozedural betrachten. Zur Datenbasis des Stammbaums wurde zum Beispiel die Regel hinzugefügt
 
+        {{11}}
 ``` prolog
 vater(X,Y):- elter(X,Y), maennl(Y).
 ```
-@Tau.programm_apend(stammbaum2.pro)
+@Tau.program_append(stammbaum2.pro)
 
-Die deklarative Lesart dieser Regel kennen wir schon: "Y ist Vater von X, falls Y Elternteil von X und männlich ist." Prozedural gesehen ist diese Regel eine Anweisung für den Computer, wie er bei der Suche nach dem Vater vorzugehen hat:
-"Ist der Vater Y von X gesucht, so suche zunächst ein Elternteil Y und versuche auch noch die Bedingung zu erfüllen, dass dieses männlich ist."
+   --{{12}}--
+Die deklarative Lesart dieser Regel kennen wir schon: "Y ist Vater von X, falls Y Elternteil von X und männlich ist." Prozedural gesehen ist diese Regel eine Anweisung für den Computer, wie er bei der Suche nach dem Vater vorzugehen hat: "Ist der Vater Y von X gesucht, so suche zunächst ein Elternteil Y und versuche auch noch die Bedingung zu erfüllen, dass dieses männlich ist."
 
-Also wird z. B. die Anfrage
+      --{{13}}--
+Also wird zum Beispiel die Anfrage
 
+      {{13}}
 ``` prolog
 vater(daisy,V).
 ```
 @Tau.query(stammbaum2.pro)
 
+    --{{14}}--
 intern ersetzt durch die Frage
 
+      {{14}}
 ``` prolog
 elter(daisy,V), maennl(V).
 ```
 @Tau.query(stammbaum2.pro)
 
+    --{{15}}--
 Die Abarbeitung dieser Frage haben wir schon oben betrachtet.
 
-Manche Prädikate werden durch mehrere Regeln festgelegt; z. B. brauchen wir für den Begriff
-'Schwager' zwei Regeln:
+    --{{16}}--
+Manche Prädikate werden durch mehrere Regeln festgelegt; zum Beispiel brauchen wir für den Begriff 'Schwager' zwei Regeln:
 
+      {{16}}
 ``` prolog
 `/* schwager(X,Y) heißt: Y ist Schwager von X */`
 
 schwager(X,Y):- verheiratet(X,Z), bruder(Z,Y).
 schwager(X,Y):- schwester(X,Z), verheiratet(Z,Y).
 ```
-@Tau.programm_apend(stammbaum2.pro)
+@Tau.program_append(stammbaum2.pro)
 
+    --{{17}}--
 Es werde jetzt die Frage gestellt
 
+      {{17}}
 ``` prolog
 schwager(cosima,S).
 ```
 @Tau.query(stammbaum2.pro)
 
+   --{{18}}--
 Nach der ersten Regel versucht PROLOG zunächst die Teilziele `verheiratet(cosima,Z)` und `bruder(Z,S)` zu erfüllen. Dies gelingt nicht.
 Deshalb wird diese Regel verlassen und der Schwager von Cosima wird nach der zweiten Regel gesucht.
 Dazu versucht PROLOG die beiden Teilziele `schwester(cosima,Z)` und `verheiratet(Z,S)` zu erfüllen, was schließlich auch gelingt.
 
+   --{{18}}--
 Wie Sie gesehen haben, verfügt PROLOG bei der Suche nach Lösungen über einen recht leistungsfähigen Grundalgorithmus.
 Entscheidungen, die in eine Sackgasse führen, werden wieder rückgängig gemacht und es wird die nächste Möglichkeit
 ausprobiert.
@@ -1585,9 +1588,10 @@ Ein solches Vorgehen wird von den Informatikern __Backtracking__ (Rücksetzen) g
 
 ### Vier-Farben-Problem
 
-Dieses Backtracking wollen wir zum Schluß noch am letzten Beispiel des vorigen Kapitels erläutern.
-Es ging dort um die Einfärbung eines Gebietes mit drei Farben und wir hatten folgendes Programm angegeben:
+    --{{0}}--
+Dieses Backtracking wollen wir zum Schluss noch am letzten Beispiel des vorigen Kapitels erläutern. Es ging dort um die Einfärbung eines Gebietes mit drei Farben und wir hatten folgendes Programm angegeben:
 
+      {{0}}
 ```prolog
 farbe(rot).
 farbe(gelb).
@@ -1599,23 +1603,22 @@ einfaerbung(F1,F2,F3,F4):-
 ```
 @Tau.program(vier_farben.pro)
 
+    --{{1}}--
 Wir fragen jetzt nach der Lösung des Problems
 
+      {{1}}
 ```prolog
 einfaerbung(F1,F2,F3,F4).
 ```
 @Tau.query(vier_farben.pro)
 
-PROLOG will diese Anfrage mit Hilfe der Regel lösen.
-Dazu versucht es nacheinander die Teilziele auf der rechten Seite zu erfüllen.
-Die ersten Teilziele `farbe(F1)`, `farbe(F2)`, `farbe(F3)`, `farbe(F4)` sind schnell erfüllbar, indem alle Variablen `F1` bis `F4` mit rot belegt werden: `F1=rot, F2=rot, F3=rot, F4=rot`.
-Damit sind alle Variablen, die in der obigen Regel vorkommen, belegt; es ist eine vollständige Belegung der Variablenmenge __erzeugt__.
-Die nächsten Teilziele `F1\=F2, F1\=F4`,... __überprüfen__ nun, ob diese Variablenbelegungen das Einfärbeproblem lösen.
-Schon die erste Überprüfung `F1\=F2` scheitert, damit setzt das Backtracking ein.
-Als erstes wird die letzte Entscheidung (`F4=rot`) rückgängig gemacht; `F4` wird wieder freigegeben und versuchsweise mit `gelb` bzw. `blau` belegt.
-Da dies auch nicht zum Ziel führt, wird dann die vorletzte Entscheidung (`F3=rot`) aufgehoben; die Variable `F3` ist nun frei und es werden die Belegungen probiert
+    --{{2}}--
+PROLOG will diese Anfrage mit Hilfe der Regel lösen. Dazu versucht es nacheinander die Teilziele auf der rechten Seite zu erfüllen. Die ersten Teilziele `farbe(F1)`, `farbe(F2)`, `farbe(F3)`, `farbe(F4)` sind schnell erfüllbar, indem alle Variablen `F1` bis `F4` mit rot belegt werden: `F1=rot, F2=rot, F3=rot, F4=rot`. Damit sind alle Variablen, die in der obigen Regel vorkommen, belegt; es ist eine vollständige Belegung der Variablenmenge erzeugt. Die nächsten Teilziele `F1\=F2, F1\=F4`, ... __überprüfen__ nun, ob diese Variablenbelegungen das Einfärbeproblem lösen. Schon die erste Überprüfung `F1\=F2` scheitert, damit setzt das Backtracking ein.
 
+    --{{3}}--
+Als erstes wird die letzte Entscheidung `F4=rot` rückgängig gemacht; `F4` wird wieder freigegeben und versuchsweise mit `gelb` beziehungsweise `blau` belegt. Da dies auch nicht zum Ziel führt, wird dann die vorletzte Entscheidung `F3=rot` aufgehoben; die Variable `F3` ist nun frei und es werden die Belegungen probiert
 
+      {{3}}
 ``` prolog
 F3=gelb, F4=rot
 F3=gelb, F4=gelb
@@ -1625,14 +1628,13 @@ F3=blau, F4=gelb
 F3=blau, F4=blau
 ```
 
-Sicher haben Sie schon bemerkt, dass diese Versuche für die Erfüllung des Teilziels `F1\=F2` alle zwecklos sind; PROLOG kommt durch braves Ausprobieren zum selben Schluß und hebt nun auch die drittletzte Entscheidung (`F2=rot`) auf. Es versucht die nächste Möglichkeit `F2=gelb`, `F3=rot`, `F4=rot`, und damit sind die ersten fünf Teilziele der rechten Seite erfüllt. PROLOG wendet sich nun dem sechsten Teilziel zu: `F1\=F4`. Mit der derzeitigen Variablenbelegung ist dieses Teilziel nicht erfüllt, also beginnt wieder das Bachtracking. Die letzte Entscheidung `F4=rot` wird aufgehoben und die nächste Möglichkeit, die die Datenbasis anbietet, wird versucht: F4=gelb. Wir haben jetzt also die Belegung `F1=rot`, `F2=gelb`, `F3=rot`, `F4=gelb`, die die ersten sechs Teilziele erfüllt. Diese Belegung erfüllt allerdings noch nicht die beiden letzten Teilziele `F2\=F4` und `F3\=F4`. Durch nochmaliges Backtracking landen wir aber schließlich bei der Belegung `F1=rot`, `F2=gelb`, `F3=rot`, `F4=blau`, die sämtliche Bedingungen erfüllt.
+    --{{4}}--
+Sicher haben Sie schon bemerkt, dass diese Versuche für die Erfüllung des Teilziels `F1\=F2` alle zwecklos sind; PROLOG kommt durch braves Ausprobieren zum selben Schluss und hebt nun auch die drittletzte Entscheidung `F2=rot` auf. Es versucht die nächste Möglichkeit `F2=gelb`, `F3=rot`, `F4=rot`, und damit sind die ersten fünf Teilziele der rechten Seite erfüllt. PROLOG wendet sich nun dem sechsten Teilziel zu: `F1\=F4`. Mit der derzeitigen Variablenbelegung ist dieses Teilziel nicht erfüllt, also beginnt wieder das Backtracking. Die letzte Entscheidung `F4=rot` wird aufgehoben und die nächste Möglichkeit, die die Datenbasis anbietet, wird versucht: `F4=gelb`. Wir haben jetzt also die Belegung `F1=rot`, `F2=gelb`, `F3=rot`, `F4=gelb`, die die ersten sechs Teilziele erfüllt. Diese Belegung erfüllt allerdings noch nicht die beiden letzten Teilziele `F2\=F4` und `F3\=F4`. Durch nochmaliges Backtracking landen wir aber schließlich bei der Belegung `F1=rot`, `F2=gelb`, `F3=rot`, `F4=blau`, die sämtliche Bedingungen erfüllt.
 
-Wir veranschaulichen uns das Backtracking in einem Diagramm (siehe nächste Seite). Es sind 4 Entscheidungen zu treffen, die Belegungen der Variablen `F1`, `F2`, `F3`, `F4`. Bei jeder Entscheidung gibt es 3 Möglichkeiten, damit gibt es insgesamt $3^4=81$ Möglichkeiten, die in einem Baum (der hier von links nach rechts wächst) dargestellt werden können. Hier ist nur ein Teil des Baumes gezeichnet.
+    --{{5}}--
+Wir veranschaulichen uns das Backtracking in einem Diagramm. Es sind 4 Entscheidungen zu treffen, die Belegungen der Variablen `F1`, `F2`, `F3`, `F4`. Bei jeder Entscheidung gibt es 3 Möglichkeiten, damit gibt es insgesamt 3 hoch 4 gleich 81 Möglichkeiten, die in einem Baum, der hier von links nach rechts wächst, dargestellt werden können. Hier ist nur ein Teil des Baumes gezeichnet.
 
-Wir durchlaufen den Entscheidungsbaum von links nach rechts, die Entscheidung für rot wird symbolisiert durch einen Weg nach schräg oben, gelb entspricht waagrecht nach rechts, blau wird dargestellt durch schräg nach unten. Nach vier Entscheidungen landet man ganz rechts bei einer Belegung der vier Variablen. Der Rücknahme einer Entscheidung entspricht das Zurückgehen nach links bis zum vorigen Knoten, wo dann eine neue Entscheidung getroffen werden kann. Wir waren zunächst beim Endpunkt 'rrrr' angelangt, durch Überprüfen, Zurückgehen und nochmaliges Versuchen kamen wir zu den Zuständen 'rrrg' und 'rrrb'; da diese auch nicht die Bedingungen erfüllten, mussten wir noch eine Entscheidungsebene zurückgehen usw. So können Sie im Baumdiagramm die Entscheidungen und das Backtracking verfolgen, die uns schließlich zum Zustand 'rgrb' geführt haben.
-Sie sehen, dass PROLOG zwölf Belegungen der vier Variablen ausprobieren musste, bis es fündig wurde.
-
-
+      {{5}}
 <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 350px;" -->
 ``````````
   .         .         .         ┏━━━ rrrr
@@ -1654,41 +1656,82 @@ Sie sehen, dass PROLOG zwölf Belegungen der vier Variablen ausprobieren musste,
  F.1       F.2       F.3       F.4
 ``````````
 
+    --{{6}}--
+Wir durchlaufen den Entscheidungsbaum von links nach rechts. Die Entscheidung für rot wird symbolisiert durch einen Weg nach schräg oben, gelb entspricht waagrecht nach rechts, blau wird dargestellt durch schräg nach unten. Nach vier Entscheidungen landet man ganz rechts bei einer Belegung der vier Variablen. Der Rücknahme einer Entscheidung entspricht das Zurückgehen nach links bis zum vorigen Knoten, wo dann eine neue Entscheidung getroffen werden kann. Wir waren zunächst beim Endpunkt 'rrrr' angelangt, durch Überprüfen, Zurückgehen und nochmaliges Versuchen kamen wir zu den Zuständen 'rrrg' und 'rrrb'. Da diese auch nicht die Bedingungen erfüllten, mussten wir noch eine Entscheidungsebene zurückgehen und so weiter. So können Sie im Baumdiagramm die Entscheidungen und das Backtracking verfolgen, die uns schließlich zum Zustand 'rgrb' geführt haben. Sie sehen, dass PROLOG zwölf Belegungen der vier Variablen ausprobieren musste, bis es fündig wurde.
 
-Das Programm arbeitet nach dem Prinzip 'Erzeuge und Überprüfe' (generate and
-test). Die ersten vier Teilziele `farbe(F1)`, ...., `farbe(F4)` erzeugen die
-Belegung sämtlicher Variablen, diese Belegungen werden durch die folgenden
-Teilziele `F1\=F2`, ..., `F3\=F4` überprüft.
+    --{{7}}--
+Das Programm arbeitet nach dem Prinzip 'Erzeuge und Überprüfe', auf englisch generate and test. Die ersten vier Teilziele `farbe(F1)` bis `farbe(F4)` erzeugen die Belegung sämtlicher Variablen. Diese Belegungen werden durch die folgenden Teilziele `F1\=F2` bis `F3\=F4` überprüft.
 
-3. Der Benutzer erfragt bei obigem Programm weitere Lösungen. Ergänzen Sie das obige Baumdiagramm und verfolgen Sie das Backtracking bis zur nächsten Lösung.
+      {{8}}
+3. __Aufgabe:__ 
 
-4. Ergänzen Sie das Programm durch vier `write`-Befehle für die Variablen `F1` bis `F4`, die nach den ersten vier Teilzielen gesetzt werden. Damit lassen Sie die Belegung der Variablen protokollieren. Vergleichen Sie mit dem Baumdiagramm.
+    --{{8}}--
+   Der Benutzer erfragt bei obigem Programm weitere Lösungen.
+   Ergänzen Sie das obige Baumdiagramm und verfolgen Sie das Backtracking bis zur nächsten Lösung.
 
-5. Machen Sie das obige Programm schneller, indem Sie die Reihenfolge der Teilziele verändern. Das Überprüfen sollte nicht erst am Schluß, sondern so bald wie möglich geschehen.
+       {{9}}
+4. __Aufgabe 4:__
 
-Wenn Sie PROLOG bei seiner Suche zuschauen wollen, können Sie das im Trace-Modus tun (siehe Anhang). Das Schöne bei PROLOG ist aber, dass sich der Programmierer um die Organisation der Suche nicht kümmern muss. Für viele Probleme reicht daher eine deklarative Beschreibung des Problems aus, die vielleicht durch eine grobe Vorstellung des Suchvorgangs abgerundet wird. Keinesfalls ist es nötig, sich bei jeder Anfrage Gedanken darüber zu machen, welche Instantiierungen und Vergleiche bei der Bearbeitung vorgenommen werden.
+    --{{9}}--
+   Ergänzen Sie das Programm durch vier `write`-Befehle für die Variablen `F1` bis `F4`, die nach den ersten vier Teilzielen gesetzt werden. Damit lassen Sie die Belegung der Variablen protokollieren. Vergleichen Sie mit dem Baumdiagramm.
+
+   ```prolog
+   einfaerbung2(F1,F2,F3,F4):-
+     farbe(F1),
+     farbe(F2),
+     farbe(F3),
+     farbe(F4),
+     F1\=F2, F1\=F4, F2\=F3, F2\=F4, F3\=F4.
+   ```
+   @Tau.program_append(vier_farben.pro)
+
+   ``` prolog
+   einfaerbung2(F1,F2,F3,F4).
+   ```
+   @Tau.query(vier_farben.pro)
+
+   <details>
+
+   <summary>Auflösung</summary>
+
+   ```prolog
+   einfaerbung2(F1,F2,F3,F4):-
+      farbe(F1), write('F1: '), write(F1), nl,
+      farbe(F2), write('F2: '), write(F2), nl,
+      farbe(F3), write('F3: '), write(F3), nl,
+      farbe(F4), write('F4: '), write(F4), nl,
+      write('------------------'), nl,
+      F1\=F2, F1\=F4, F2\=F3, F2\=F4, F3\=F4.
+   ```
+
+   </details>
+
+       {{10}}
+5. __Aufgabe 5:__
+   
+    --{{10}}--
+   Machen Sie das obige Programm schneller, indem Sie die Reihenfolge der Teilziele verändern. Das Überprüfen sollte nicht erst am Schluss, sondern so bald wie möglich geschehen.
+
+    --{{11}}--
+Wenn Sie PROLOG bei seiner Suche zuschauen wollen, können Sie das im Trace-Modus tun, siehe Anhang. Das Schöne bei PROLOG ist aber, dass sich der Programmierer um die Organisation der Suche nicht kümmern muss. Für viele Probleme reicht daher eine deklarative Beschreibung des Problems aus, die vielleicht durch eine grobe Vorstellung des Suchvorgangs abgerundet wird. Keinesfalls ist es nötig, sich bei jeder Anfrage Gedanken darüber zu machen, welche Instantiierungen und Vergleiche bei der Bearbeitung vorgenommen werden.
 
 
 
 ## 4. Rekursion
 
+    --{{0}}--
+Hier sehen Sie ein Bild von Donald, dessen Stammbaum uns schon in den Kapiteln 1 und 2 beschäftigt hat. Donald hat sich vor dem Bild seines Vaters Clemens fotografieren lassen. Als dieses Bild von Clemens vor etwa 25 Jahren aufgenommen wurde, hat sich Clemens vor das Bild seines Vaters Baldur gestellt, der sich vor 50 Jahren vor dem Bild seines Vaters Adam aufgestellt hatte. Auf diese Weise ist in einem Bild eine ganze Galerie von Vorfahren eingefangen.
+
+      {{0}}
 ![recursion](img/recursion.png)
 
-Hier sehen Sie ein Bild von Donald, dessen Stammbaum uns schon in den Kapiteln 1
-und 2 beschäftigt hat. Donald hat sich vor dem Bild seines Vaters (Clemens)
-fotografieren lassen. Als dieses Bild von Clemens vor etwa 25 Jahren aufgenommen
-wurde, hat sich Clemens vor das Bild seines Vaters (Baldur) gestellt, der sich
-vor 50 Jahren vor dem Bild seines Vaters (Adam) aufgestellt hatte. Auf diese
-Weise ist in einem Bild eine ganze Galerie von Vorfahren eingefangen.
+    --{{1}}--
+Um den Begriff 'Vorfahr' geht es in diesem Abschnitt. Schon einem kleinen Kind können wir diesen Begriff schnell erklären: Vorfahren sind die Eltern, Großeltern, Urgroßeltern, Ururgroßeltern, Urururgroßeltern und so weiter.
 
-Um den Begriff 'Vorfahr' geht es in diesem Abschnitt. Schon einem kleinen Kind
-können wir diesen Begriff schnell erklären:
-
-Vorfahren sind die Eltern, Großeltern, Urgroßeltern, Ururgroßeltern,
-Urururgroßeltern usw.
-
+    --{{2}}--
 Wir erklären PROLOG zunächst diese Begriffe:
 
+      {{2}}
 ```prolog Großeltern
       grosselter(X,Y):- elter(X,Z), elter(Z,Y).
     urgrosselter(X,Y):- elter(X,Z), grosselter(Z,Y).
@@ -1697,71 +1740,62 @@ urururgrosselter(X,Y):- elter(X,Z), ururgrosselter(Z,Y).
 ```
 @Tau.program_append(stammbaum2.pro)
 
-Schwierig ist nur die Verallgemeinerung, der Begriff 'Vorfahr', da PROLOG im
-Gegensatz zu uns mit dem 'usw.' nichts anzufangen weiß. Dieses 'usw.' dient uns
-dazu, die unendlich vielen Möglichkeiten einzufangen. In PROLOG benötigen wir
-hierfür die Rekursion. Die rekursive Definition von 'Vorfahr' lautet:
+    --{{3}}--
+Schwierig ist nur die Verallgemeinerung, der Begriff 'Vorfahr', da PROLOG im Gegensatz zu uns mit dem 'usw.' nichts anzufangen weiß. Dieses 'usw.' dient uns dazu, die unendlich vielen Möglichkeiten einzufangen. In PROLOG benötigen wir hierfür die Rekursion. Die rekursive Definition von 'Vorfahr' lautet:
 
+      {{3}}
 ``` prolog
 vorfahr(X,Y):- elter(X,Y).
 vorfahr(X,Y):- elter(X,Z), vorfahr(Z,Y).
 ```
 @Tau.program_append(stammbaum2.pro)
 
-Das heißt: Vorfahren von X sind die Eltern von X und die Vorfahren der Eltern
-von X. Der Begriff 'Vorfahr' wird also teilweise durch sich selbst erklärt. Dass
-dies trotzdem keine unsinnige, in sich kreisende Definition ist, sieht man am
-besten, wenn man sie prozedural betrachtet.
+    --{{4}}--
+Das heißt: Vorfahren von X sind die Eltern von X und die Vorfahren der Eltern von X. Der Begriff 'Vorfahr' wird also teilweise durch sich selbst erklärt. Dass dies trotzdem keine unsinnige, in sich kreisende Definition ist, sieht man am besten, wenn man sie prozedural betrachtet. Dann sind die obigen Regeln eine Anweisung an PROLOG:
 
-Dann sind die obigen Regeln eine Anweisung an PROLOG:
-
+      {{4}}
 * Wenn du einen Vorfahr von X suchen sollst, so suche zunächst die Eltern von X.
 * Wenn du noch weiter nach Vorfahren suchen sollst, so suche ein Elternteil Z
   und von diesem einen Vorfahr.
 
-Dieses Vorgehen wollen wir für eine spezielle Anfrage nachvollziehen. Es sei
-gefragt:
+    --{{5}}--
+Dieses Vorgehen wollen wir für eine spezielle Anfrage nachvollziehen. Es sei gefragt:
 
+      {{5}}
 ```prolog
 vorfahr(donald,V).
 ```
 @Tau.query(stammbaum2.pro)
 
-Den Vorfahr V wird das System zunächst nach der ersten Regel suchen, es wird
-also mit dem Ziel elter(donald,V) weitersuchen. Das ergibt die Antworten X =
-clemens und X = cleopatra. Fordern wir nun das System auf, noch weitere
-Lösungen zu finden, so ist das nach der ersten Regel nicht mehr möglich, PROLOG
-geht also zur zweiten Regel über. Die Anfrage
+    --{{6}}--
+Den Vorfahr V wird das System zunächst nach der ersten Regel suchen, es wird also mit dem Ziel elter von donald, V weitersuchen. Das ergibt die Antworten X gleich clemens und X gleich cleopatra. Fordern wir nun das System auf, noch weitere Lösungen zu finden, so ist das nach der ersten Regel nicht mehr möglich, PROLOG geht also zur zweiten Regel über. Die Anfrage
 
+      {{6}}
 ```prolog
 vorfahr(donald,V).
 ```
 @Tau.query(stammbaum2.pro)
 
+    --{{7}}--
 wird dazu intern ersetzt durch die Anfrage
 
+      {{7}}
 ```prolog
 elter(donald,Z), vorfahr(Z,V).
 ```
 @Tau.query(stammbaum2.pro)
 
-Das erste Teilziel hiervon wird zuerst mit Z = clemens erfüllt. Das zweite
-Teilziel lautet damit vorfahr(clemens,V). Um die Vorfahren von Clemens zu
-finden, wird PROLOG zunächst wieder nach der ersten Regel die Eltern aufspüren,
-das heißt: die Antworten ausgeben:
+    --{{8}}--
+Das erste Teilziel hiervon wird zuerst mit Z gleich clemens erfüllt. Das zweite Teilziel lautet damit vorfahr von clemens, V. Um die Vorfahren von Clemens zu finden, wird PROLOG zunächst wieder nach der ersten Regel die Eltern aufspüren, das heißt: die Antworten ausgeben:
 
+      {{8}}
 ```prolog
 V=baldur
 V=barbara
 ```
 
-Dieses sind Großeltern von Donald. Wird das System noch weiter zum Suchen
-angehalten, so wird es die zweite Regel anwenden, um die Vorfahren von Clemens
-zu finden, und dabei Urgroßeltern von Donald finden usw.
-
-Sind irgendwann alle Vorfahren von Clemens gefunden, wird die Variable Z wieder
-von clemens gelöst und mit cleopatra belegt, und damit werden dann alle
-Vorfahren von Cleopatra als Lösungen der Anfrage ausgegeben.
+    --{{9}}--
+Dieses sind Großeltern von Donald. Wird das System noch weiter zum Suchen angehalten, so wird es die zweite Regel anwenden, um die Vorfahren von Clemens zu finden, und dabei Urgroßeltern von Donald finden usw. Sind irgendwann alle Vorfahren von Clemens gefunden, wird die Variable Z wieder von clemens gelöst und mit cleopatra belegt, und damit werden dann alle Vorfahren von Cleopatra als Lösungen der Anfrage ausgegeben.
 
 ### Aufgaben
 
@@ -5657,18 +5691,18 @@ dass ein Subtrahend, also eine Zahl oder ein Term in Klammern, immer auch als Fa
 kann. Ein Term kann das Produkt von zwei Faktoren sein. Wir ersetzen den Begiff 'Subtrahend'
 durch 'Faktor' und wandeln das Syntaxdiagramm entsprechend ab:
 
-```
-┌────┐┌──────┐
-│term│: │faktor│:
-└────┘┌──────┐└──────┘┌──────┐
-──┬──────┤faktor├───────┬───┬────────┤n_zahl├────────┐
-│└──────┘││└──────┘│
-│┌────┐┌──────┐││┌────┐│
-├──┤term├─ + ─┤faktor├┤├──── ( ──┤term├── ) ────┤
-│└────┘└──────┘││└────┘│
-│┌────┐┌──────┐││┌──────┐┌──────┐│
-└──┤term├─ - ─┤faktor├┘└─┤faktor├── * ──┤faktor├┘
-└────┘└──────┘└──────┘└──────┘
+```ascii
+┌────┐                             ┌──────┐
+│term│:                            │faktor│:
+└────┘         ┌──────┐            └──────┘┌──────┐
+      ──┬──────┤faktor├───────┬───┬────────┤n_zahl├────────┐
+        │      └──────┘       │   │        └──────┘        │
+        │  ┌────┐     ┌──────┐│   │         ┌────┐         │
+        ├──┤term├─ + ─┤faktor├┤   ├──── ( ──┤term├── ) ────┤
+        │  └────┘     └──────┘│   │         └────┘         │
+        │  ┌────┐     ┌──────┐│   │ ┌──────┐       ┌──────┐│
+        └──┤term├─ - ─┤faktor├┘   └─┤faktor├── * ──┤faktor├┘
+           └────┘     └──────┘      └──────┘       └──────┘
 ```
 7) Schreiben Sie Parser und Interpreter zu diesem Syntaxdiagramm.
 
