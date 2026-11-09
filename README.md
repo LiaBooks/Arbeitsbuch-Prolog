@@ -1,6 +1,6 @@
 <!--
 link:     https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap
-author:   André Dietrich
+author:   Hartmut Göhner; Bernd Hafenbrak; (LiaScript-Fassung: André Dietrich)
 email:    LiaScript@web.de
 version:  1.1.0
 language: de
