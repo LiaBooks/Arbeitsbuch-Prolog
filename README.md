@@ -5,7 +5,7 @@ email:    LiaScript@web.de
 version:  1.1.0
 language: de
 narrator: Deutsch Female
-logo:     img/logo-prolog-entwurf.png
+logo:     img/logo.png
 
 comment:  Dieses Buch soll in die Programmiersprache PROLOG und in die mit ihr verbundene
           'Logikprogrammierung' einführen. Die Idee, 'Logik als eine Programmiersprache'
