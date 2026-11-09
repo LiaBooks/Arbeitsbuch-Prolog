@@ -285,7 +285,7 @@ details, .lia-quote, .lia-code__input, .lia-table-responsive, .lia-card {
 
 # Arbeitsbuch PROLOG
 
-![Logo Arbeitsbuch PROLOG mit offenem Buch, Anfragezeichen und Suchbaum](img/logo-prolog-entwurf.png)
+![Logo Arbeitsbuch PROLOG mit offenem Buch, Anfragezeichen und Suchbaum](img/logo.png)
 
                             --{{0}}--
 Willkommen beim Arbeitsbuch PROLOG! Hier lernen Sie Schritt für Schritt, mit Fakten, Regeln und Anfragen zu programmieren – Vorkenntnisse brauchen Sie keine. Danach können Sie eigene PROLOG-Programme schreiben und nachvollziehen, wie PROLOG nach Lösungen sucht. Probieren Sie alles gleich aus: Jeder Code-Block mit der Schaltfläche „Ausführen“ läuft direkt hier im Browser, und Sie dürfen ihn jederzeit verändern.
